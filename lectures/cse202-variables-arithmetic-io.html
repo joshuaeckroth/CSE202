@@ -1,0 +1,443 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for Linux/x86 (vers 25 March 2009), see www.w3.org" />
+
+  <title>CSE 202 - Variables, arithmetic, input/output</title>
+</head>
+
+<body>
+  <h1>Variables, arithmetic, input/output</h1>
+
+  <h2>Variables and types</h2>
+
+  <p>It is very important when writing computer programs that one
+  is able to save data in temporary locations, move data in and out
+  of these locations and change the data over time. How we do this
+  in C++ is with variables.</p>
+
+  <p>Consider the mathematical formula <tt>c = sqrt(a*a + b*b)</tt>
+  (Pythagoras' formula). This formula can find the length of the
+  hypotenuse of <em>any</em> right triangle. If we were to write a
+  program that implemented this formula, then we would have a
+  program that can find the length of the hypotenuse of any right
+  triangle. This is clearly useful (though perhaps not as its own
+  program).</p>
+
+  <p>The reason the letters <tt>a</tt>, <tt>b</tt>, and <tt>c</tt>
+  are used in the formula is because they <em>stand in</em> for
+  whatever values some particular right triangle has. Our program
+  would ask for these values (specifically, the values for
+  <tt>a</tt> and <tt>b</tt> from the user (or read them from a
+  file, or whatever). Our program must also save these values in
+  variables.</p>
+
+  <p>However, unlike mathematics, C++ variables are <em>typed</em>.
+  This means that every variable in C++ is a variable of a certain
+  type. We have the following types available to us:</p>
+
+  <ul>
+    <li><tt>int</tt> for integers (..., -2, -1, 0, 1, 2, ...)</li>
+
+    <li><tt>double</tt> for "floating point" values (i.e. decimal
+    values like -0.5 or 1.23040 * 10<sup>-23</sup>)</li>
+
+    <li><tt>string</tt> for "strings" (i.e. text)</li>
+
+    <li><tt>bool</tt> for true/false values</li>
+
+    <li>and some others...</li>
+  </ul>
+
+  <p>Variables in C++ are typed for two reasons: (1) programs can
+  be executed more efficiently if the type is known beforehand and
+  need not be determined based on what kinds of values the user
+  provides (technically, this advantage is only gained because C++
+  is <em>statically</em> typed, which means the types of variables
+  never change while the program is executing); (2) the C++
+  compiler is able to ensure that you are using variables the right
+  way by checking if you are using values of the right type. For
+  example, trying to save a string inside an integer type results
+  in an error.</p>
+
+  <h2>Overflow and underflow</h2>
+
+  <p>Computers are finite machines, so they cannot store
+  arbitrarily large values or arbitrarily small values (i.e.
+  teeny-tiny fractions). Most programs do not need extremely large
+  or small values, so very rarely is the fact that computers are
+  finite an issue. However, C++ types also have their limits, and
+  some of these limits need to be considered when writing any
+  program.</p>
+
+  <p>For any general category of types such as integers, decimal
+  numbers, etc. C++ has multiple specific types that you can choose
+  from to use in your programs. For example, <tt>int</tt> is not
+  the only C++ type that stores integer values. There is also
+  <tt>char</tt>, <tt>short</tt>, <tt>long</tt>, <tt>long long</tt>,
+  and possibly more depending on the compiler. As well,
+  <tt>double</tt> is not the only type that can store decimal
+  values. There is also <tt>float</tt> and <tt>long double</tt>. A
+  quick comparison of these types will help you decide which is
+  appropriate for each variable in your program.</p>
+
+  <h3>Integer types</h3>
+
+  <ul>
+    <li><tt>char</tt> can store values between -127 and 128
+    (signed) or between 0 and 255 (unsigned)</li>
+
+    <li><tt>short</tt> can store values between -32767 and 32767
+    (signed) or between 0 and 65535 (unsigned)</li>
+
+    <li><tt>int</tt> can store values between -2147483647 and
+    2147483647 (signed) or between 0 and 4294967295</li>
+
+    <li><tt>long</tt> is the same as <tt>int</tt> (on CSE
+    server)</li>
+
+    <li><tt>long long</tt> can store values between
+    -9223372036854775807 and 9223372036854775807 (signed) or
+    between 0 and 18446744073709551615 (unsigned)</li>
+  </ul>
+
+  <h3>Decimal ("floating point") types</h3>
+
+  <ul>
+    <li><tt>float</tt> can store values up to +/- 3.40282 *
+    10<sup>+/- 38</sup>, 6 precision digits are kept</li>
+
+    <li><tt>double</tt> can store values up to +/- 1.79769 *
+    10<sup>+/- 308</sup>, 15 precision digits are kept</li>
+
+    <li><tt>long double</tt> can store values up to +/- 1.7 *
+    10<sup>+/- 4932</sup>, 18 precision digits are kept</li>
+  </ul>
+
+  <p><em>Note about precision in floating point types</em> — The
+  floating point types do not represent values precisely. It is not
+  a good idea to do this:</p>
+  <pre>
+    double x;
+    cin &gt;&gt; x;
+    if(x == 2.5) // NOT GOOD
+    {
+        // blah...
+    }
+  
+  </pre>
+
+  <p>The value 2.5 cannot be represented precisely, so even if the
+  user inputs 2.5, it may not be stored as 2.5. Thus we cannot test
+  if the value is "exactly" 2.5. We must check, instead, if the
+  value is "close" to 2.5, using the following approach:</p>
+  <pre>
+    double x;
+    cin &gt;&gt; x;
+    if(x &lt; 2.50001 &amp;&amp; x &gt; 2.49999) // YES, GOOD
+    {
+        // blah...
+    }
+  </pre>
+
+  <p>For more gory details, see:</p>
+
+  <ul>
+    <li><a href=
+	   "http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm"
+	   target="_blank">
+	http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm</a></li>
+
+    <li><a href="http://en.wikipedia.org/wiki/Floating_point"
+	   target="_blank">http://en.wikipedia.org/wiki/Floating_point</a></li>
+  </ul>
+
+  <p>Although you may know your program has variables that would
+  work just fine as type <tt>short</tt> (for example), it's not
+  always the best idea to use <tt>short</tt>. The type
+  <tt>short</tt> is relatively uncommon. (Think about metric units:
+  although you could use centiliters, it's normal to switch to
+  milliliters at that point.) The common types (and what you are
+  encouraged to use) are:</p>
+
+  <ul>
+    <li>True/False values: <tt>bool</tt></li>
+
+    <li>Integers: <tt>int</tt></li>
+
+    <li>Floating point: <tt>double</tt></li>
+
+    <li>Strings: <tt>string</tt> (there are other string types but
+    they are not shown here)</li>
+  </ul>
+
+  <p>Even with these large ranges of values, sometimes your
+  variables may suffer overflow or underflow. Overflow occurs when
+  you try to store a value that is too large for the type.
+  Underflow occurs when you try to store a value that is too small
+  for the type. Underflow only makes sense with decimal types: if
+  you try to store a very small number, say 0.0 followed by 5000
+  0's followed by a 1, not even a <tt>long double</tt> can store
+  that value. Overflow and underflow should be rare for the
+  programs we are interested in, however.</p>
+
+  <h2>Arithmetic</h2>
+
+  <p>Here are the normal math operators that work on integers and
+  floating point numbers:</p>
+
+  <ul>
+    <li><tt>+</tt> (add)</li>
+
+    <li><tt>-</tt> (subtract; or a negative number, e.g. <tt>int x
+    = -5</tt>)</li>
+
+    <li><tt>*</tt> (multiply)</li>
+  </ul>
+
+  <p>Here are somewhat-unique math operators that work with
+  integers:</p>
+
+  <ul>
+    <li><tt>/</tt> (quotient: <tt>13 / 5</tt> is 2 because 5 goes
+    into 13 two times)</li>
+
+    <li><tt>%</tt> (remainder: <tt>13 % 5</tt> is 3 because the
+    remainder of 5/13 is 2)</li>
+  </ul>
+
+  <p>Note that <tt>/</tt> works as you would expect with floating
+  point numbers (e.g. <tt>1.2 / 5.6</tt> is about 0.214).</p>
+
+  <p>Precedence works the same as you would expect: <tt>* / %</tt>
+  happen before <tt>+ -</tt> so <tt>(5 + 6 % 4 - (3 + 4) / 2)</tt>
+  equals 4 as you would expect. You can use parentheses to clarify
+  the math.</p>
+
+  <h2>Simple user input</h2>
+
+  <p>To close up this lecture, we'll quickly look at simple user
+  input (from the keyboard). You remember using <tt>cout</tt> to
+  display a message. You can use <tt>cin</tt> to do the opposite:
+  get input from the user. It works like this (notice the
+  <tt>&gt;&gt;</tt> of <tt>cin</tt>, which are opposite those of
+  <tt>cout</tt>):</p>
+  <pre>
+    int x;
+    cout &lt;&lt; "Give me a number: ";
+    cin &gt;&gt; x;
+    cout &lt;&lt; "You gave me the number " &lt;&lt; x &lt;&lt; endl;
+  </pre>
+
+  <p>You can use <tt>cin</tt> for integer types, floating point
+  types, string types, and others. It's easiest if you ask the user
+  to enter one value at a time, pressing Enter between each
+  value.</p>
+
+  <p>To acquire multiple values at once, just string them together
+  with <tt>cin</tt>:</p>
+  <pre>
+    int x;
+    double y;
+    short z;
+    cout &lt;&lt; "Enter three numeric values: ";
+    cin &gt;&gt; x &gt;&gt; y &gt;&gt; z;
+  </pre>
+
+  <p>This is equivalent to:</p>
+  <pre>
+    int x;
+    double y;
+    short z;
+    cout &lt;&lt; "Enter three numeric values: ";
+    cin &gt;&gt; x;
+    cin &gt;&gt; y;
+    cin &gt;&gt; z;
+  </pre>
+
+  <h2>Printing with precision</h2>
+
+  <p>When printing "floating-point values" (such as floats,
+  doubles, etc.) we often need to show a specific number of digits
+  after the decimal point. This is known as the "precision" of the
+  number. The actual precision of the value will not change; we
+  will only change the printed precision. The following will show
+  three digits after the decimal point:</p>
+  <pre>
+    cout.precision(3);
+    sout.setf(ios::fixed, ios::floatfield);
+  </pre>
+
+  <p>Here is a complete example:</p>
+
+  <pre>
+    #include &lt;iostream&gt;
+    using namespace std;
+    int main()
+    {
+        double x;
+        cout &lt;&lt; "Enter value for x: ";
+        cin &gt;&gt; x;
+    
+        cout.precision(3);
+        cout.setf(ios::fixed, ios::floatfield);
+    
+        cout &lt;&lt; "You entered " &lt;&lt; x &lt;&lt; endl;
+        return 0;
+    }
+  </pre>
+
+  <p>For example,</p>
+  <pre>
+    Enter value for x: 4.444444
+    You entered 4.444
+  </pre>
+  <pre>
+    Enter value for x: 0.0000001
+    You entered 0.000
+  </pre>
+  <pre>
+    Enter value for x: 123.45678
+    You entered 123.457
+  </pre>
+  
+  <p>Notice how the last printout rounded up; the value of "x"
+    inside the program has not changed, however.</p>
+  
+  <h2>Variable naming</h2>
+
+  <p>Here are the rules for naming variables:</p>
+
+  <ul>
+    <li>1 to 255 characters</li>
+
+    <li>must begin with a letter or _</li>
+
+    <li>after the first letter or _, can contain numbers</li>
+
+    <li>uppercase and lowercase letters are considered different
+    (e.g. <tt>xyz</tt> is not the same variable as
+    <tt>Xyz</tt>)</li>
+
+    <li>"reserved" words cannot be used (e.g. "using" "namespace"
+    "if" "else" etc.)</li>
+
+    <li>do not use all uppercase letters unless the variable is a
+    "constant" ("constant" means its value never changes; e.g.
+    <tt>const double PI = 3.14159</tt> is a proper use of all
+    uppercase letters)</li>
+  </ul>
+
+  <h2>Declaring variables</h2>
+
+  <p>Just as a convention, declare all the variables you need in a
+  function at the top of the function. For example, this is
+  good:</p>
+  <pre>
+    int main() {
+        double xyz;
+        int abc;
+        // do stuff...
+        return 0;
+    }
+  </pre>
+
+  <p>while this is not preferred:</p>
+  <pre>
+    int main() {
+        // do stuff...
+        double xyz;
+        int abc;
+    
+        // do more stuff...
+        return 0;
+    }
+  </pre>
+
+  <p>You can declare multiple variables in one line (separated by
+  commas), if they are all of the same type:</p>
+  <pre>
+    double a, b, c, d, e, f, g;
+    int x, y, z;
+  </pre>
+
+  <p>You can also give them values:</p>
+  <pre>
+    double a = 1.1, b = 2.2, c = 3.3;
+    int x = 1, y = 2, z = 3;
+  </pre>
+
+  <p>Declare and define constant values like this (using all caps
+  for the variable names):</p>
+  <pre>
+    const double PI = 3.14159;
+    const int MULTIPLIER = 5;
+  </pre>
+
+  <p>Because these variables have the modifier <tt>const</tt>, you
+  are not allowed to change their values (the compiler will display
+  an error if you try).</p>
+
+  <h2>Arithmetic shorthand</h2>
+
+  <p>You can use the following shorthand for changing the values of
+  variables. The shorthand form is shown, then the equivalent form
+  is described in comments.</p>
+  <pre>
+    double a = 0.0;
+    int x = 0;
+    x++;            // same as: x = x + 1;
+    x--;            // same as: x = x - 1;
+    x += 2;         // same as: x = x + 2;
+    x -= 2;         // same as: x = x - 2;
+    x *= 2;         // same as: x = x * 2;
+    x /= 2;         // same as: x = x / 2;
+    x %= 2;         // same as: x = x % 2;
+    
+    a += 2.0;       // same as: a = a + 2.0;
+    // etc.
+  </pre>
+
+  <h2>Boolean operators</h2>
+
+  <p>Variables of type <tt>bool</tt> have the following special
+  operators:</p>
+  <pre>
+    bool p = TRUE;
+    bool q = FALSE;
+    bool r;
+    r = !p;        // "!" means "not" or "opposite", so r == FALSE
+    r = p || q;    // "||" means "or", so r == TRUE
+    r = p &amp;&amp; q;    // "&amp;&amp;" means "and", so r == FALSE
+    r = q || (!p)  // r == FALSE
+  </pre>
+  
+  <p>Note that you cannot use "shorthand" operators with Boolean
+    variables. The following does <em>not</em> do what you expect:
+    <tt>r != p;</tt></p>
+  
+  <h2>Input from the user</h2>
+  
+  <p>We quickly looked at how to get input from the user. Here it
+    is again:</p>
+  <pre>
+    double a;
+    int x;
+    bool p;
+    cout &lt;&lt; "Enter a decimal value: ";
+    cin &gt;&gt; a;
+    
+    cout &lt;&lt; "Enter an integer value: ";
+    cin &gt;&gt; x;
+    
+    cout &lt;&lt; "Enter a 0 for FALSE, anything else for TRUE: ";
+    cin &gt;&gt; p;
+  </pre>
+  
+  <p>The function <tt>cin</tt> only collects input up to the first
+    space or newline.</p>
+</body>
+</html>
