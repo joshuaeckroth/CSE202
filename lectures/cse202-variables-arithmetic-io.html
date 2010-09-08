@@ -144,13 +144,15 @@
   <p>For more gory details, see:</p>
 
   <ul>
-    <li><a href=
-	   "http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm"
-	   target="_blank">
+    <li>
+      <a href=
+	 "http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm"
+	 target="_blank">
 	http://www.cygnus-software.com/papers/comparingfloats/comparingfloats.htm</a></li>
 
-    <li><a href="http://en.wikipedia.org/wiki/Floating_point"
-	   target="_blank">http://en.wikipedia.org/wiki/Floating_point</a></li>
+    <li>
+      <a href="http://en.wikipedia.org/wiki/Floating_point"
+	 target="_blank">http://en.wikipedia.org/wiki/Floating_point</a></li>
   </ul>
 
   <p>Although you may know your program has variables that would
@@ -336,9 +338,12 @@
   good:</p>
   <pre>
     int main() {
+
         double xyz;
         int abc;
+
         // do stuff...
+
         return 0;
     }
   </pre>
@@ -346,11 +351,14 @@
   <p>while this is not preferred:</p>
   <pre>
     int main() {
+
         // do stuff...
+
         double xyz;
         int abc;
     
         // do more stuff...
+
         return 0;
     }
   </pre>
@@ -416,15 +424,69 @@
   <p>Note that you cannot use "shorthand" operators with Boolean
     variables. The following does <em>not</em> do what you expect:
     <tt>r != p;</tt></p>
+
+  <h2>Mathy example</h2>
+
+  <p>This example shows use of several mathematical functions and
+  operators.</p>
+
+  <pre>
+    // math example
+    #include &lt;iostream&gt;
+    #include &lt;cmath&gt;
+    using namespace std;
+
+    int main()
+    {
+        cout &lt;&lt; "The reciprocal of 10 is " &lt;&lt; 1.0/10.0 &lt;&lt; endl;
+        cout &lt;&lt; "The square root of 10 is " &lt;&lt; sqrt(10.0) &lt;&lt; endl;
+        cout &lt;&lt; "e^(10.0) = " &lt;&lt; exp(10.0) &lt;&lt; endl;
+        cout &lt;&lt; "The reciprocal of 15 is " &lt;&lt; 1.0/15.0 &lt;&lt; endl;
+        cout &lt;&lt; "The square root of 15 is " &lt;&lt; sqrt(15.0) &lt;&lt; endl;
+        cout &lt;&lt; "e^(15.0) = " &lt;&lt; exp(15.0) &lt;&lt; endl;
+
+        return 0; // exit program
+    }
+  </pre>
+
+  <p>Here is the example again, but this time with a
+  variable <tt>x</tt>:</p>
+
+  <pre>
+    #include &lt;iostream&gt;
+    #include &lt;cmath&gt;
+    using namespace std;
+
+    int main()
+    {
+        double x;
+        
+        x = 10.0;
+
+        cout &lt;&lt; "The reciprocal of 10 is " &lt;&lt; 1.0/x &lt;&lt; endl;
+        cout &lt;&lt; "The square root of 10 is " &lt;&lt; sqrt(x) &lt;&lt; endl;
+        cout &lt;&lt; "e^(" &lt;&lt; x &lt;&lt; ") = " &lt;&lt; exp(x) &lt;&lt; endl;
+
+        x = 15.0;
+
+        cout &lt;&lt; "The reciprocal of 15 is " &lt;&lt; 1.0/x &lt;&lt; endl;
+        cout &lt;&lt; "The square root of 15 is " &lt;&lt; sqrt(x) &lt;&lt; endl;
+        cout &lt;&lt; "e^(" &lt;&lt; x &lt;&lt; ") = " &lt;&lt; exp(x) &lt;&lt; endl;
+
+        return 0; // exit program
+    }
+  </pre>
   
   <h2>Input from the user</h2>
   
   <p>We quickly looked at how to get input from the user. Here it
     is again:</p>
+
   <pre>
     double a;
     int x;
     bool p;
+
     cout &lt;&lt; "Enter a decimal value: ";
     cin &gt;&gt; a;
     
@@ -434,9 +496,25 @@
     cout &lt;&lt; "Enter a 0 for FALSE, anything else for TRUE: ";
     cin &gt;&gt; p;
   </pre>
-  
+
   <p>The function <tt>cin</tt> only collects input up to the first
     space or newline.</p>
+
+  <p><tt>cin</tt> can be used to obtain multiple inputs. It knows when
+  to delimit (i.e. start looking for the next input) when it reaches a
+  space or newline (or tab).</p>
+
+  <p>Here's the same example as above, but using just
+  one <tt>cin</tt>:</p>
+
+  <pre>
+    double a;
+    int x;
+    bool p;
+    
+    cout &lt;&lt; "Enter a decimal, integer, and boolean value: ";
+    cin &gt;&gt; a &gt;&gt; x &gt;&gt; p;
+  </pre>
 
   <h2>Readings</h2>
   <ul>

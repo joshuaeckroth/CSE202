@@ -3,116 +3,93 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <script type="text/javascript" src="http://insearchofartifice.com/cse202/mathjax/MathJax.js"></script>
     <link rel="stylesheet" type="text/css" href="http://insearchofartifice.com/cse202/style.css" />
     <title>CSE 202 Fundamentals</title>
   </head>
 
   <body>
-    <p>About C++:</p>
+    <h1>Fundamentals</h1>
 
-    <ul>
-      <li>one of many languages</li>
+    <h2>Simple program</h2>
 
-      <li>a superset of C -- C code still passes as C++ code</li>
+    <pre>
+      // This is a comment. The compiler ignores comments.
 
-      <li>an ALGOL-like structure and syntax
+      // header information
+      // File iostream contains "cout" and "endl"
+      // Namespace std contains "cout" and "endl"
+      #include &lt;iostream&gt;
+      using namespace std;
 
-	<ul>
-          <li>C++ has lots of braces, semicolons</li>
+      int main()
+      {
+          cout &lt;&lt; "Hello World!" &lt;&lt; endl;
+          cout &lt;&lt; "Goodbye World!" &lt;&lt; endl;
 
-          <li>Each command is usually typed on a new line, runs top
-            to bottom, left to right</li>
+          // Exit program.
+          return 0;
+      }
+    </pre>
 
-          <li>Doesn't have to be that way: don't really need
-            semicolons and braces (Python), don't really need top-down
-            left-right (Haskell), don't really need to type in files
-            (Max)</li>
-	</ul>
-      </li>
+    <h2>Compiling and running the code</h2>
 
-      <li>We are learning C++ for a host of reasons: historical (was
-	C or Pascal previously, which are similar), practical (common
-	today), social (languages pushed by tool makers), etc.</li>
+    <p>On Linux:</p>
 
-      <li>Overall point is to utilize computers in our research and
-	jobs
+    <pre>
+      $ g++ helloworld.cpp
+      $ a.out
+      Hello World!
+      Goodbye World!
+      $
+    </pre>
+    
+    <p>Let's say you mistype the code. We'll forget the semicolon
+    after "return 0", and try to compile the program:</p>
 
-	<ul>
-          <li>This can be done with virtually any programming
-            language</li>
+    <pre>
+      $ g++ helloworld.cpp
+      helloworld.cpp: In function 'int main()':
+      helloworld.cpp:16: error: expected ';' before '}' token
+      $
+    </pre>
 
-          <li>Topics in this class, could be taught with virtually
-            any language
+    <p>Note that line 16 is actually the line <em>after</em> the
+    error.</p>
 
-            <ul>
-              <li>It is also relatively hard to teach C++ because of
-		all the syntax and other oddities (mostly relating to
-		the fact it's compatible with the older C
-		language)</li>
-            </ul>
-          </li>
-	</ul>
-      </li>
-    </ul>
+    <h2>About the code</h2>
 
-    <p>Then go over syllabus, learning objectives.</p>
+    <p>The <tt>main()</tt> function is where your programs will start
+    execution; you will <em>always</em> need one of these. In a way,
+    it "drives" your program; only actions in the <tt>main()</tt>
+    function will be executed (often, <tt>main()</tt> refers to other
+    functions as well).</p>
 
-    <p>Expectations:</p>
+    <p><tt>#include</tt> is a <em>preprocessor directive</em>; it
+    attaches the file <tt>iostream</tt> to the top of your program. We
+    need <tt>iostream</tt> for <tt>cout</tt>, among other
+    things. Preprocessor directives do not end with a semicolon.</p>
 
-    <ul>
-      <li>Expect you to do all the work on time
+    <p><tt>using namespace std;</tt> tells the compiler to look at in
+    the "namespace" (a place where things are defined) known as "std"
+    ("standard"). <tt>cout</tt> is defined in "std", for example.</p>
 
-	<ul>
-          <li>Programming assignments can be turned in 1 week late
-            for a maximum grade of 85% on that assignment</li>
+    <h2>Another example (same functionality)</h2>
 
-          <li>Programming assignments are always due 1 week after
-            they are assigned; that is, they are due on Tuesdays, by
-            1:00pm in the Carmen dropbox</li>
+    <pre>
+      #include &lt;iostream&gt;
+      using namespace std;
 
-          <li>A programming assignment should take maybe 3 hours
-            max</li>
+      int main()
+      {
+          // statements can be on multiple lines
+          cout &lt;&lt; "Hello World!"
+               &lt;&lt; endl;
+          cout &lt;&lt; "Goodbye World!"
+               &lt;&lt; endl; // comments can be here
 
-          <li>Labs are always due the day of the lab, by 3:30pm in
-            the Carmen dropbox (except Lab 1; I'm not so worried about
-            due dates for that one)</li>
-
-          <li>Labs are short and to the point -- they should take
-            about 30 min max</li>
-
-          <li>Mini-quizzes are online in Carmen; they are available
-            for about a week and must be done by Fridays 5:00pm</li>
-
-          <li>Mini-quizzes are very short and simple, usually just a
-            couple questions; you have 1 hour to complete them after
-            you begin them (they must be completed by Fridays 5:00pm);
-            they should really only take a few minutes to complete, if
-            you already know the material</li>
-
-          <li>Programming assignments and labs should be tested with
-            the tester program I wrote; I will demo that later; the
-            tester assists me in my grading, and it also assists you
-            not only to see if you program is correct, but also to
-            learn what the correct output is (I will not write that
-            information in the programming assignment and lab
-            descriptions; you can find it in the tester)</li>
-	</ul>
-      </li>
-    </ul>
-
-    <p>Then describe what we are going to do in the lab.</p>
-
-    <p>C++ style:</p>
-
-    <ul>
-      <li>Show basic template in jEdit; describe each part</li>
-
-      <li>Show basic "cout", compile, execute</li>
-
-      <li>Diagram compiling process, talk about file names (and Unix
-	vs Windows)</li>
-    </ul>
+          return 0; // exit program
+      }
+    </pre>
 
     <h2>Readings</h2>
 
