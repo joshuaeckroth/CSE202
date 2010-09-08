@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for Linux/x86 (vers 25 March 2009), see www.w3.org" />
+
+  <title>CSE 202 Loops 1</title>
+</head>
+
+<body>
+  <h1>Loops 1</h1>
+
+  <h2>Motivation</h2>
+
+  <p>So far our programs have not used any loops. A loop is a
+  repetition of some section of code. Loops are essential in the
+  common situation where user input or data determines how many
+  times something should occur. In other cases, the programmer just
+  wants to save time by reducing the amount of typing or
+  copy-pasting required, as our first example below shows.</p>
+
+  <p>Consider the simple example of the "bottles of beer" song.
+  This is how it goes (as far as I know):</p>
+
+  <blockquote>
+    <p>99 bottles of beer on the wall, 99 bottles of beer, take one
+    down, pass it around, 98 bottles of beer on the wall.<br />
+    <br />
+    98 bottles of beer on the wall, 98 bottles of beer, take one
+    down, pass it around, 97 bottles of beer on the wall.<br />
+    <br />
+    97 bottles of beer on the wall, 97 bottles of beer, take one
+    down, pass it around, 96 bottles of beer on the wall.<br />
+    <br />
+    ...<br />
+    <br />
+    1 bottle of beer on the wall, 1 bottle of beer, take it down,
+    pass it around, no more bottles of beer on the wall.</p>
+  </blockquote>
+
+  <p>Clearly this is a loop. (But a program that prints these
+  lyrics need not use loops, since you know it should print 100
+  lines. You could just use 100 separate <tt>cout</tt> statements.
+  Using a loop, on the other hand, saves us from such tedium.)</p>
+
+  <p>There are many examples of tasks that require loops. An
+  interactive program that asks the user to input a value, then
+  performs a computation on that input, then asks the user to input
+  another value, and so on, until the user decides to quit, must
+  use loops.</p>
+
+  <p>In this lecture, we will look at the 99-bottles-of-beer loop
+  and the interactive program loop.</p>
+
+  <h2>Building up to 99 bottles of beer</h2>
+
+  <p>In C++, the simplest loop is the <tt>while</tt> loop. Here is
+  a <tt>while</tt> loop that prints the first line of the song,
+  forever and ever (infinitely-many copies of this same lyric are
+  shown on the screen):</p>
+  <pre>
+    while(true)
+    {
+        cout &lt;&lt; "99 bottles of beer on the wall... "
+             &lt;&lt; "pass it around, 98 bottles..."
+             &lt;&lt; endl;
+    }
+  
+</pre>
+
+  <p>The general format for a <tt>while</tt> loop is:</p>
+  <pre>
+    while(conditional)
+    {
+        // do stuff...
+    }
+  
+</pre>
+
+  <p>where <tt>conditional</tt> is the same kind of conditional
+  used in <tt>if</tt> statements. In other words,
+  <tt>conditional</tt> must be something that is a <tt>bool</tt>
+  result.</p>
+
+  <p>In an <tt>if</tt> statement, there is no repetition, so the
+  conditional is only checked once. In a <tt>while</tt> loop, on
+  the other hand, the conditional is checked before the loop begins
+  and after every time the stuff inside the loop is executed. In
+  other words, first <tt>conditional</tt> is checked. If it turns
+  out to be true, then <tt>stuff...</tt> is executed. Then
+  <tt>conditional</tt> is checked again. If it is true,
+  <tt>stuff...</tt> is executed. And so on, looping over and over
+  so long as <tt>conditional</tt> is true. If at some point
+  <tt>conditional</tt> is false, then <tt>stuff...</tt> is not
+  executed and the loop is finished. Execution resumes after the
+  <tt>while</tt> loop block (a block starts with <tt>{</tt> and
+  ends with <tt>}</tt>).</p>
+
+  <p>We saw a "degenerate" loop earlier. It started with
+  <tt>while(true)</tt>. A loop like that never stops because the
+  conditional is always true. Another degenerate case is
+  <tt>while(false)</tt>. In this case, since the conditional is
+  never true, the stuff inside the block never executes. We will
+  see later that <tt>while(true)</tt> actually can be useful in a
+  program, but <tt>while(false)</tt> is never useful.</p>
+
+  <p>A loop can be stopped by two techniques. The first technique
+  will be discussed now. A loop stops when the conditional is
+  false. Consider this loop:</p>
+  <pre>
+    while(x != 0)
+    {
+        // do stuff...
+    }
+  
+</pre>
+
+  <p>This loop is stopped only when <tt>x == 0</tt> because that is
+  the only case when the conditional is false. This suggests that
+  somewhere inside the loop, <tt>x</tt> has to change such that,
+  eventually, <tt>x</tt> is given the value <tt>0</tt>. If that
+  never happens inside the loop, the loop never ends.</p>
+
+  <p>Consider the bottles of beer again. Here is a loop that mostly
+  works:</p>
+  <pre>
+    int n = 99;
+    while(n &gt; 0)
+    {
+        cout &lt;&lt; n &lt;&lt; " bottles of beer..."
+             &lt;&lt; "take one down..."
+             &lt;&lt; (n-1) &lt;&lt; " bottles of beer..."
+             &lt;&lt; endl;
+        n--;
+    }
+  </pre>
+
+  <p>See how in that case, the conditional <tt>n &gt; 0</tt> does
+  eventually become false, because <tt>n</tt> is decreased each
+  time the loop executes.</p>
+
+  <p>In the last code segment, the final bottles-of-beer lyric is
+  not handled properly. Here is a fix:</p>
+  <pre>
+    int n = 99;
+    while(n &gt; 1)
+    {
+        cout &lt;&lt; n &lt;&lt; " bottles of beer..."
+             &lt;&lt; "take one down..."
+             &lt;&lt; (n-1) &lt;&lt; " bottles of beer..."
+             &lt;&lt; endl;
+         n--;
+    }
+    cout &lt;&lt; "1 bottle of beer ..." &lt;&lt; endl;
+  </pre>
+
+  <p>The last case, when <tt>n == 1</tt>, is special so we put it
+  outside the loop.</p>
+
+  <h2>Interactive program</h2>
+  <pre>
+    char c;
+    cout &lt;&lt; "Enter a letter, 's' to skip the message, 'q' to quit: ";
+    cin &gt;&gt; c;
+    while(c != 'q')
+    {
+        if(c != 's')
+        {
+            cout &lt;&lt; "You typed " &lt;&lt; c &lt;&lt; endl;
+        }
+        cout &lt;&lt; "Enter a letter, 's' to skip the message, 'q' to quit: ";
+        cin &gt;&gt; c;
+    }
+  </pre>
+</body>
+</html>
