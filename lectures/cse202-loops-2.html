@@ -1,0 +1,248 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <script type="text/javascript" src="http://insearchofartifice.com/cse202/mathjax/MathJax.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://insearchofartifice.com/cse202/style.css" />
+  <title>CSE Loops 2</title>
+</head>
+
+<body>
+  <h1>Loops 2</h2>
+
+  <h2>Motivation</h2>
+
+  <p>Anything a <tt>while</tt> loop can do, a <tt>for</tt> loop can
+  do, and vice versa. However, each kind of loop is used equally
+  often in practice because they have slightly different "styles."
+  First, we will look at how <tt>for</tt> loops work.</p>
+
+  <p>This is the basic structure of a <tt>for</tt> loop:</p>
+
+  <pre>
+    for(initialization; conditional; update)
+    {
+        // do stuff...
+    }
+  </pre>
+
+  <p>This is what the three parts inside the parentheses (commonly)
+  mean:</p>
+
+  <ul>
+    <li><tt>initialization</tt> &mdash; create counting variables and set
+    their values</li>
+
+    <li><tt>conditional</tt> &mdash; determine if the loop should repeat;
+    this conditional usually refers to a variable defined in the
+    <tt>initialization</tt></li>
+
+    <li><tt>update</tt> &mdash; commonly used to change a variable
+    defined in the <tt>initialization</tt> and referred to in the
+    <tt>conditional</tt>; changing this variable should eventually
+    cause the conditional to be false, causing the loop to
+    complete</li>
+  </ul>
+
+  <p><tt>for</tt> loops follow this sequence of steps:</p>
+
+  <ol>
+    <li>execute whatever is put in the <tt>initialization</tt></li>
+
+    <li>check the <tt>conditional</tt>; if it evaluates to
+    <tt>false</tt> (<tt>0</tt>) then skip the loop; if it evaluates
+    to <tt>true</tt> (any integer not equal to <tt>0</tt>),
+    continue to the next step</li>
+
+    <li>execute the <tt>stuff</tt> inside the block</li>
+
+    <li>execute the <tt>update</tt></li>
+
+    <li>go to step 2</li>
+  </ol>
+
+  <p>It's useful to see how a <tt>while</tt> loop can be converted
+  to a <tt>for</tt> loop. In this example, the <tt>while</tt> loop
+  and the <tt>for</tt> loop are (nearly) equivalent:</p>
+
+  <pre>
+    int i = 0;
+    while(i &lt; 10)
+    {
+        // do stuff...
+        i++;
+    }
+
+    for(int i = 0; i &lt; 10; i++)
+    {
+        // do stuff...
+    }
+  </pre>
+
+  <p>(The two are only "nearly" equivalent for the following
+  reason: in the <tt>while</tt> loop case, the integer <tt>i</tt>
+  is declared outside of the loop, so code that follows the loop
+  block can still refer to <tt>i</tt>. In the <tt>for</tt> loop
+  case, the integer <tt>i</tt> can only be used inside the
+  <tt>for</tt> loop block; it does not exist when the loop is
+  finished.)</p>
+
+  <p>Let's dissect that <tt>for</tt> loop above:</p>
+
+  <ul>
+    <li><tt>initialization</tt> &mdash; <tt>int i = 0</tt></li>
+
+    <li><tt>conditional</tt> &mdash; <tt>i &lt; 10</tt></li>
+
+    <li><tt>update</tt> &mdash; <tt>i++</tt></li>
+  </ul>
+
+  <p>You should be able to see these same three components present
+  in the <tt>while</tt> loop, but the <tt>while</tt> loop does not
+  have special handling of the three components. On the other hand,
+  a <tt>for</tt> loop is specifically designed to have exactly
+  those three components (initialization, conditional, and
+  update).</p>
+
+  <p>A <tt>for</tt> loop need not have anything in any of the three
+  components. If none of the components have code in them, it is
+  equivalent to an infinite loop. In other words, these two loops
+  are equivalent:</p>
+
+  <pre>
+    while(true)
+    {
+        // do stuff forever... (or until "break" is encountered)
+    }
+    for(;;)
+    {
+        // do stuff forever... (or until "break" is encountered)
+    }
+  </pre>
+
+
+  <p>Here is the bottles-of-beer example again, this time using a
+  <tt>for</tt> loop:</p>
+
+  <pre>
+    for(int n = 99; n &gt; 1; n--)
+    {
+        cout &lt;&lt; n &lt;&lt; " bottles of beer..." &lt;&lt; "take one down..."
+             &lt;&lt; (n-1) &lt;&lt; " bottles of beer..." &lt;&lt; endl;
+    }
+    cout &lt;&lt; "1 bottle of beer ..." &lt;&lt; endl;
+  </pre>
+
+  <p>Here is an example that is equivalent to
+
+    $$\sum_{j=1}^{100} \sum_{k=1}^{100} (j+k)^2$$
+
+  </p>
+
+  <pre>
+    int sum = 0;
+    for(int j = 1; j &lt;= 100; j++)
+    {
+        for(int k = 1; k &lt;= 100; k++)
+        {
+            sum += (j+k)*(j+k);
+        }
+    }
+  </pre>
+
+  <p>Here is an example that prints a triangle of stars:</p>
+
+  <pre>
+    // the maximum width of a line of stars
+    int width = 30;
+
+    // print 2 stars, then 4 stars, etc., centered on the line
+    for(int i = 2; i &lt;= width; i += 2)
+    {
+        // we want to print "i" stars in the middle of the line,
+        // so we need to add spaces before the stars, then print
+        // the stars (we don't need spaces after the stars, just
+        // a newline)
+    
+        // print spaces
+        for(int j = 0; j &lt; ((width - i) / 2); j++)
+        {
+            cout &lt;&lt; " ";
+        }
+    
+        // print stars
+        for(int j = 0; j &lt; i; j++)
+        {
+            cout &lt;&lt; "*";
+        }
+    
+        // print newline
+        cout &lt;&lt; endl;
+    }
+  </pre>
+  
+  <p>Here is the result:</p>
+
+  <pre>
+              **
+             ****
+            ******
+           ********
+          **********
+         ************
+        **************
+       ****************
+      ******************
+     ********************
+    **********************
+   ************************
+  **************************
+ ****************************
+******************************
+
+  </pre>
+
+  <p>Let's fix that extra blank line at the bottom. We will check if
+  the loop is on the last iteration; if it is, we don't print the last
+  line:</p>
+
+  <pre>
+    // the maximum width of a line of stars
+    int width = 30;
+
+    // print 2 stars, then 4 stars, etc., centered on the line
+    for(int i = 2; i &lt;= width; i += 2)
+    {
+        // we want to print "i" stars in the middle of the line,
+        // so we need to add spaces before the stars, then print
+        // the stars (we don't need spaces after the stars, just
+        // a newline)
+    
+        // print spaces
+        for(int j = 0; j &lt; ((width - i) / 2); j++)
+        {
+            cout &lt;&lt; " ";
+        }
+    
+        // print stars
+        for(int j = 0; j &lt; i; j++)
+        {
+            cout &lt;&lt; "*";
+        }
+    
+        // print newline only if we aren't on the last line
+        if(i != width)
+        {
+            cout &lt;&lt; endl;
+        }
+    }
+  </pre>
+
+  <p>Notice that in each of these examples, we are doing
+  <tt>stuff</tt> some particular number of times (the number of
+  times is already known, like <tt>100</tt>, or stored in an
+  integer or a calculation, such as <tt>((width - i) / 2)</tt>).
+  These are the typical use cases for the <tt>for</tt> loop.</p>
+</body>
+</html>

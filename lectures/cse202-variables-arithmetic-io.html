@@ -3,9 +3,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta name="generator" content=
-  "HTML Tidy for Linux/x86 (vers 25 March 2009), see www.w3.org" />
-
+  <script type="text/javascript" src="http://insearchofartifice.com/cse202/mathjax/MathJax.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://insearchofartifice.com/cse202/style.css" />
   <title>CSE 202 Variables, arithmetic, input/output</title>
 </head>
 
@@ -19,21 +18,20 @@
   of these locations and change the data over time. How we do this
   in C++ is with variables.</p>
 
-  <p>Consider the mathematical formula <tt>c = sqrt(a*a + b*b)</tt>
+  <p>Consider the mathematical formula $c = \sqrt{a^2+b^2}$
   (Pythagoras' formula). This formula can find the length of the
   hypotenuse of <em>any</em> right triangle. If we were to write a
-  program that implemented this formula, then we would have a
-  program that can find the length of the hypotenuse of any right
+  program that implemented this formula, then we would have a program
+  that can find the length of the hypotenuse of any right
   triangle. This is clearly useful (though perhaps not as its own
   program).</p>
 
-  <p>The reason the letters <tt>a</tt>, <tt>b</tt>, and <tt>c</tt>
-  are used in the formula is because they <em>stand in</em> for
-  whatever values some particular right triangle has. Our program
-  would ask for these values (specifically, the values for
-  <tt>a</tt> and <tt>b</tt> from the user (or read them from a
-  file, or whatever). Our program must also save these values in
-  variables.</p>
+  <p>The reason the letters $a$, $b$, and $c$ are used in the formula
+  is because they <em>stand in</em> for whatever values some
+  particular right triangle has. Our program would ask for these
+  values (specifically, the values for $a$ and $b$ from the user (or
+  read them from a file, or whatever). Our program must also save
+  these values in variables.</p>
 
   <p>However, unlike mathematics, C++ variables are <em>typed</em>.
   This means that every variable in C++ is a variable of a certain

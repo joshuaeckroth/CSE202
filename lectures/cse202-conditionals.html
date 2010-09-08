@@ -1,0 +1,351 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <script type="text/javascript" src="http://insearchofartifice.com/cse202/mathjax/MathJax.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://insearchofartifice.com/cse202/style.css" />
+  <title>CSE 202 Conditionals</title>
+</head>
+
+<body>
+  <h1>Conditionals</h1>
+
+  <h2>Motivation</h2>
+
+  <p>It is a very rare program that solves a problem with the exact
+  same sequence of operations every time it is executed. What is
+  more common is a program that does some operations if the data or
+  user input looks a certain way, and a different set of operations
+  if the data looks a different way.</p>
+
+  <p>The way we can do this in C++ is with "conditionals." The word
+  "conditional" means that some operations will only occur if a
+  certain "condition" is true.</p>
+
+  <p>For example, consider the program that gives the user three
+  attempts to guess a number between 1 and 10. Here is what the
+  program should do (in pseudo-code):</p>
+
+  <ol>
+    <li>Ask the user for the first guess. Save this guess into a
+    variable called <tt>guess1</tt>.</li>
+
+    <li>If <tt>guess1</tt> is the correct guess, then tell the user
+    "Success!" and quit.</li>
+
+    <li>If <tt>guess1</tt> is not the correct guess, then tell the
+    user "Nope. Try another guess." and save the second guess into
+    a variable called <tt>guess2</tt>.</li>
+
+    <li>If <tt>guess2</tt> is the correct guess, then tell the user
+    "Success!" and quit.</li>
+
+    <li>If <tt>guess2</tt> is not the correct guess, then tell the
+    user "Nope. Try another guess." and save the third guess into a
+    variable called <tt>guess3</tt>.</li>
+
+    <li>If <tt>guess3</tt> is the correct guess, then tell the user
+    "Success!" and quit.</li>
+
+    <li>If <tt>guess3</tt> is not the correct guess, then tell the
+    user "Nope. You are not allowed any more guesses, sorry! The
+    number you failed to guess was [the number]." (where "the
+    number" is the real number).</li>
+  </ol>
+
+  <h2>How to do it in code</h2>
+
+  <p>In C++, we have a command called <tt>if</tt>. This is what it
+  looks like:</p>
+
+  <pre>
+    if(...something...)
+    {
+        // do stuff...
+    }
+  </pre>
+
+  <p>Of course, we need to change the phrase
+  <tt>...something...</tt> to a "conditional." The <tt>if</tt>
+  command expects something that results in a <tt>bool</tt> value.
+  So we can use <tt>bool</tt> values like <tt>true</tt> and
+  <tt>false</tt>:</p>
+
+  <pre>
+    if(true)
+    {
+        // do stuff...
+    }
+    if(false)
+    {
+        // do stuff...
+    }
+  </pre>
+
+  <p>But these conditionals (<tt>true</tt> and <tt>false</tt>) are
+  not very interesting because in the first case, the stuff inside
+  the <tt>if</tt> block will always be executed (a "block" is the
+  stuff being <tt>{</tt> and <tt>}</tt>). In the second case, the
+  stuff in the block will never be executed.</p>
+
+  <p>More interesting conditionals may involve the following
+  boolean operators (assuming <tt>p</tt> and <tt>q</tt> are
+  <tt>bool</tt> variables and <tt>x</tt> is an <tt>int</tt>
+  variable):</p>
+
+  <ul>
+    <li><tt>!p</tt> &mdash; "not p" or "opposite of the value that p
+    has"</li>
+
+    <li><tt>p || q</tt> &mdash; "p or q"</li>
+
+    <li><tt>p &amp;&amp; q</tt> &mdash; "p and q"</li>
+
+    <li><tt>x == 5</tt> &mdash; "the value in the variable x is equal to
+    5"</li>
+
+    <li><tt>x != 5</tt> &mdash; "the value in the variable x is not equal
+    to 5"</li>
+
+    <li><tt>x &lt; 5</tt></li>
+
+    <li><tt>x &gt; 5</tt></li>
+
+    <li><tt>x &lt;= 5</tt> &mdash; "the value in the variable x is less
+    than or equal to 5"</li>
+
+    <li><tt>x &gt;= 5</tt></li>
+
+    <li><tt>(x &gt;= 0) &amp;&amp; (x &lt;= 5)</tt> &mdash; "x is between
+    0 and 5" (x can be one of [0,1,2,3,4,5]); note that you
+    <em>cannot</em> say <tt>(0 &lt;= x &lt;= 5) (wrong!)</tt></li>
+  </ul>
+
+  <p>So we can write our guessing program like this:</p>
+
+  <pre>
+    #include &lt;iostream&gt;
+    using namespace std;
+    int main()
+    {
+        int answer = 8;
+        int guess;
+    
+        cout &lt;&lt; "Enter first guess: ";
+        cin &gt;&gt; guess;
+
+        if(answer == guess)
+        {
+            cout &lt;&lt; "Success!";
+            return 0;
+        }
+    
+        cout &lt;&lt; "Nope. Try another guess." &lt;&lt; endl;
+        cout &lt;&lt; "Enter second guess: ";
+        cin &gt;&gt; guess;
+    
+        if(answer == guess)
+        {
+            cout &lt;&lt; "Success!";
+            return 0;
+        }
+    
+        cout &lt;&lt; "Nope. Try another guess." &lt;&lt; endl;
+        cout &lt;&lt; "Enter third guess: ";
+        cin &gt;&gt; guess;
+
+        if(answer == guess)
+        {
+            cout &lt;&lt; "Success!";
+            return 0;
+        }
+    
+        cout &lt;&lt; "Nope. You are not allowed any more guesses, sorry!" &lt;&lt; endl;
+        cout &lt;&lt; "The number you failed to guess was " &lt;&lt; answer &lt;&lt; endl;
+    
+        return -1;
+    }
+  </pre>
+
+  <h2>if/else</h2>
+
+  <p>Besides <tt>if</tt> we can also use <tt>else</tt> to specify
+  some operations that should be executed if the conditional is
+  <em>not</em> satisfied. Example:</p>
+
+  <pre>
+    if(x == 5)
+    {
+        cout &lt;&lt; "x equals 5!" &lt;&lt; endl;
+    }
+    else
+    {
+        cout &lt;&lt; "x does not equal 5!" &lt;&lt; endl;
+    }
+  </pre>
+
+  <h2>Nested if's</h2>
+
+  <p><tt>if</tt> commands can be inside other <tt>if</tt> (or
+  <tt>else</tt>) blocks:</p>
+
+  <pre>
+    if(x &lt; 5)
+    {
+        if(x &lt; 0)
+        {
+            cout &lt;&lt; "x is less than 0!" &lt;&lt; endl;
+        }
+        else
+        {
+            cout &lt;&lt; "x is less than 5 but not less than 0!" &lt;&lt; endl;
+        }
+    }
+    else
+    {
+        cout &lt;&lt; "x is not less than 5!" &lt;&lt; endl;
+    }
+  </pre>
+
+  <h2>Series of if/else's</h2>
+
+  <p>It is common practice to check a series of conditions, where
+  you only expect one of them to be true:</p>
+
+  <pre>
+    if(x == 0)
+    {
+        // do stuff...
+    }
+    else if(x == 1)
+    {
+        // do stuff...
+    }
+    else if(x == 2)
+    {
+        // do stuff...
+    }
+    else
+    {
+        // fallback...
+    }
+  </pre>
+
+  <h2>"switch" statements</h2>
+
+  <p>An alternative to the above example (series of if/else's) is
+  the <tt>switch</tt> statement. The <tt>switch</tt> statement is the
+  same as a series of if/else's because only one of the conditions
+  should turn out to be true.  The <tt>switch</tt> statement can only
+  handle simple conditions, however; actually, it can only handle
+  conditions of the form "is some integer equal to some value?" This
+  means that a <tt>switch</tt> statement can only be used for
+  integers.</p>
+
+  <p>Here is an example.</p>
+
+  <pre>
+    #include &lt;iostream&gt;
+    using namespace std;
+    int main()
+    {
+        int number;
+        cout &lt;&lt; "Enter a number 1-4: ";
+        cin &gt;&gt; number;
+    
+        switch(number)
+        {
+        case 1:
+            cout &lt;&lt; "You entered the number 1." &lt;&lt; endl;
+            break;
+        case 2:
+            cout &lt;&lt; "You entered the number 2." &lt;&lt; endl;
+            break;
+        case 3:
+            cout &lt;&lt; "You entered the number 3." &lt;&lt; endl;
+            break;
+        case 4:
+            cout &lt;&lt; "You entered the number 4." &lt;&lt; endl;
+            break;
+        default:
+            cout &lt;&lt; "You must have entered some other number." &lt;&lt; endl;
+        }
+    
+        return 0;
+    }
+  </pre>
+
+  <p>The <tt>switch</tt> statement above can be rewritten with a
+  series of if/else's:</p>
+
+  <pre>
+    // the following is the same as the "switch" statement above
+    if(number == 1)
+    {
+        cout &lt;&lt; "You entered the number 1." &lt;&lt; endl;
+    }
+    else if(number == 2)
+    {
+        cout &lt;&lt; "You entered the number 2." &lt;&lt; endl;
+    }
+    else if(number == 3)
+    {
+        cout &lt;&lt; "You entered the number 3." &lt;&lt; endl;
+    }
+    else if(number == 4)
+    {
+        cout &lt;&lt; "You entered the number 4." &lt;&lt; endl;
+    }
+    else
+    {
+        cout &lt;&lt; "You must have entered some other number." &lt;&lt; endl;
+    }
+  </pre>
+
+
+  <p>Notice that an <tt>if</tt> is much more powerful: you can use
+  very complicated conditionals. However, a <tt>switch</tt> is very
+  simple: for each "case", you provide a value that is compared to the
+  variable used in the switch (in this case, the variable used in the
+  switch is "number"). Each case basically asks, "does the value in
+  the variable equal this number?"</p>
+
+  <p>Each "case" in a <tt>switch</tt> needs a "break" at the end so
+  that the next case is not entered. It's good practice to always
+  include a "break" at the end of each case in a <tt>switch</tt>.</p>
+
+  <p>The "default" case is the case that is used if all the other
+  cases fail.</p>
+
+  <p>You can also use a <tt>switch</tt> to determine which character a
+  user typed, since characters are themselves just integers. Here is
+  an example:</p>
+
+  <pre>
+    #include &lt;iostream&gt;
+    using namespace std;
+    int main()
+    {
+        char letter;
+        cout &lt;&lt; "Enter a letter: ";
+        cin &gt;&gt; letter;
+    
+        switch(letter)
+        {
+        case 'a':
+            cout &lt;&lt; "You entered the letter 'a'." &lt;&lt; endl;
+            break;
+        case 'b':
+            cout &lt;&lt; "You entered the letter 'b'." &lt;&lt; endl;
+            break;
+        default:
+            cout &lt;&lt; "You must have entered some other letter." &lt;&lt; endl;
+        }
+    
+        return 0;
+    }
+  </pre>
+
+</body>
+</html>
