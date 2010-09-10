@@ -1,0 +1,563 @@
+* Example 1 - simple vector
+
+<src lang="c++">
+#include <iostream>
+#include <vector>  // this is necessary to use vectors
+using namespace std;
+
+int main()
+{
+    vector<int> vals;
+    vals.push_back(5);
+    vals.push_back(6);
+    vals.push_back(1);
+
+    cout << "Size of vals: " << vals.size() << endl;
+    for(int i = 0; i < vals.size(); i++)
+    {
+        cout << "Value at index " << i
+             << " is " << vals[i] << endl;
+    }
+    return 0;
+}
+</src>
+
+Output:
+
+<example>
+Size of vals: 3
+Value at index 0 is 5
+Value at index 1 is 6
+Value at index 2 is 1
+</example>
+
+* Example 2 - vector with initial values
+
+<src lang="c++">
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    // create a vector of size 10,
+    // with every element equal to 0
+    vector<int> vals(10, 0);
+    vals.push_back(5);
+    vals.push_back(6);
+    vals.push_back(1);
+
+    cout << "Size of vals: " << vals.size() << endl;
+    for(int i = 0; i < vals.size(); i++)
+    {
+        cout << "Value at index " << i
+             << " is " << vals[i] << endl;
+    }
+    return 0;
+}
+</src>
+
+Output:
+
+<example>
+Size of vals: 13
+Value at index 0 is 0
+Value at index 1 is 0
+Value at index 2 is 0
+Value at index 3 is 0
+Value at index 4 is 0
+Value at index 5 is 0
+Value at index 6 is 0
+Value at index 7 is 0
+Value at index 8 is 0
+Value at index 9 is 0
+Value at index 10 is 5
+Value at index 11 is 6
+Value at index 12 is 1
+</example>
+
+* Example 3 - clearing a vector
+
+<src lang="c++">
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    // create a vector of size 10,
+    // with every element equal to 0
+    vector<int> vals(10, 0);
+    vals.push_back(5);
+    vals.push_back(6);
+    vals.push_back(1);
+
+    cout << "Size of vals: " << vals.size() << endl;
+    for(int i = 0; i < vals.size(); i++)
+    {
+        cout << "Value at index " << i
+             << " is " << vals[i] << endl;
+    }
+
+    vals.clear();
+    cout << "Size of vals: " << vals.size() << endl;
+
+    return 0;
+}
+</src>
+
+Output:
+
+<example>
+Size of vals: 13
+Value at index 0 is 0
+Value at index 1 is 0
+Value at index 2 is 0
+Value at index 3 is 0
+Value at index 4 is 0
+Value at index 5 is 0
+Value at index 6 is 0
+Value at index 7 is 0
+Value at index 8 is 0
+Value at index 9 is 0
+Value at index 10 is 5
+Value at index 11 is 6
+Value at index 12 is 1
+Size of vals: 0
+</example>
+
+* Example 4 - vector of strings
+
+<src lang="c++">
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+int main()
+{
+    vector<string> names;
+    names.push_back("Euler");
+    names.push_back("Descartes");
+    names.push_back("Turing");
+    names.push_back("Church");
+
+    cout << "Size of names: " << names.size() << endl;
+    for(int i = 0; i < names.size(); i++)
+    {
+        cout << "Name at index " << i
+             << " is " << names[i] << endl;
+    }
+
+    return 0;
+}
+</src>
+
+Output:
+
+<example>
+Size of names: 4
+Name at index 0 is Euler
+Name at index 1 is Descartes
+Name at index 2 is Turing
+Name at index 3 is Church
+</example>
+
+* Example 5 - using the empty() function
+
+<src lang="c++">
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+int main()
+{
+    vector<string> names;
+    names.push_back("Euler");
+    names.push_back("Descartes");
+    names.push_back("Turing");
+    names.push_back("Church");
+
+    names.clear();
+
+    if(names.empty())
+    {
+        cout << "Names vector is empty." << endl;
+    }
+    else
+    {
+        cout << "Names vector is not empty." << endl;
+    }
+
+    return 0;
+}
+</src>
+
+Output:
+
+<example>
+Names vector is empty.
+</example>
+
+* Example 6 - sorting
+
+<src lang="c++">
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+    vector<string> names;
+    names.push_back("Euler");
+    names.push_back("Descartes");
+    names.push_back("Turing");
+    names.push_back("Church");
+
+    sort(names.begin(), names.end());
+
+    for(int i = 0; i < names.size(); i++)
+    {
+        cout << "Name at index " << i
+             << " is " << names[i] << endl;
+    }
+
+    return 0;
+}
+</src>
+
+Output:
+
+<example>
+Name at index 0 is Church
+Name at index 1 is Descartes
+Name at index 2 is Euler
+Name at index 3 is Turing
+</example> 
+
+* Example 7 - random shuffling
+
+<src lang="c++">
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+
+int main()
+{
+    srand(time(NULL));
+
+    vector<string> names;
+    names.push_back("Euler");
+    names.push_back("Descartes");
+    names.push_back("Turing");
+    names.push_back("Church");
+    names.push_back("Curry");
+    names.push_back("Gauss");
+    names.push_back("Riemann");
+    names.push_back("McCarthy");
+    names.push_back("Hopper");
+    names.push_back("Lovelace");
+
+    sort(names.begin(), names.end());
+
+    cout << "--Sorted names:" << endl;
+    for(int i = 0; i < names.size(); i++)
+    {
+        cout << names[i] << endl;
+    }
+    cout << endl;
+
+    random_shuffle(names.begin(), names.end());
+
+    cout << "--Randomly shuffled names:" << endl;
+    for(int i = 0; i < names.size(); i++)
+    {
+        cout << names[i] << endl;
+    }
+
+    return 0;
+}
+</src>
+
+Output:
+
+<example>
+--Sorted names:
+Church
+Curry
+Descartes
+Euler
+Gauss
+Hopper
+Lovelace
+McCarthy
+Riemann
+Turing
+
+--Randomly shuffled names:
+Curry
+Hopper
+Turing
+Descartes
+Gauss
+Lovelace
+McCarthy
+Church
+Euler
+Riemann
+</example>
+
+* Example 8 - passing a vector to a function
+
+<src lang="c++">
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int sum(vector<int> vals)
+{
+    int sum = 0;
+    for(int i = 0; i < vals.size(); i++)
+    {
+        sum += vals[i];
+    }
+    return sum;
+}
+
+int main()
+{
+    vector<int> xs;
+    
+    for(int i = 0; i < 1000; i++)
+    {
+        xs.push_back(i + 1);
+    }
+
+    cout << "Sum of integers 1 to 1000: " << sum(xs) << endl;
+
+    return 0;
+}
+</src>
+
+Output:
+
+<example>
+Sum of integers 1 to 1000: 500500
+</example>
+
+* Example 9 - reading file data into vectors
+
+<src lang="c++">
+#include <iostream>
+#include <fstream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    string filename;
+    ifstream file;
+    double val;
+    vector<double> vals;
+    
+    cout << "Enter file name: ";
+    getline(cin, filename);
+    file.open(filename.c_str());
+    if(!file.is_open())
+    {
+        cout << "Error opening file." << endl;
+        return -1;
+    }
+
+    while(file >> val)
+    {
+        vals.push_back(val);
+    }
+    file.close();
+
+    for(int i = 0; i < vals.size(); i++)
+    {
+        cout << vals[i] << endl;
+    }
+
+    return 0;
+}
+</src>
+
+* Example 10 - reading three columns of file data into an array of vectors
+
+<src lang="c++">
+#include <iostream>
+#include <fstream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    string filename;
+    ifstream file;
+    double val1, val2, val3;
+    vector<double> vals[3];
+    
+    cout << "Enter file name: ";
+    getline(cin, filename);
+    file.open(filename.c_str());
+    if(!file.is_open())
+    {
+        cout << "Error opening file." << endl;
+        return -1;
+    }
+
+    while(file >> val1 >> val2 >> val3)
+    {
+        vals[0].push_back(val1);
+        vals[1].push_back(val2);
+        vals[2].push_back(val3);
+    }
+    file.close();
+
+    for(int i = 0; i < vals[0].size(); i++)
+    {
+        cout << "col 1: " << vals[0][i]
+             << ", col 2: " << vals[1][i]
+             << ", col 3: " << vals[2][i]
+             << endl;
+    }
+
+    return 0;
+}
+</src>
+
+Input file:
+
+<example>
+3.7 32.2 0.0
+68.4 37.2 95.2
+12.9 26.4 82.0
+</example>
+
+Output:
+
+<example>
+Enter file name: input.txt
+col 1: 3.7, col 2: 32.2, col 3: 0
+col 1: 68.4, col 2: 37.2, col 3: 95.2
+col 1: 12.9, col 2: 26.4, col 3: 82
+</example>
+
+* Example 11 - returning a vector from a function
+
+<src lang="c++">
+#include <iostream>
+#include <fstream>
+#include <vector>
+using namespace std;
+
+vector<double> repeatThree(vector<double> vals)
+{
+    vector<double> repeatedVals;
+
+    for(int i = 0; i < vals.size(); i++)
+    {
+        repeatedVals.push_back(vals[i]);
+        repeatedVals.push_back(vals[i]);
+        repeatedVals.push_back(vals[i]);
+    }
+    
+    return repeatedVals;
+}
+
+int main()
+{
+    string filename;
+    ifstream file;
+    double val;
+    vector<double> vals;
+    
+    cout << "Enter file name: ";
+    getline(cin, filename);
+    file.open(filename.c_str());
+    if(!file.is_open())
+    {
+        cout << "Error opening file." << endl;
+        return -1;
+    }
+
+    while(file >> val)
+    {
+        vals.push_back(val);
+    }
+    file.close();
+
+    vector<double> newVals = repeatThree(vals);
+
+    for(int i = 0; i < newVals.size(); i++)
+    {
+        cout << newVals[i] << endl;
+    }
+
+    return 0;
+}
+</src>
+
+* Example 12 - passing a vector by reference to a function
+
+<src lang="c++">
+#include <iostream>
+#include <fstream>
+#include <vector>
+using namespace std;
+
+void repeatThree(vector<double> &vals)
+{
+    vector<double> repeatedVals;
+
+    for(int i = 0; i < vals.size(); i++)
+    {
+        repeatedVals.push_back(vals[i]);
+        repeatedVals.push_back(vals[i]);
+        repeatedVals.push_back(vals[i]);
+    }
+    
+    vals = repeatedVals;
+}
+
+int main()
+{
+    string filename;
+    ifstream file;
+    double val;
+    vector<double> vals;
+    
+    cout << "Enter file name: ";
+    getline(cin, filename);
+    file.open(filename.c_str());
+    if(!file.is_open())
+    {
+        cout << "Error opening file." << endl;
+        return -1;
+    }
+
+    while(file >> val)
+    {
+        vals.push_back(val);
+    }
+    file.close();
+
+    repeatThree(vals);
+
+    for(int i = 0; i < vals.size(); i++)
+    {
+        cout << vals[i] << endl;
+    }
+
+    return 0;
+}
+</src>

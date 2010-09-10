@@ -1,0 +1,361 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>Searching</title>
+    <meta name="generator" content="muse.el">
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=iso-8859-1">
+    <style type="text/css">
+body {
+  background: white; color: black;
+  margin-left: 3%; margin-right: 7%;
+  line-height: 1.5;
+  font-family: Nimbus Sans L, sans;
+}
+
+p { margin-top: 1% }
+p.verse { margin-left: 3% }
+
+.example { margin-left: 3% }
+
+li { margin: 0.5em 0; }
+
+h2 {
+  margin-top: 25px;
+  margin-bottom: 0px;
+}
+h3 { margin-bottom: 0px; }
+
+pre {
+  border: 1px solid #ccc;
+  margin: 5px;
+  padding: 5px;
+}
+
+code { color: #bc8f8f; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <h1>Searching</h1>
+    <!-- Page published by Emacs Muse begins here -->
+<h2>Sequential search</h2>
+
+<p class="first">Sequential search is as simple as it gets. If we have an array of
+data, call it <code>arr</code> (of size <code>size</code>), then sequential search just looks at
+every element in <code>arr</code> until either (1) it finds what it was asked to
+find or (2) it runs out of elements. Here is the code for sequential
+search (for an array of strings):</p>
+
+<pre class="src">
+<span style="color: #b22222;">// </span><span style="color: #b22222;">this function returns the position of 'target' in the array
+</span><span style="color: #b22222;">// </span><span style="color: #b22222;">if it is found; if it is not found, this function returns -1
+</span><span style="color: #228b22;">int</span> <span style="color: #0000ff;">sequentialSearch</span>(<span style="color: #228b22;">string</span> <span style="color: #b8860b;">arr</span>[], <span style="color: #228b22;">int</span> <span style="color: #b8860b;">size</span>, <span style="color: #228b22;">string</span> <span style="color: #b8860b;">target</span>)
+{
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; size; i++)
+    {
+        <span style="color: #a020f0;">if</span>(arr[i] == target)
+        {
+            <span style="color: #a020f0;">return</span> i;
+        }
+    }
+    <span style="color: #a020f0;">return</span> -1;
+}
+</pre>
+
+<p>It should be obvious then that (1) sequential search is the slowest
+search (if there are <!-- $n$--><img src="./latex/latex2png-Searching__10372.png" alt="latex2png equation" class="latex-inline"> elements in the array then, on
+average, sequential search looks at <!-- $n/2$--><img src="./latex/latex2png-Searching__2658884.png" alt="latex2png equation" class="latex-inline"> elements) and (2)
+the array need not be sorted.</p>
+
+<p>But what if the array <em>is</em> sorted? Isn't there some kind of advantage
+for searching?</p>
+
+
+<h2>Binary search</h2>
+
+<p class="first">Imagine somebody gives you a portion of a phone book. The book is like
+a sorted array of names (sorted by last name). We are considering just
+a portion of the phone book because not all sorted arrays start at
+letter A and end at letter Z. Perhaps our book has last names between
+C and Q.</p>
+
+<p>How do we most efficiently search for a particular name in this book?
+You do a binary search:</p>
+
+<ol>
+<li>Open the book to the exact middle. Look at a name in the exact
+middle of the page. Is this name equal to the name we are looking
+for? Is this name after/before the name we are looking for?</li>
+
+<li>If the name is the one we are looking for, then we are done.</li>
+
+<li>If the name is after the one we are looking for (e.g. we are
+looking for Einstein but the name in the middle is Riemann), then
+throw out the second half of the book (rip it apart, keep the
+first half); we know what we are looking for is in the first half
+of the book.</li>
+
+<li>If the name is before the one we are looking for (e.g. we are
+looking for Einstein but the name in the middle is Descartes),
+then throw out the first half of the book.</li>
+
+<li>Repeat step 1 with the reduced (halved) book. We know the name we
+are looking for is in this reduced book.</li>
+</ol>
+
+<p>Is it clear that this is a <em>binary</em> search? Binary means two. So a
+binary search is a &quot;two&quot;-search. If we don't find our target in the
+array (or the phone book), we cut the array or book in half and search
+in that half. Half=two=binary.</p>
+
+<p>While sequential search required, on average, looking at
+<!-- $n/2$--><img src="./latex/latex2png-Searching__2658884.png" alt="latex2png equation" class="latex-inline"> elements (where <!-- $n$--><img src="./latex/latex2png-Searching__10372.png" alt="latex2png equation" class="latex-inline"> is the size of the
+array, or the number of names in a phone book), binary search
+requires, on average, looking at <!-- $\log_2(n)$--><img src="./latex/latex2png-Searching__182127940.png" alt="latex2png equation" class="latex-inline"> elements. This
+means that if an array has size 1024 (which is <!-- $2^{10}$--><img src="./latex/latex2png-Searching__130661002.png" alt="latex2png equation" class="latex-inline">),
+then sequential search requires about 500 comparisons while binary
+search requires about 10. This is a substantial improvement.</p>
+
+<p>Note, however, that binary search requires that the array be
+sorted. Sorting also takes time, and that must be considered when you
+plan to use binary search.</p>
+
+<p>Here is the code for binary search (searching an array of
+integers). Note that <code>top</code> and <code>bottom</code> keep track of the highest and
+lowest indexes (respectively) of the &quot;half&quot; of the array that we are
+looking at at any particular iteration.</p>
+
+<pre class="src">
+<span style="color: #b22222;">// </span><span style="color: #b22222;">this function returns the position of 'target' in the array
+</span><span style="color: #b22222;">// </span><span style="color: #b22222;">if it is found; if it is not found, this function returns -1;
+</span><span style="color: #b22222;">// </span><span style="color: #b22222;">this function requires that 'arr' be sorted (ascending)
+</span><span style="color: #228b22;">int</span> <span style="color: #0000ff;">binarySearch</span>(<span style="color: #228b22;">double</span> <span style="color: #b8860b;">arr</span>[], <span style="color: #228b22;">int</span> <span style="color: #b8860b;">size</span>, <span style="color: #228b22;">double</span> <span style="color: #b8860b;">target</span>)
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">top</span> = (size - 1);
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">bottom</span> = 0;
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">middle</span>;
+    <span style="color: #a020f0;">while</span>(<span style="color: #5f9ea0;">true</span>)
+    {
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">if there is only one element to look at,
+</span>        <span style="color: #b22222;">// </span><span style="color: #b22222;">it is either the target or it is not
+</span>        <span style="color: #a020f0;">if</span>(top == bottom)
+        {
+            <span style="color: #b22222;">// </span><span style="color: #b22222;">we found the target
+</span>            <span style="color: #a020f0;">if</span>(arr[top] == target)
+            {
+                <span style="color: #a020f0;">return</span> top;
+            }
+            <span style="color: #b22222;">// </span><span style="color: #b22222;">we did not find the target,
+</span>            <span style="color: #b22222;">// </span><span style="color: #b22222;">and we have nowhere else to look;
+</span>            <span style="color: #b22222;">// </span><span style="color: #b22222;">so the target is not in the array
+</span>            <span style="color: #a020f0;">else</span>
+            {
+                <span style="color: #a020f0;">return</span> -1;
+            }
+        }
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">otherwise, if top != bottom, then we can split
+</span>        <span style="color: #b22222;">// </span><span style="color: #b22222;">the array in half
+</span>        <span style="color: #a020f0;">else</span>
+        {
+            middle = bottom + (top - bottom) / 2;
+
+            <span style="color: #b22222;">// </span><span style="color: #b22222;">check if arr[middle] is our target
+</span>            <span style="color: #a020f0;">if</span>(arr[middle] == target)
+            {
+                <span style="color: #a020f0;">return</span> middle;
+            }
+            <span style="color: #b22222;">// </span><span style="color: #b22222;">else if middle is larger, throw out top half of array
+</span>            <span style="color: #a020f0;">else</span> <span style="color: #a020f0;">if</span>(arr[middle] &gt; target)
+            {
+                <span style="color: #b22222;">// </span><span style="color: #b22222;">we "throw out" the top half by changing our bounds
+</span>                top = middle;
+            }
+            <span style="color: #b22222;">// </span><span style="color: #b22222;">otherwise middle is smaller than target
+</span>            <span style="color: #a020f0;">else</span>
+            {
+                <span style="color: #b22222;">// </span><span style="color: #b22222;">we "throw out" the bottom half by changing our bounds
+</span>
+                <span style="color: #b22222;">// </span><span style="color: #b22222;">if there are only two elements left, then
+</span>                <span style="color: #b22222;">// </span><span style="color: #b22222;">middle == bottom (because top-bottom/2 == 0),
+</span>                <span style="color: #b22222;">// </span><span style="color: #b22222;">so we need to increase bottom by 1;
+</span>                <span style="color: #b22222;">// </span><span style="color: #b22222;">otherwise, we'll never move forward
+</span>                <span style="color: #a020f0;">if</span>(middle == bottom)
+                {
+                    bottom = bottom + 1;
+                }
+                <span style="color: #a020f0;">else</span>
+                {
+                    bottom = middle;
+                }
+            }
+        }
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">then the loop repeats with our new bounds
+</span>    }
+}
+</pre>
+
+<p>Here is a complete example, this time searching through an array of
+doubles.</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;cmath&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">this function returns the position of 'target' in the array
+</span><span style="color: #b22222;">// </span><span style="color: #b22222;">if it is found; if it is not found, this function returns -1;
+</span><span style="color: #b22222;">// </span><span style="color: #b22222;">this function requires that 'arr' be sorted (ascending)
+</span><span style="color: #228b22;">int</span> <span style="color: #0000ff;">binarySearch</span>(<span style="color: #228b22;">double</span> <span style="color: #b8860b;">arr</span>[], <span style="color: #228b22;">int</span> <span style="color: #b8860b;">size</span>, <span style="color: #228b22;">double</span> <span style="color: #b8860b;">target</span>)
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">top</span> = (size - 1);
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">bottom</span> = 0;
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">middle</span>;
+    <span style="color: #a020f0;">while</span>(<span style="color: #5f9ea0;">true</span>)
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">"bottom: "</span> &lt;&lt; bottom &lt;&lt; <span style="color: #bc8f8f;">", top: "</span> &lt;&lt; top &lt;&lt; endl;
+
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">if there is only one element to look at,
+</span>        <span style="color: #b22222;">// </span><span style="color: #b22222;">it is either the target or it is not
+</span>        <span style="color: #a020f0;">if</span>(top == bottom)
+        {
+            <span style="color: #b22222;">// </span><span style="color: #b22222;">we found the target
+</span>            <span style="color: #a020f0;">if</span>(arr[top] &lt; (target + 0.000001)
+               &amp;&amp; arr[top] &gt; (target - 0.000001))
+            {
+                <span style="color: #a020f0;">return</span> top;
+            }
+            <span style="color: #b22222;">// </span><span style="color: #b22222;">we did not find the target,
+</span>            <span style="color: #b22222;">// </span><span style="color: #b22222;">and we have nowhere else to look;
+</span>            <span style="color: #b22222;">// </span><span style="color: #b22222;">so the target is not in the array
+</span>            <span style="color: #a020f0;">else</span>
+            {
+                <span style="color: #a020f0;">return</span> -1;
+            }
+        }
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">otherwise, if top != bottom, then we can split
+</span>        <span style="color: #b22222;">// </span><span style="color: #b22222;">the array in half
+</span>        <span style="color: #a020f0;">else</span>
+        {
+            middle = bottom + (top - bottom) / 2;
+
+            <span style="color: #b22222;">// </span><span style="color: #b22222;">check if arr[middle] is our target
+</span>            <span style="color: #a020f0;">if</span>(arr[middle] &lt; (target + 0.000001)
+               &amp;&amp; arr[middle] &gt; (target - 0.000001))
+            {
+                <span style="color: #a020f0;">return</span> middle;
+            }
+            <span style="color: #b22222;">// </span><span style="color: #b22222;">else if middle is larger, throw out top half of array
+</span>            <span style="color: #a020f0;">else</span> <span style="color: #a020f0;">if</span>(arr[middle] &gt; target)
+            {
+                <span style="color: #b22222;">// </span><span style="color: #b22222;">we "throw out" the top half by changing our bounds
+</span>                top = middle;
+            }
+            <span style="color: #b22222;">// </span><span style="color: #b22222;">otherwise middle is smaller than target
+</span>            <span style="color: #a020f0;">else</span>
+            {
+                <span style="color: #b22222;">// </span><span style="color: #b22222;">we "throw out" the bottom half by changing our bounds
+</span>
+                <span style="color: #b22222;">// </span><span style="color: #b22222;">if there are only two elements left, then
+</span>                <span style="color: #b22222;">// </span><span style="color: #b22222;">middle == bottom (because top-bottom/2 == 0),
+</span>                <span style="color: #b22222;">// </span><span style="color: #b22222;">so we need to increase bottom by 1;
+</span>                <span style="color: #b22222;">// </span><span style="color: #b22222;">otherwise, we'll never move forward
+</span>                <span style="color: #a020f0;">if</span>(middle == bottom)
+                {
+                    bottom = bottom + 1;
+                }
+                <span style="color: #a020f0;">else</span>
+                {
+                    bottom = middle;
+                }
+            }
+        }
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">then the loop repeats with our new bounds
+</span>    }
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">arr</span>[100000];
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; 100000; i++)
+    {
+        arr[i] = sqrt(i);
+    }
+
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">pos</span> = binarySearch(arr, 100000, 98);
+    cout &lt;&lt; pos &lt;&lt; endl;
+}
+</pre>
+
+<p>Result:</p>
+
+<pre class="example">
+bottom: 0, top: 99999
+bottom: 0, top: 49999
+bottom: 0, top: 24999
+bottom: 0, top: 12499
+bottom: 6249, top: 12499
+bottom: 9374, top: 12499
+bottom: 9374, top: 10936
+bottom: 9374, top: 10155
+bottom: 9374, top: 9764
+bottom: 9569, top: 9764
+bottom: 9569, top: 9666
+bottom: 9569, top: 9617
+bottom: 9593, top: 9617
+bottom: 9593, top: 9605
+bottom: 9599, top: 9605
+bottom: 9602, top: 9605
+bottom: 9603, top: 9605
+9604
+</pre>
+
+<p>If we change this line in <code>main()</code>:</p>
+
+<pre class="src">
+<span style="color: #228b22;">int</span> <span style="color: #b8860b;">pos</span> = binarySearch(arr, 100000, 98);
+</pre>
+
+<p>to:</p>
+
+<pre class="src">
+<span style="color: #228b22;">int</span> <span style="color: #b8860b;">pos</span> = binarySearch(arr, 100000, 387.30);
+</pre>
+
+<p>then our output is:</p>
+
+<pre class="example">
+bottom: 0, top: 99999
+bottom: 49999, top: 99999
+bottom: 74999, top: 99999
+bottom: 87499, top: 99999
+bottom: 93749, top: 99999
+bottom: 96874, top: 99999
+bottom: 98436, top: 99999
+bottom: 99217, top: 99999
+bottom: 99608, top: 99999
+bottom: 99803, top: 99999
+bottom: 99901, top: 99999
+bottom: 99950, top: 99999
+bottom: 99974, top: 99999
+bottom: 99986, top: 99999
+bottom: 99992, top: 99999
+bottom: 99995, top: 99999
+bottom: 99997, top: 99999
+bottom: 99998, top: 99999
+bottom: 99999, top: 99999
+-1
+</pre>
+
+<p>Note that it took 19 comparisons (19 iterations of the <code>while()</code> loop
+inside the search function). Since our array has 100000 elements, the
+most comparisons that a binary search would require is
+<!-- $\log_2(100000) \approxeq 17$--><img src="./latex/latex2png-Searching__195474101.png" alt="latex2png equation" class="latex-inline">. The extra two lines of
+output occurred because of how we wrote our code. Our code will always
+show two extra lines of output.</p>
+
+
+
+<!-- Page published by Emacs Muse ends here -->
+  </body>
+</html>

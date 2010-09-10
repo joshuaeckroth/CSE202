@@ -123,6 +123,40 @@ For more gory details, see:
 
   - [[http://en.wikipedia.org/wiki/Floating_point]]
 
+** String types
+
+A "string" is literally a collection of characters (=char=). C++ allows
+us to type strings without resorting to creating lots of =char=
+variables. So the string ="hello"= is literally the collection of =char=
+thingies ='h'= ='e'= ='l'= ='l'= ='o'= (there is actually another special =char=
+at the end that tells the computer the string is finished). The
+double-quotes ="= tell C++ we are using a string; single quotes ='= tell
+C++ we are referring to a =char= (which is only one thing, one symbol).
+
+Before C++, in the C language, strings, as we use them in C++, were
+not available. C++-style strings are much more convenient because you
+can easily make them larger or smaller, ask how long they are, etc.
+
+To use strings, you have to =#include <string>= Here is an example using
+a =string=:
+
+<src lang="c++">
+#include <iostream>
+#include <string>  // necessary to use strings
+using namespace std;
+
+int main()
+{
+    string myname = "Joshua Eckroth";
+
+    cout << myname << endl;
+
+    return 0;
+}
+</src>
+
+** Commonly-used types
+
 Although you may know your program has variables that would work just
 fine as type =short= (for example), it's not always the best idea to use
 =short=. The type =short= is relatively uncommon. (Think about metric
@@ -136,8 +170,7 @@ encouraged to use) are:
 
   - Floating point: =double=
 
-  - Strings: =string= (there are other string types but they are not
-    shown here)
+  - Strings: =string=
 
 Even with these large ranges of values, sometimes your variables may
 suffer overflow or underflow. Overflow occurs when you try to store a
@@ -423,6 +456,28 @@ bool p;
 cout << "Enter a decimal, integer, and boolean value: ";
 cin >> a >> x >> p;
 </src>
+
+We can get strings in the usual way:
+
+<src lang="c++">
+string word;
+
+cout << "Enter a word: ";
+cin >> word;
+</src>
+
+However, using that technique, you cannot get strings that have
+spaces. To get strings that have spaces in them, we have to use this
+method:
+
+<src lang="c++">
+string s;
+
+// get a whole line of text from the user and save into the variable s
+getline(cin, s);
+</src>
+
+That method gets a whole line of text, which could have spaces.
 
 * Printing with precision
 

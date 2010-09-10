@@ -210,6 +210,166 @@ variable names (i.e. they cannot start with a number or special
 symbol, etc.).</p>
 
 
+<h2>Function calling &amp; parameter passing</h2>
+
+<p class="first">Imagine we made a function for the <code>overlap.cpp</code> program that checked if
+the strings overlapped and a function that determined the length of
+the overlap:</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;string&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">overlapStart</span>(<span style="color: #228b22;">string</span> <span style="color: #b8860b;">s1</span>, <span style="color: #228b22;">string</span> <span style="color: #b8860b;">s2</span>)
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">start</span>;
+    <span style="color: #a020f0;">for</span>(start = 0; start &lt; s1.length(); start++)
+    {
+        <span style="color: #a020f0;">if</span>(s1.at(start) == s2.at(0))
+        {
+            <span style="color: #a020f0;">return</span> start;
+        }
+    }
+    <span style="color: #a020f0;">return</span> s1.length();
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">overlapLength</span>(<span style="color: #228b22;">string</span> <span style="color: #b8860b;">s1</span>, <span style="color: #228b22;">string</span> <span style="color: #b8860b;">s2</span>, <span style="color: #228b22;">int</span> <span style="color: #b8860b;">start</span>)
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span>, <span style="color: #b8860b;">j</span>;
+    <span style="color: #a020f0;">for</span>(i = start, j = 0; (i &lt; s1.length()) &amp;&amp; (j &lt; s2.length()); i++, j++)
+    {
+        <span style="color: #a020f0;">if</span>(s1.at(i) != s2.at(j))
+        {
+            <span style="color: #a020f0;">break</span>;
+        }
+    }
+    <span style="color: #a020f0;">return</span> j;
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">string</span> <span style="color: #b8860b;">input1</span>, <span style="color: #b8860b;">input2</span>;
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">startOfOverlap</span>, <span style="color: #b8860b;">lengthOfOverlap</span>;
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter first string: "</span>;
+    getline(cin, input1);
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter second string: "</span>;
+    getline(cin, input2);
+
+    startOfOverlap = overlapStart(input1, input2);
+    <span style="color: #a020f0;">if</span>(startOfOverlap == input1.length())
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">"Second string does not overlap first string."</span> &lt;&lt; endl;
+        <span style="color: #a020f0;">return</span> EXIT_SUCCESS;
+    }
+
+    lengthOfOverlap = overlapLength(input1, input2, startOfOverlap);
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Second string overlaps first string,"</span> &lt;&lt; endl
+         &lt;&lt; <span style="color: #bc8f8f;">"starting at first string position "</span>
+         &lt;&lt; (startOfOverlap + 1) <span style="color: #bc8f8f;">","</span> &lt;&lt; endl
+         &lt;&lt; <span style="color: #bc8f8f;">"for "</span> &lt;&lt; lengthOfOverlap &lt;&lt; <span style="color: #bc8f8f;">" characters of second string."</span>
+         &lt;&lt; endl;
+
+    <span style="color: #a020f0;">return</span> EXIT_SUCCESS;
+}
+</pre>
+
+<p>Notice that the functions have parameters that have different names
+than the calling function (in this case, <code>main</code> is the calling
+function). <em>Parameter names for a function are unrelated to variable
+names in the calling function.</em></p>
+
+<p>The example above uses <em>call-by-value</em>, because when the <code>overlapStart()</code>
+function is called, its arguments are <em>just the values</em> of the variables
+<code>input1</code> and <code>input2</code>:</p>
+
+<pre class="src">
+<span style="color: #b22222;">// </span><span style="color: #b22222;">the function receives the *values* of input1 and input2, and
+</span><span style="color: #b22222;">// </span><span style="color: #b22222;">these values are actually named 's1' and 's2' in the function itself
+</span>startOfOverlap = overlapStart(input1, input2);
+</pre>
+
+<p>The same is true about <code>overlapLength()</code>: it receives only the values of
+the variables given to it as arguments:</p>
+
+<pre class="src">
+<span style="color: #b22222;">// </span><span style="color: #b22222;">the function receives three values:
+</span><span style="color: #b22222;">// </span><span style="color: #b22222;">a string, another string, and an integer;
+</span><span style="color: #b22222;">// </span><span style="color: #b22222;">these values are named 's1', 's2', and 'start' in the function itself
+</span>lengthOfOverlap = overlapLength(input1, input2, startOfOverlap);
+</pre>
+
+<p>Functions can also use <em>call-by-reference</em>. If a function uses
+call-by-reference, then it receives not just the value of an argument
+but also the <em>memory location</em> of the original variable. All variables
+keep track of their memory location so they know where their value is
+stored in memory. When a variable is updated or assigned, the value in
+the variable's memory location is changed.</p>
+
+<p>When a function uses call-by-reference, it also has access to the
+memory locations that the original variables (in the calling function)
+used. So the function can change the values in those memory locations.</p>
+
+<p>Here is an example of a function that uses call-by-reference. It's the
+&quot;increment&quot; function, which means it takes an integer parameter and
+increases that integer by one.</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">increment</span>(<span style="color: #228b22;">int</span> &amp;<span style="color: #b8860b;">x</span>)
+{
+    x++;
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">a</span> = 5;
+    increment(a);
+
+    cout &lt;&lt; a &lt;&lt; endl;
+    <span style="color: #a020f0;">return</span> EXIT_SUCCESS;
+}
+</pre>
+
+<p>You know the <code>increment()</code> function uses call-by-reference for its
+single argument because that argument has an <code>&amp;amp;</code> in front of
+it. When <code>main()</code> calls <code>increment()</code>, the variable <code>a</code> (inside <code>main()</code>) is
+<em>passed by reference</em> to the function. The function does not name this
+variable (and its memory location) &quot;a&quot; but instead names it
+<code>x</code>. Otherwise, <em>they are the same variable</em>. Any changes to <code>x</code> inside the
+function cause the same changes to <code>a</code> inside the calling function
+(i.e. <code>main()</code>) because <code>x</code> and <code>a</code> <em>use the same memory location to store
+their value</em>. We say this is a case of &quot;call-by-reference&quot; because it's
+not the value of <code>a</code> that is being provided to the function but the
+memory location to which <code>a</code> <em>refers</em>.</p>
+
+<p>A function can have a mix of call-by-reference (or
+&quot;pass-by-reference&quot;) and call-by-value arguments. For example, this
+function updates two variables <code>w0</code> and <code>w1</code> (which are passed by
+reference, so that they can be updated) depending on the value of
+another variable <code>y</code> (which is just passed by value):</p>
+
+<pre class="src">
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">updateXYZ</span>(<span style="color: #228b22;">double</span> &amp;<span style="color: #b8860b;">w0</span>, <span style="color: #228b22;">double</span> &amp;<span style="color: #b8860b;">w1</span>, <span style="color: #228b22;">double</span> <span style="color: #b8860b;">y</span>)
+{
+    <span style="color: #a020f0;">if</span>(y &lt; 0.0)
+    {
+        w0 = w1 = 0;
+    }
+    <span style="color: #a020f0;">else</span>
+    {
+        w0 = pow(w0+w1, 2.0);
+        w1 = pow(w0-w1, 2.0);
+    }
+}
+</pre>
+
+
 
 <!-- Page published by Emacs Muse ends here -->
   </body>

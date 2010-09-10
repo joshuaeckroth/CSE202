@@ -167,4 +167,161 @@ Note that function names (e.g. =add=) have the same restrictions as
 variable names (i.e. they cannot start with a number or special
 symbol, etc.).
 
- 
+* Function calling & parameter passing
+
+Imagine we made a function for the =overlap.cpp= program that checked if
+the strings overlapped and a function that determined the length of
+the overlap:
+
+<src lang="c++">
+#include <iostream>
+#include <string>
+using namespace std;
+
+int overlapStart(string s1, string s2)
+{
+    int start;
+    for(start = 0; start < s1.length(); start++)
+    {
+        if(s1.at(start) == s2.at(0))
+        {
+            return start;
+        }
+    }
+    return s1.length();
+}
+
+int overlapLength(string s1, string s2, int start)
+{
+    int i, j;
+    for(i = start, j = 0; (i < s1.length()) && (j < s2.length()); i++, j++)
+    {
+        if(s1.at(i) != s2.at(j))
+        {
+            break;
+        }
+    }
+    return j;
+}
+
+int main()
+{
+    string input1, input2;
+    int startOfOverlap, lengthOfOverlap;
+
+    cout << "Enter first string: ";
+    getline(cin, input1);
+
+    cout << "Enter second string: ";
+    getline(cin, input2);
+
+    startOfOverlap = overlapStart(input1, input2);
+    if(startOfOverlap == input1.length())
+    {
+        cout << "Second string does not overlap first string." << endl;
+        return EXIT_SUCCESS;
+    }
+
+    lengthOfOverlap = overlapLength(input1, input2, startOfOverlap);
+
+    cout << "Second string overlaps first string," << endl
+         << "starting at first string position "
+         << (startOfOverlap + 1) "," << endl
+         << "for " << lengthOfOverlap << " characters of second string."
+         << endl;
+
+    return EXIT_SUCCESS;
+}
+</src>
+
+Notice that the functions have parameters that have different names
+than the calling function (in this case, =main= is the calling
+function). *Parameter names for a function are unrelated to variable
+names in the calling function.*
+
+The example above uses *call-by-value*, because when the =overlapStart()=
+function is called, its arguments are *just the values* of the variables
+=input1= and =input2=:
+
+<src lang="c++">
+// the function receives the *values* of input1 and input2, and
+// these values are actually named 's1' and 's2' in the function itself
+startOfOverlap = overlapStart(input1, input2);
+</src>
+
+The same is true about =overlapLength()=: it receives only the values of
+the variables given to it as arguments:
+
+<src lang="c++">
+// the function receives three values:
+// a string, another string, and an integer;
+// these values are named 's1', 's2', and 'start' in the function itself
+lengthOfOverlap = overlapLength(input1, input2, startOfOverlap);
+</src>
+
+Functions can also use *call-by-reference*. If a function uses
+call-by-reference, then it receives not just the value of an argument
+but also the *memory location* of the original variable. All variables
+keep track of their memory location so they know where their value is
+stored in memory. When a variable is updated or assigned, the value in
+the variable's memory location is changed.
+
+When a function uses call-by-reference, it also has access to the
+memory locations that the original variables (in the calling function)
+used. So the function can change the values in those memory locations.
+
+Here is an example of a function that uses call-by-reference. It's the
+"increment" function, which means it takes an integer parameter and
+increases that integer by one.
+
+<src lang="c++">
+#include <iostream>
+using namespace std;
+
+void increment(int &x)
+{
+    x++;
+}
+
+int main()
+{
+    int a = 5;
+    increment(a);
+
+    cout << a << endl;
+    return EXIT_SUCCESS;
+}
+</src>
+
+You know the =increment()= function uses call-by-reference for its
+single argument because that argument has an =&amp;= in front of
+it. When =main()= calls =increment()=, the variable =a= (inside =main()=) is
+*passed by reference* to the function. The function does not name this
+variable (and its memory location) "a" but instead names it
+=x=. Otherwise, *they are the same variable*. Any changes to =x= inside the
+function cause the same changes to =a= inside the calling function
+(i.e. =main()=) because =x= and =a= *use the same memory location to store
+their value*. We say this is a case of "call-by-reference" because it's
+not the value of =a= that is being provided to the function but the
+memory location to which =a= *refers*.
+
+A function can have a mix of call-by-reference (or
+"pass-by-reference") and call-by-value arguments. For example, this
+function updates two variables =w0= and =w1= (which are passed by
+reference, so that they can be updated) depending on the value of
+another variable =y= (which is just passed by value):
+
+<src lang="c++">
+void updateXYZ(double &w0, double &w1, double y)
+{
+    if(y < 0.0)
+    {
+        w0 = w1 = 0;
+    }
+    else
+    {
+        w0 = pow(w0+w1, 2.0);
+        w1 = pow(w0-w1, 2.0);
+    }
+}
+</src>

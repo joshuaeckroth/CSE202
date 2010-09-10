@@ -1,0 +1,290 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>2D Arrays</title>
+    <meta name="generator" content="muse.el">
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=iso-8859-1">
+    <style type="text/css">
+body {
+  background: white; color: black;
+  margin-left: 3%; margin-right: 7%;
+  line-height: 1.5;
+  font-family: Nimbus Sans L, sans;
+}
+
+p { margin-top: 1% }
+p.verse { margin-left: 3% }
+
+.example { margin-left: 3% }
+
+li { margin: 0.5em 0; }
+
+h2 {
+  margin-top: 25px;
+  margin-bottom: 0px;
+}
+h3 { margin-bottom: 0px; }
+
+pre {
+  border: 1px solid #ccc;
+  margin: 5px;
+  padding: 5px;
+}
+
+code { color: #bc8f8f; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <h1>2D Arrays</h1>
+    <!-- Page published by Emacs Muse begins here -->
+<h2>Two-dimensional arrays (matrices)</h2>
+
+<p class="first">Arrays are perfect for representing a collection of values that can be
+thought of as a single dimension of data. But for two-dimensional
+data, we cannot just create many different one-dimensional arrays. A
+two-dimensional (or higher-dimensional) data set <em>can</em> be finagled into
+a one-dimensional array (with clever trickery using array indices) but
+this is inconvenient. In order to conveniently represent 2D data, we
+will use 2D arrays, also known as matrices.</p>
+
+<p>What kinds of data are found in matrices? Pictures are 2D grids of
+pixels, and thus are represented as matrices. Spreadsheets (like those
+made in Microsoft Excel) are matrices. As alluded to in class, generic
+&quot;graph&quot; structures can be represented in matrices (in what are called
+&quot;adjacent matrices&quot;). Temperature readings at every hour over several
+days could be saved in a matrix.</p>
+
+
+<h2>Creating a 2D array</h2>
+
+<p class="first">Here is the basic technique for creating a 2D array. In this example,
+the matrix is 10 rows by 10 columns. All of its &quot;cells&quot; are set to
+0.0.</p>
+
+<pre class="src">
+<span style="color: #228b22;">double</span> <span style="color: #b8860b;">arr</span>[10][10];
+<span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; 10; i++)
+{
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; 10; j++)
+    {
+        arr[i][j] = 0.0;
+    }
+}
+</pre>
+
+<p>For smaller matrices, the values can be set individually:</p>
+
+<pre class="src">
+<span style="color: #228b22;">double</span> <span style="color: #b8860b;">xyz</span>[3][2] = {{0.0, 1.0}, {5.0, 6.0}, {11.0, 12.0}};
+</pre>
+
+
+<h2>Reading a matrix of data from a file</h2>
+
+<p class="first">Two-dimensional data in a file must be read one row at a time. The
+file also must contain two values at the beginning: first an integer
+representing how many rows are in the file, and second an integer
+representing how many columns are in each row (each row must have the
+same number of columns).</p>
+
+<p>Here is an input file:</p>
+
+<pre class="example">
+7 4
+1	2	3	4
+2	4	4	5
+4	6	6	9
+6	2	8	2
+7	6	1	6
+4	9	3	3
+3	2	3	8
+</pre>
+
+<p>Here is code that will read the input file, then report the sum for
+each column:</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;fstream&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">string</span> <span style="color: #b8860b;">filename</span>;
+    <span style="color: #228b22;">ifstream</span> <span style="color: #b8860b;">file</span>;
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter file name: "</span>;
+    getline(cin, filename);
+
+    file.open(filename.c_str());
+    <span style="color: #a020f0;">if</span>(!file.is_open())
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">"Error opening file."</span> &lt;&lt; endl;
+        <span style="color: #a020f0;">return</span> -1;
+    }
+
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">numRows</span>, <span style="color: #b8860b;">numCols</span>;
+    file &gt;&gt; numRows &gt;&gt; numCols;
+
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">arr</span>[numRows][numCols];
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">read each value into the array
+</span>    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; numRows; i++)
+    {
+        <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; numCols; j++)
+        {
+            file &gt;&gt; arr[i][j];
+        }
+    }
+
+    file.close();
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">find the sum for each column;
+</span>    <span style="color: #b22222;">// </span><span style="color: #b22222;">note that we can look through the array
+</span>    <span style="color: #b22222;">// </span><span style="color: #b22222;">in any order; we will look at columns first
+</span>    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">sum</span>;
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; numCols; j++)
+    {
+        sum = 0;
+        <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; numRows; i++)
+        {
+            sum += arr[i][j];
+        }
+        cout &lt;&lt; <span style="color: #bc8f8f;">"Sum for column "</span> &lt;&lt; j &lt;&lt; <span style="color: #bc8f8f;">" = "</span> &lt;&lt; sum &lt;&lt; endl;
+    }
+
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+
+<p>Here is the output:</p>
+
+<pre class="example">
+Enter file name: matrix-1.txt
+Sum for column 0 = 27
+Sum for column 1 = 31
+Sum for column 2 = 28
+Sum for column 3 = 37
+</pre>
+
+
+<h2>Passing 2D arrays to functions</h2>
+
+<p class="first">Unfortunately, passing 2D arrays to functions does not work as you
+might hope. This is not a valid function header:</p>
+
+<pre class="src">
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">sumAllColumns</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">arr</span>[][], <span style="color: #228b22;">int</span> <span style="color: #b8860b;">rows</span>, <span style="color: #228b22;">int</span> <span style="color: #b8860b;">cols</span>)  <span style="color: #b22222;">// </span><span style="color: #b22222;">NOT CORRECT!!
+</span>{
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">...
+</span>}
+</pre>
+
+<p>In order to pass a 2D array to a function, the number of columns must
+be known:</p>
+
+<pre class="src">
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">sumAllColumns</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">arr</span>[][10], <span style="color: #228b22;">int</span> <span style="color: #b8860b;">rows</span>) <span style="color: #b22222;">// </span><span style="color: #b22222;">CORRECT
+</span>{
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">...
+</span>}
+</pre>
+
+<p>Of course, the 10 above (referring to the number of columns) may be
+different in a different program. The basic idea is that if the array
+is created with a size (rows and columns) not known until the file is
+read (the file specifies the size), then the array cannot be passed to
+a function.</p>
+
+
+<h2>A matrix in a one-dimensional array</h2>
+
+<p class="first">Above, it was mentioned that with some &quot;clever trickery&quot; with array
+indices, a 2D array could be stored in a 1D array. We will investigate
+in this section.</p>
+
+<p>Since a matrix is just a grid with some fixed number of rows and
+columns, we can &quot;linearize&quot; the grid by just joining each row
+end-to-end. In a 10x10 matrix, there are 100 cells. So we can make a
+1D array with 100 cells and use indices appropriately to access
+individual elements as if they were in a 10x10 grid.</p>
+
+<p>The math is as follows. Assume our matrix has <!-- $r$--><img src="./latex/latex2png-2D Arrays__10436.png" alt="latex2png equation" class="latex-inline"> rows and
+<!-- $c$--><img src="./latex/latex2png-2D Arrays__10196.png" alt="latex2png equation" class="latex-inline"> columns. If an element was a row <!-- $i$--><img src="./latex/latex2png-2D Arrays__10292.png" alt="latex2png equation" class="latex-inline"> and
+column <!-- $j$--><img src="./latex/latex2png-2D Arrays__10308.png" alt="latex2png equation" class="latex-inline"> in the original matrix, then in the 1D array the
+element is at index <!-- $i*c+j$--><img src="./latex/latex2png-2D Arrays__138272580.png" alt="latex2png equation" class="latex-inline">.</p>
+
+<p>Here is the same program as above, but that uses a 1D array. (The
+input file is also the same as above.)</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;fstream&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">string</span> <span style="color: #b8860b;">filename</span>;
+    <span style="color: #228b22;">ifstream</span> <span style="color: #b8860b;">file</span>;
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter file name: "</span>;
+    getline(cin, filename);
+
+    file.open(filename.c_str());
+    <span style="color: #a020f0;">if</span>(!file.is_open())
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">"Error opening file."</span> &lt;&lt; endl;
+        <span style="color: #a020f0;">return</span> -1;
+    }
+
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">numRows</span>, <span style="color: #b8860b;">numCols</span>;
+    file &gt;&gt; numRows &gt;&gt; numCols;
+
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">arr</span>[numRows * numCols];
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">read each value into the array
+</span>    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; numRows; i++)
+    {
+        <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; numCols; j++)
+        {
+            file &gt;&gt; arr[i * numCols + j];
+        }
+    }
+
+    file.close();
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">find the sum for each column;
+</span>    <span style="color: #b22222;">// </span><span style="color: #b22222;">note that we can look through the array
+</span>    <span style="color: #b22222;">// </span><span style="color: #b22222;">in any order; we will look at columns first
+</span>    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">sum</span>;
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; numCols; j++)
+    {
+        sum = 0;
+        <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; numRows; i++)
+        {
+            sum += arr[i * numCols + j];
+        }
+        cout &lt;&lt; <span style="color: #bc8f8f;">"Sum for column "</span> &lt;&lt; j &lt;&lt; <span style="color: #bc8f8f;">" = "</span> &lt;&lt; sum &lt;&lt; endl;
+    }
+
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+
+<p>The output is the same as above. (The programs are identical.)</p>
+
+<p>Since this new approach, representing 2D matrices as 1D arrays, uses
+plain ol' arrays, we can pass these plain ol' 1D arrays to functions,
+just like before:</p>
+
+<pre class="src">
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">sumAllColumns</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">arr</span>[], <span style="color: #228b22;">int</span> <span style="color: #b8860b;">rows</span>, <span style="color: #228b22;">int</span> <span style="color: #b8860b;">cols</span>) <span style="color: #b22222;">// </span><span style="color: #b22222;">CORRECT
+</span>{
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">...
+</span>}
+</pre>
+
+
+
+<!-- Page published by Emacs Muse ends here -->
+  </body>
+</html>

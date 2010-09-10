@@ -173,7 +173,43 @@ cin &gt;&gt; x;
 <li><a href="http://en.wikipedia.org/wiki/Floating_point">http://en.wikipedia.org/wiki/Floating_point</a></li>
 </ul>
 
-<p>Although you may know your program has variables that would work just
+
+<h3>String types</h3>
+
+<p class="first">A &quot;string&quot; is literally a collection of characters (<code>char</code>). C++ allows
+us to type strings without resorting to creating lots of <code>char</code>
+variables. So the string <code>&quot;hello&quot;</code> is literally the collection of <code>char</code>
+thingies <code>'h'</code> <code>'e'</code> <code>'l'</code> <code>'l'</code> <code>'o'</code> (there is actually another special <code>char</code>
+at the end that tells the computer the string is finished). The
+double-quotes <code>&quot;</code> tell C++ we are using a string; single quotes <code>'</code> tell
+C++ we are referring to a <code>char</code> (which is only one thing, one symbol).</p>
+
+<p>Before C++, in the C language, strings, as we use them in C++, were
+not available. C++-style strings are much more convenient because you
+can easily make them larger or smaller, ask how long they are, etc.</p>
+
+<p>To use strings, you have to <code>#include &lt;string&gt;</code> Here is an example using
+a <code>string</code>:</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;string&gt;</span>  <span style="color: #b22222;">// </span><span style="color: #b22222;">necessary to use strings
+</span><span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">string</span> <span style="color: #b8860b;">myname</span> = <span style="color: #bc8f8f;">"Joshua Eckroth"</span>;
+
+    cout &lt;&lt; myname &lt;&lt; endl;
+
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+
+
+<h3>Commonly-used types</h3>
+
+<p class="first">Although you may know your program has variables that would work just
 fine as type <code>short</code> (for example), it's not always the best idea to use
 <code>short</code>. The type <code>short</code> is relatively uncommon. (Think about metric
 units: although you could use centiliters, it's normal to switch to
@@ -187,8 +223,7 @@ encouraged to use) are:</p>
 
 <li>Floating point: <code>double</code></li>
 
-<li>Strings: <code>string</code> (there are other string types but they are not
-shown here)</li>
+<li>Strings: <code>string</code></li>
 </ul>
 
 <p>Even with these large ranges of values, sometimes your variables may
@@ -490,6 +525,28 @@ newline (or tab).</p>
 cout &lt;&lt; <span style="color: #bc8f8f;">"Enter a decimal, integer, and boolean value: "</span>;
 cin &gt;&gt; a &gt;&gt; x &gt;&gt; p;
 </pre>
+
+<p>We can get strings in the usual way:</p>
+
+<pre class="src">
+<span style="color: #228b22;">string</span> <span style="color: #b8860b;">word</span>;
+
+cout &lt;&lt; <span style="color: #bc8f8f;">"Enter a word: "</span>;
+cin &gt;&gt; word;
+</pre>
+
+<p>However, using that technique, you cannot get strings that have
+spaces. To get strings that have spaces in them, we have to use this
+method:</p>
+
+<pre class="src">
+<span style="color: #228b22;">string</span> <span style="color: #b8860b;">s</span>;
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">get a whole line of text from the user and save into the variable s
+</span>getline(cin, s);
+</pre>
+
+<p>That method gets a whole line of text, which could have spaces.</p>
 
 
 <h2>Printing with precision</h2>

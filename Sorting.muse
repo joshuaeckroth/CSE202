@@ -1,0 +1,27 @@
+* Bubble sort
+
+<src lang="c++">
+void bubbleSort(int arr[], int size)
+{
+    int tmp;
+    bool swapped;
+    for(int i = 0; i < size; i++)
+    {
+        swapped = false;
+        for(int j = (size - 1); j > i; j--)
+        {
+            if(arr[j-1] > arr[j])
+            {
+                swapped = true;
+                tmp = arr[j-1];
+                arr[j-1] = arr[j];
+                arr[j] = tmp;
+            }
+        }
+        if(!swapped)
+        {
+            break;
+        }
+    } 
+}
+</src>

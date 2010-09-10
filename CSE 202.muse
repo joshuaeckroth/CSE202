@@ -13,9 +13,19 @@ Lectures:
 
   6. [[Functions]]
 
-  7. [[Arrays]]
+  7. [[Random numbers]]
 
-  8. [[Files]]
+  8. [[Arrays]]
+
+  9. [[Files]]
+
+  10. [[2D Arrays]]
+
+  11. [[Sorting]]
+
+  12. [[Searching]]
+
+  13. [[Vectors]]
 
 Assignments:
 
