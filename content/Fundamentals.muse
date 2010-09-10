@@ -1,0 +1,82 @@
+* Simple program
+
+<src lang="c++">
+// This is a comment. The compiler ignores comments.
+
+// header information
+// File iostream contains "cout" and "endl"
+// Namespace std contains "cout" and "endl"
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    cout << "Hello World!" << endl;
+    cout << "Goodbye World!" << endl;
+
+    // Exit program.
+    return 0;
+}
+</src>
+
+* Compiling and running the code
+
+On Linux:
+
+<example>
+$ g++ helloworld.cpp
+$ a.out
+Hello World!
+Goodbye World!
+$
+</example>
+   
+Let's say you mistype the code. We'll forget the semicolon after
+"return 0", and try to compile the program:
+
+<example>
+$ g++ helloworld.cpp
+helloworld.cpp: In function 'int main()':
+helloworld.cpp:16: error: expected ';' before '}' token
+$
+</example>
+
+Note that line 16 is actually the line *after* the error.
+
+* About the code
+
+The =main()= function is where your programs will start execution; you
+will *always* need one of these. In a way, it "drives" your program;
+only actions in the =main()= function will be executed (often, =main()=
+refers to other functions as well).
+
+=#include= is a *preprocessor directive*; it attaches the file =iostream= to
+the top of your program. We need =iostream= for =cout=, among other
+things. Preprocessor directives do not end with a semicolon.
+
+=using namespace std;= tells the compiler to look at in the "namespace"
+(a place where things are defined) known as "std" ("standard"). =cout=
+is defined in "std", for example.
+
+* Another example (same functionality)
+
+<src lang="c++">
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    // statements can be on multiple lines
+    cout << "Hello World!"
+         << endl;
+    cout << "Goodbye World!"
+         << endl; // comments can be here
+
+    return 0; // exit program
+}
+</src>
+
+* Readings (not required)
+
+  - Textbook (Etter & Ingber): pp 12-14
+
