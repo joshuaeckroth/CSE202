@@ -11,6 +11,16 @@ Lectures:
 
   5. [[Loops 2]]
 
+Assignments:
+
+  1. [[Assignment 1]]
+
+  2. [[Assignment 2]]
+
+  3. [[Assignment 3]]
+
+  4. [[Assignment 4]]
+
 Miscellaneous:
 
   - [[Pedagogical foundations]]
@@ -18,6 +28,26 @@ Miscellaneous:
   - [[Adventure and hackers]]
 
   - [[Risk and reassurance]]
+
+Office hours:
+
+
+
+Contact info:
+
+  - [[mailto:joshuaeckroth@gmail.com][joshuaeckroth@gmail.com]]
+
+  - AIM: joshuaeckroth
+
+  - Gmail Chat: joshuaeckroth@gmail.com
+
+  - Yahoo! IM: joshuaeckroth
+
+  - Facebook Chat: http://www.facebook.com/joshuaeckroth
+
+  - Other info: http://www.cse.ohio-state.edu/~eckroth
+
+Feel free to message me whenever I'm "available" on chat.
 
 
 

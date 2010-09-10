@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>Assignment 2</title>
+    <meta name="generator" content="muse.el">
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=iso-8859-1">
+    <style type="text/css">
+body {
+  background: white; color: black;
+  margin-left: 3%; margin-right: 7%;
+  line-height: 1.5;
+}
+
+p { margin-top: 1% }
+p.verse { margin-left: 3% }
+
+.example { margin-left: 3% }
+
+li { margin: 0.5em 0; }
+
+h2 {
+  margin-top: 25px;
+  margin-bottom: 0px;
+}
+h3 { margin-bottom: 0px; }
+    </style>
+  </head>
+  <body>
+    <h1>Assignment 2</h1>
+    <!-- Page published by Emacs Muse begins here -->
+<h2>Task</h2>
+
+<p class="first">Write a program that asks for three decimal numbers (<!-- $a$--><img src="./latex/latex2png-Assignment 2__10164.png" alt="latex2png equation" class="latex-inline">,
+<!-- $b$--><img src="./latex/latex2png-Assignment 2__10180.png" alt="latex2png equation" class="latex-inline">, and <!-- $c$--><img src="./latex/latex2png-Assignment 2__10196.png" alt="latex2png equation" class="latex-inline">) and prints a message indicating
+whether the quadratic equation <!-- $ax^2+bx+c=0$--><img src="./latex/latex2png-Assignment 2__257349176.png" alt="latex2png equation" class="latex-inline"> has no
+solutions, one solution, two solutions, or no real solutions (only
+imaginary solutions). Your program will need to make use of several if
+statements. Nest the <code>if</code> statements appropriately so that you do not
+test for a condition twice (e.g., you must test <!-- $a=0$--><img src="./latex/latex2png-Assignment 2__2609188.png" alt="latex2png equation" class="latex-inline"> only
+once, not five times). Here is the algorithm:</p>
+
+<ul>
+<li>If <!-- $a=0$--><img src="./latex/latex2png-Assignment 2__2609188.png" alt="latex2png equation" class="latex-inline"> and <!-- $b=0$--><img src="./latex/latex2png-Assignment 2__2613284.png" alt="latex2png equation" class="latex-inline">, then there is no solution
+(output <code>No solution.</code>).</li>
+
+<li>If <!-- $a=0$--><img src="./latex/latex2png-Assignment 2__2609188.png" alt="latex2png equation" class="latex-inline"> and <!-- $b \neq 0$--><img src="./latex/latex2png-Assignment 2__10597792.png" alt="latex2png equation" class="latex-inline">, then there is one
+solution.</li>
+
+<li>If <!-- $a \neq 0$--><img src="./latex/latex2png-Assignment 2__10597791.png" alt="latex2png equation" class="latex-inline"> and <!-- $b^2-4ac = 0$--><img src="./latex/latex2png-Assignment 2__50596748.png" alt="latex2png equation" class="latex-inline">, then there is
+one solution.</li>
+
+<li>If <!-- $a \neq 0$--><img src="./latex/latex2png-Assignment 2__10597791.png" alt="latex2png equation" class="latex-inline"> and <!-- $b^2-4ac > 0$--><img src="./latex/latex2png-Assignment 2__50592652.png" alt="latex2png equation" class="latex-inline">, then there
+are two solutions.</li>
+
+<li>If <!-- $a \neq 0$--><img src="./latex/latex2png-Assignment 2__10597791.png" alt="latex2png equation" class="latex-inline"> and <!-- $b^2-4ac < 0$--><img src="./latex/latex2png-Assignment 2__50600844.png" alt="latex2png equation" class="latex-inline">, then there
+are no real solutions, i.e. two imaginary solutions.</li>
+</ul>
+
+
+<h2>Examples</h2>
+
+<p class="first">Be sure your program works with the following examples:</p>
+
+<pre class="example">
+Enter values for a, b, and c: 0 0 7
+No solution.
+</pre>
+
+<pre class="example">
+Enter values for a, b, and c: 0 0 38.8
+No solution.
+</pre>
+
+<pre class="example">
+Enter values for a, b, and c: 0 0.5 2
+One solution.
+</pre>
+
+<pre class="example">
+Enter values for a, b, and c: 1 -6 9
+One solution.
+</pre>
+
+<pre class="example">
+Enter values for a, b, and c: 1 -3 2
+Two solutions.
+</pre>
+
+<pre class="example">
+Enter values for a, b, and c: 0.1 -2.5 15
+Two solutions.
+</pre>
+
+<pre class="example">
+Enter values for a, b, and c: 1 0 1
+Two imaginary solutions.
+</pre>
+
+<pre class="example">
+Enter values for a, b, and c: 2 -4 3
+Two imaginary solutions.
+</pre>
+
+
+<h2>Academic misconduct policy</h2>
+
+<p class="first">All writing (prose) and coding for every one of the programming
+assignments and labs is to be done individually. DO NOT LOOK AT OR
+COPY anyone else's writing or code. DO NOT SHARE your writing or code
+with anyone else. The only code you can copy is what you see in the
+book and what I provide to you (in class or on this website). If you
+are stuck on an assignment or lab, please visit me (or another TA)
+during office hours. Suspected cases of academic misconduct will be
+filed with the Committee of Academic Misconduct.</p>
+
+
+
+<!-- Page published by Emacs Muse ends here -->
+  </body>
+</html>

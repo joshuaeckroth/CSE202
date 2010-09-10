@@ -1,0 +1,79 @@
+* Task
+
+Let <math>f</math> be the function
+
+  <math>f(x, y) = \cos(x) \sin(y) \log(x + y + 1)</math>
+
+where <math>\log</math> is the natural logarithm (sometimes written
+<math>\ln</math>).
+
+Write a program that asks the user for integers <math>m</math> and
+<math>n</math> and computes and writes <math>f(i/5,j/5)</math> to the
+file "outfile.txt" for <math>0 \leq i < m</math> and <math>0 \leq j <
+n</math>. The output (in the file) should be formatted as an <math>m
+\times n</math> matrix where <math>i</math> is the matrix row number
+and <math>j</math> is the matrix column number.
+
+In more detail:
+
+  1. Prompt and then read in the values of <math>m</math> and
+     <math>n</math>. (These two numbers may be different.)
+
+  2. Your program should open the file "outdata.txt" and check that
+     the file is open.  Output an error message and exit if the
+     program could not open the file.
+
+  3. For each value of <math>i</math> from <math>0</math> to
+     <math>m-1</math> and for each value of <math>j</math> from
+     <math>0</math> to <math>n-1</math>, compute and output
+     <math>f(i/5,j/5)</math>. Note that the first values of
+     <math>i</math> and <math>j</math> are both <math>0</math> and the
+     last values are <math>m-1</math> and <math>n-1</math>,
+     respectively.
+
+  4. Output should be formatted in an <math>m \times n</math>
+     matrix. Each row of the matrix should be a single line in the
+     output file consisting of m numbers. An example of the output
+     format is shown below.
+
+  5. Output the numbers in fixed precision with precision set to
+     3. Format the output so that the decimal point lines up in each
+     column and columns are separated by one or more blanks. Note that
+     the output may be negative, so leave space for a minus sign. The
+     easiest way to do this is with the "tab" character ="\t"=.
+
+  6. Close the file "outdata.txt".
+
+  7. *(Just for fun)* On Linux in the lab, Visualize a surface
+     representing the output of your program using Matlab. Type
+     "matlab &" to start matlab. Within Matlab, type =load outdata.txt=
+     and then type =surf(outdata)= . Also try clicking, in the "Figure"
+     window, the menu "Tools" and the option "Rotate3D", to rotate the
+     figure. Note that for Matlab to correctly read and process the
+     output, output must be formatted in an <math>m \times n</math>
+     matrix where each row of the matrix is a single line in the
+     output file consisting of <math>n</math> numbers.
+
+* Examples
+
+<example>
+</example>
+
+* Academic misconduct policy
+
+All writing (prose) and coding for every one of the programming
+assignments and labs is to be done individually. DO NOT LOOK AT OR
+COPY anyone else's writing or code. DO NOT SHARE your writing or code
+with anyone else. The only code you can copy is what you see in the
+book and what I provide to you (in class or on this website). If you
+are stuck on an assignment or lab, please visit me (or another TA)
+during office hours. Suspected cases of academic misconduct will be
+filed with the Committee of Academic Misconduct.
+
+
+
+
+
+
+
+
