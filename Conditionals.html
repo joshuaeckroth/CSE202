@@ -1,0 +1,366 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>Conditionals</title>
+    <meta name="generator" content="muse.el">
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=iso-8859-1">
+    <style type="text/css">
+body {
+  background: white; color: black;
+  margin-left: 3%; margin-right: 7%;
+  line-height: 1.5;
+}
+
+p { margin-top: 1% }
+p.verse { margin-left: 3% }
+
+.example { margin-left: 3% }
+
+li { margin: 0.5em 0; }
+
+h2 {
+  margin-top: 25px;
+  margin-bottom: 0px;
+}
+h3 { margin-bottom: 0px; }
+    </style>
+  </head>
+  <body>
+    <h1>Conditionals</h1>
+    <!-- Page published by Emacs Muse begins here -->
+<h2>Motivation</h2>
+
+<p class="first">It is a very rare program that solves a problem with the exact same
+sequence of operations every time it is executed. What is more common
+is a program that does some operations if the data or user input looks
+a certain way, and a different set of operations if the data looks a
+different way.</p>
+
+<p>The way we can do this in C++ is with &quot;conditionals.&quot; The word
+&quot;conditional&quot; means that some operations will only occur if a certain
+&quot;condition&quot; is true.</p>
+
+<p>For example, consider the program that gives the user three attempts
+to guess a number between 1 and 10. Here is what the program should do
+(in pseudo-code):</p>
+
+<ul>
+<li>Ask the user for the first guess. Save this guess into a variable
+called <code>guess1</code>.</li>
+
+<li>If <code>guess1</code> is the correct guess, then tell the user &quot;Success!&quot; and
+quit.</li>
+
+<li>If <code>guess1</code> is not the correct guess, then tell the user &quot;Nope. Try
+another guess.&quot; and save the second guess into a variable called
+<code>guess2</code>.</li>
+
+<li>If <code>guess2</code> is the correct guess, then tell the user &quot;Success!&quot; and
+quit.</li>
+
+<li>If <code>guess2</code> is not the correct guess, then tell the user &quot;Nope. Try
+another guess.&quot; and save the third guess into a variable called
+<code>guess3</code>.</li>
+
+<li>If <code>guess3</code> is the correct guess, then tell the user &quot;Success!&quot; and
+quit.</li>
+
+<li>If <code>guess3</code> is not the correct guess, then tell the user &quot;Nope. You
+are not allowed any more guesses, sorry! The number you failed to
+guess was [the number].&quot; (where &quot;the number&quot; is the real number).</li>
+</ul>
+
+
+
+<h2>How to do it in code</h2>
+
+<p class="first">In C++, we have a command called <code>if</code>. This is what it looks like:</p>
+
+<pre class="src">
+<span style="color: #a020f0;">if</span>(...something...)
+{
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">do stuff...
+</span>}
+</pre>
+
+<p>Of course, we need to change the phrase <code>...something...</code> to a
+&quot;conditional.&quot; The <code>if</code> command expects something that results in a <code>bool</code>
+value. So we can use <code>bool</code> values like <code>true</code> and <code>false</code>:</p>
+
+<pre class="src">
+<span style="color: #a020f0;">if</span>(<span style="color: #5f9ea0;">true</span>)
+{
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">do stuff...
+</span>}
+<span style="color: #a020f0;">if</span>(<span style="color: #5f9ea0;">false</span>)
+{
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">do stuff...
+</span>}
+</pre>
+
+<p>But these conditionals (<code>true</code> and <code>false</code>) are not very interesting
+because in the first case, the stuff inside the <code>if</code> block will always
+be executed (a &quot;block&quot; is the stuff being <code>{</code> and <code>}</code>). In the second
+case, the stuff in the block will never be executed.</p>
+
+<p>More interesting conditionals may involve the following boolean
+operators (assuming <code>p</code> and <code>q</code> are <code>bool</code> variables and <code>x</code> is an <code>int</code>
+variable):</p>
+
+<ul>
+<li><code>!p</code> &mdash; &quot;not p&quot; or &quot;opposite of the value that p has&quot;</li>
+
+<li><code>p || q</code> &mdash; &quot;p or q&quot;</li>
+
+<li><code>p &amp;&amp; q</code> &mdash; &quot;p and q&quot;</li>
+
+<li><code>x == 5</code> &mdash; &quot;the value in the variable x is equal
+to 5&quot;</li>
+
+<li><code>x != 5</code> &mdash; &quot;the value in the variable x is not
+equal to 5&quot;</li>
+
+<li><code>x &lt; 5</code></li>
+
+<li><code>x &gt; 5</code></li>
+
+<li><code>x &lt;= 5</code> &mdash; &quot;the value in the variable x is less
+than or equal to 5&quot;</li>
+
+<li><code>x &gt;= 5</code></li>
+
+<li><code>(x &gt;= 0) &amp;&amp; (x &lt;= 5)</code> &mdash; &quot;x is between 0 and 5&quot;
+(x can be one of [0,1,2,3,4,5]); note that you <em>cannot</em> say
+<code>(0 &lt;= x &lt;= 5) (wrong!)</code></li>
+</ul>
+
+
+<p>So we can write our guessing program like this:</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">answer</span> = 8;
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">guess</span>;
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter first guess: "</span>;
+    cin &gt;&gt; guess;
+
+    <span style="color: #a020f0;">if</span>(answer == guess)
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">"Success!"</span>;
+        <span style="color: #a020f0;">return</span> 0;
+    }
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Nope. Try another guess."</span> &lt;&lt; endl;
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter second guess: "</span>;
+    cin &gt;&gt; guess;
+
+    <span style="color: #a020f0;">if</span>(answer == guess)
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">"Success!"</span>;
+        <span style="color: #a020f0;">return</span> 0;
+    }
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Nope. Try another guess."</span> &lt;&lt; endl;
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter third guess: "</span>;
+    cin &gt;&gt; guess;
+
+    <span style="color: #a020f0;">if</span>(answer == guess)
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">"Success!"</span>;
+        <span style="color: #a020f0;">return</span> 0;
+    }
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Nope. You are not allowed any more guesses, sorry!"</span> &lt;&lt; endl;
+    cout &lt;&lt; <span style="color: #bc8f8f;">"The number you failed to guess was "</span> &lt;&lt; answer &lt;&lt; endl;
+
+    <span style="color: #a020f0;">return</span> -1;
+}
+</pre>
+
+
+<h2>if/else</h2>
+
+<p class="first">Besides <code>if</code> we can also use <code>else</code> to specify some operations that should
+be executed if the conditional is <em>not</em> satisfied. Example:</p>
+
+<pre class="src">
+<span style="color: #a020f0;">if</span>(x == 5)
+{
+    cout &lt;&lt; <span style="color: #bc8f8f;">"x equals 5!"</span> &lt;&lt; endl;
+}
+<span style="color: #a020f0;">else</span>
+{
+    cout &lt;&lt; <span style="color: #bc8f8f;">"x does not equal 5!"</span> &lt;&lt; endl;
+}
+</pre>
+
+
+<h2>Nested if's</h2>
+
+<p><code>if</code> commands can be inside other <code>if</code> (or <code>else</code>) blocks:</p>
+
+<pre class="src">
+<span style="color: #a020f0;">if</span>(x &lt; 5)
+{
+    <span style="color: #a020f0;">if</span>(x &lt; 0)
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">"x is less than 0!"</span> &lt;&lt; endl;
+    }
+    <span style="color: #a020f0;">else</span>
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">"x is less than 5 but not less than 0!"</span> &lt;&lt; endl;
+    }
+}
+<span style="color: #a020f0;">else</span>
+{
+    cout &lt;&lt; <span style="color: #bc8f8f;">"x is not less than 5!"</span> &lt;&lt; endl;
+}
+</pre>
+
+
+<h2>Series of if/else's</h2>
+
+<p class="first">It is common practice to check a series of conditions, where you only
+expect one of them to be true:</p>
+
+<pre class="src">
+<span style="color: #a020f0;">if</span>(x == 0)
+{
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">do stuff...
+</span>}
+<span style="color: #a020f0;">else</span> <span style="color: #a020f0;">if</span>(x == 1)
+{
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">do stuff...
+</span>}
+<span style="color: #a020f0;">else</span> <span style="color: #a020f0;">if</span>(x == 2)
+{
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">do stuff...
+</span>}
+<span style="color: #a020f0;">else</span>
+{
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">fallback...
+</span>}
+</pre>
+
+
+<h2>&quot;switch&quot; statements</h2>
+
+<p class="first">An alternative to the above example (series of if/else's) is the
+<code>switch</code> statement. The <code>switch</code> statement is the same as a series of
+if/else's because only one of the conditions should turn out to be
+true. The <code>switch</code> statement can only handle simple conditions,
+however; actually, it can only handle conditions of the form &quot;is some
+integer equal to some value?&quot; This means that a <code>switch</code> statement can
+only be used for integers.</p>
+
+<p>Here is an example.</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">number</span>;
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter a number 1-4: "</span>;
+    cin &gt;&gt; number;
+
+    <span style="color: #a020f0;">switch</span>(number)
+    {
+    <span style="color: #a020f0;">case</span> 1:
+        cout &lt;&lt; <span style="color: #bc8f8f;">"You entered the number 1."</span> &lt;&lt; endl;
+        <span style="color: #a020f0;">break</span>;
+    <span style="color: #a020f0;">case</span> 2:
+        cout &lt;&lt; <span style="color: #bc8f8f;">"You entered the number 2."</span> &lt;&lt; endl;
+        <span style="color: #a020f0;">break</span>;
+    <span style="color: #a020f0;">case</span> 3:
+        cout &lt;&lt; <span style="color: #bc8f8f;">"You entered the number 3."</span> &lt;&lt; endl;
+        <span style="color: #a020f0;">break</span>;
+    <span style="color: #a020f0;">case</span> 4:
+        cout &lt;&lt; <span style="color: #bc8f8f;">"You entered the number 4."</span> &lt;&lt; endl;
+        <span style="color: #a020f0;">break</span>;
+    <span style="color: #a020f0;">default</span>:
+        cout &lt;&lt; <span style="color: #bc8f8f;">"You must have entered some other number."</span> &lt;&lt; endl;
+    }
+
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+
+<p>The <code>switch</code> statement above can be rewritten with a series of
+if/else's:</p>
+
+<pre class="src">
+<span style="color: #b22222;">// </span><span style="color: #b22222;">the following is the same as the "switch" statement above
+</span><span style="color: #a020f0;">if</span>(number == 1)
+{
+    cout &lt;&lt; <span style="color: #bc8f8f;">"You entered the number 1."</span> &lt;&lt; endl;
+}
+<span style="color: #a020f0;">else</span> <span style="color: #a020f0;">if</span>(number == 2)
+{
+    cout &lt;&lt; <span style="color: #bc8f8f;">"You entered the number 2."</span> &lt;&lt; endl;
+}
+<span style="color: #a020f0;">else</span> <span style="color: #a020f0;">if</span>(number == 3)
+{
+    cout &lt;&lt; <span style="color: #bc8f8f;">"You entered the number 3."</span> &lt;&lt; endl;
+}
+<span style="color: #a020f0;">else</span> <span style="color: #a020f0;">if</span>(number == 4)
+{
+    cout &lt;&lt; <span style="color: #bc8f8f;">"You entered the number 4."</span> &lt;&lt; endl;
+}
+<span style="color: #a020f0;">else</span>
+{
+    cout &lt;&lt; <span style="color: #bc8f8f;">"You must have entered some other number."</span> &lt;&lt; endl;
+}
+</pre>
+
+<p>Notice that an <code>if</code> is much more powerful: you can use very complicated
+conditionals. However, a <code>switch</code> is very simple: for each &quot;case&quot;, you
+provide a value that is compared to the variable used in the switch
+(in this case, the variable used in the switch is &quot;number&quot;). Each case
+basically asks, &quot;does the value in the variable equal this number?&quot;</p>
+
+<p>Each &quot;case&quot; in a <code>switch</code> needs a &quot;break&quot; at the end so that the next
+case is not entered. It's good practice to always include a &quot;break&quot; at
+the end of each case in a <code>switch</code>.</p>
+
+<p>The &quot;default&quot; case is the case that is used if all the other cases
+fail.</p>
+
+<p>You can also use a <code>switch</code> to determine which character a user typed,
+since characters are themselves just integers. Here is an example:</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">char</span> <span style="color: #b8860b;">letter</span>;
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter a letter: "</span>;
+    cin &gt;&gt; letter;
+
+    <span style="color: #a020f0;">switch</span>(letter)
+    {
+    <span style="color: #a020f0;">case</span> <span style="color: #bc8f8f;">'a'</span>:
+        cout &lt;&lt; <span style="color: #bc8f8f;">"You entered the letter 'a'."</span> &lt;&lt; endl;
+        <span style="color: #a020f0;">break</span>;
+    <span style="color: #a020f0;">case</span> <span style="color: #bc8f8f;">'b'</span>:
+        cout &lt;&lt; <span style="color: #bc8f8f;">"You entered the letter 'b'."</span> &lt;&lt; endl;
+        <span style="color: #a020f0;">break</span>;
+    <span style="color: #a020f0;">default</span>:
+        cout &lt;&lt; <span style="color: #bc8f8f;">"You must have entered some other letter."</span> &lt;&lt; endl;
+    }
+
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+
+
+
+<!-- Page published by Emacs Muse ends here -->
+  </body>
+</html>
