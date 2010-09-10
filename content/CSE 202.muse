@@ -1,0 +1,19 @@
+
+Lectures:
+
+  1. [[Fundamentals]]
+
+  2. [[Variables Arithmetic IO]]
+
+  3. [[Conditionals]]
+
+Miscellaneous:
+
+  - [[Pedagogical foundations]]
+
+  - [[Adventure and hackers]]
+
+  - [[Risk and reassurance]]
+
+
+

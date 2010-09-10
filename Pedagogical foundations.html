@@ -1,0 +1,277 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>Pedagogical foundations</title>
+    <meta name="generator" content="muse.el">
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=iso-8859-1">
+    <style type="text/css">
+body {
+  background: white; color: black;
+  margin-left: 3%; margin-right: 7%;
+  line-height: 1.5;
+}
+
+p { margin-top: 1% }
+p.verse { margin-left: 3% }
+
+.example { margin-left: 3% }
+
+li { margin: 0.5em 0; }
+
+h2 {
+  margin-top: 25px;
+  margin-bottom: 0px;
+}
+h3 { margin-bottom: 0px; }
+    </style>
+  </head>
+  <body>
+    <h1>Pedagogical foundations</h1>
+    <!-- Page published by Emacs Muse begins here -->
+<p>The purpose of this class is to teach basic programming concepts to
+students who have never programmed before. You will be taught not only
+the concepts of programming but how to do it in a real and very common
+language: C++. We use this language rather than a more &quot;friendly&quot;
+language for a variety of political, cultural, and practical
+reasons. Throughout the course I'll try to differentiate what is a
+basic programming concept and what is just a C++ peculiarity (there
+are many).</p>
+
+<p>Teaching programming is like teaching essay-writing. The language of
+choice (be it a programming language or a &quot;natural&quot; language) is not
+relevant in some sense, but all the examples and practice must use
+some language or another. C++ is commonly used today so you at least
+leave this class with a practical skill as well.</p>
+
+<p>Essay-writing (in a language foreign to the student) shares more
+similarities with programming. Beginners often find it challenging not
+only because they may not know the language well enough to just
+&quot;think&quot; in that language, but also because they may not know how to
+structure their ideas and move back and forth between big ideas and
+small details. In programming, we also need to structure ideas and
+manage &quot;levels of abstraction.&quot; The programmer must be able to
+understand a problem at an abstract level, then figure out how to fill
+in the details. C++ in particular requires the programmer to manage
+more details than some other programming languages.</p>
+
+<p>This is because C++ is a &quot;low-level&quot; language. If you are inclined,
+you can write C++ code that mucks around with the hardware. We're not
+going to do that in this class due to the increased complexity of the
+task, but you'll see throughout the class that some tasks you think
+should be simple are made much harder; this is because C++ has all the
+power necessary to code entire operating systems (e.g. Microsoft
+Windows), but our tasks will involve simple numerical calculations and
+simple interactions with the user through the keyboard.</p>
+
+<p>Why should we focus on simple tasks and not work towards a single huge
+final project? Why emphasize silly little calculations and
+question-answer sessions with the user through the keyboard? The
+answer is that learning a language or a skill &quot;from scratch&quot; is best
+done with lots of small examples and lots of feedback. Imagine
+teaching natural language to a child. The child cannot speak so you
+can't describe why words mean what they do. You just have to exhibit
+their meanings, by pointing to things or using the same word in the
+same context again and again. Children learn language primarily by
+repeated exposure.  (When a child is born, she does not even know what
+a word is! She does not know that the long sound Mom made is actually
+seven different words.) The sounds, the facial movements, and the
+context all play a role in helping the child figure out <em>what's the
+pattern?</em> The child utilizes a natural tendency of humans: when two or
+more things &quot;covary&quot; (change together), humans are really good at
+identifying that the two things have some kind of relationship, as if
+they go together.  Thus, eventually, the child associates the sound
+&quot;Cheerios&quot; with the Cheerios themselves, since the two are witnessed
+(seen, heard) simultaneously again and again. The second way children
+learn language is to try it themselves. They not only try it but
+receive feedback (usually the mom just repeats the word as the child
+tries to speak it). This is &quot;supervised learning&quot; because the child
+receives *lots*of feedback while she's working through the task.</p>
+
+<p>On the other hand, most programming courses (and math courses for that
+matter) have fallen into the &quot;constructivist approach&quot; to
+teaching. This approach (which is still all the rage in academia) says
+that students learn best when they are given a hard task and told to
+solve it on their own. The students will somehow acquire the necessary
+knowledge by sheer will power. The theory is that knowledge you
+discover on your own is more memorable than what I, as a teacher, can
+give you (maybe what I say is &quot;just facts&quot; that are easily
+forgotten). So in the typical programming course, you are told &quot;ok,
+here are some basic ideas, blah blah blah, now here's a hard problem
+godoit.&quot; (Many academics like this approach because it allows bigger
+classes: you can tell the students &quot;ok go do your task and discuss
+your problems online; please answer each other's posts; type the
+answer into the website, then you will find out if you were right or
+wrong, that should be enough feedback.&quot;)</p>
+
+<p>But that's <em>folk pedagogy</em>. There's no research supporting the claim
+that students learn better that way. In fact, there <em>is</em> research
+supporting the opposite claim: that students need <em>many examples</em> and
+need to be <em>guided</em> through a task. Otherwise, how can a teacher be sure
+the student is both (1) not becoming frustrated and annoyed with the
+subject and (2) not learning a <em>bad</em> way to solve the problem?</p>
+
+<p>You will be asked to write a lot of programs. They are not all
+easy. But I hope to be able to show you many examples of similar
+programs, and not only the completed examples (&quot;look at how perfectly
+somebody solved this problem!&quot;) but also <em>how</em> it was solved. It is very
+important that I show you how a programmer approaches a problem and
+works it out. You can know all about C++ but not know how to solve
+problems in an effective manner. There is anecdotal evidence that
+without specific guidance about how to solve problems, students in
+beginning programming classes focus on peculiarities of the
+programming language and utterly fail simple tests. These simple tests
+ask the student to identify which chunk of code correctly performs a
+specific function (e.g. &quot;which chunk of code correctly calculates the
+square root of x?&quot;). Rather than seeing the chunks of code simply as
+&quot;functional&quot; units that perform a specific task (which is something
+that good problem solvers can do) the students only see details and
+process the code like a computer would, writing every step and
+mathematical result. Doing so involves far too much calculation, and
+they run out of time. The expert can look at a chunk of code and,
+without paper and pencil, often say &quot;oh, this is what the code does.&quot;
+This is where we want to get in this class.</p>
+
+<p>Likewise, the expert knows how to solve simple problems (e.g.  finding
+the square root of a number) in just a few lines of code.  Not only
+that, the expert has experience solving big problems, even though the
+path to the solution is circuitous and full of mistakes. Novice
+problem solvers become expert problem solvers by practice and
+guidance, as it is with any skill.</p>
+
+<p>I'll summarize some of the teaching techniques I want to emphasize:</p>
+
+<ul>
+<li>I should show an example of a concept in just about every
+variation. You should see <em>lots</em> of examples. I want you to
+<em>overlearn</em> the important bits, just like how a basketball player
+practices layups again and again until it's just a natural
+movement.</li>
+
+<li>I should show you how problems are solved. This includes how I
+approach a problem, how I make mistakes and fix them, how I test
+ideas, etc. You should only be asked to model these techniques,
+not come up with them yourself.</li>
+
+<li>You should practice the techniques I show you. This is why we have
+assignments.</li>
+
+<li>You should practice explaining ideas and techniques and solutions
+to others. Explaining something helps you learn it yourself. I'll
+encourage this whenever possible but it will not be a requirement
+(there will be no formal &quot;presentations&quot;).</li>
+
+<li>I should encourage you to solve problems in novel ways, doing it
+the way <em>you think</em> is the best. Then, we can discuss alternatives
+(possibly better ways, if they exist).</li>
+</ul>
+
+<p>So that covers the basics. What about programming computers?</p>
+
+<p>C++ is a &quot;programming language&quot; because it allows you to program a
+computer (of course) and it is a &quot;language.&quot; But there are two types
+of languages: natural and formal. English, Spanish, etc. are natural
+languages. They are formal (i.e. logical) in many ways but it always
+breaks down. People use words inconsistently, omit or add words
+(&quot;where you at?&quot;), and use metaphor continuously (&quot;why are you feeling
+down?&quot;). Formal languages, on the other hand, cannot be used
+inconsistently or employ metaphor. Formal languages must be used
+according to a &quot;syntax&quot; or grammar. The syntax of a language is a set
+of rules that dictate how symbols (words, punctuation) can be
+used. For example, in C++, &quot;x=5&quot; is <em>valid</em> but &quot;5=x&quot; is <em>invalid</em>; the
+latter causes a &quot;syntax error.&quot; A formal language is interpreted (or
+&quot;understood&quot; by the computer, metaphorically of course) with respect
+to its formal &quot;semantics.&quot;&amp;nbsp; The semantics of C++ tell us that
+&quot;x=5&quot; <em>causes</em> the computer to change the value of the variable x to the
+value 5. A major task of this class is to teach you the syntax and
+semantics of C++. If you are not comfortable with the syntax and
+semantics of a language, you cannot use it to solve a problem, just as
+an artist cannot paint a scene in her mind until she is very familiar
+with paint and paintbrushes.</p>
+
+<p>My area of study is Artificial Intelligence. Part of that field is
+natural language understanding. You may or may not be surprised to
+learn that programming a computer to understand natural language
+(whatever &quot;understand&quot; is supposed to mean) is extraordinarily
+difficult and maybe impossible. If it were easy, we probably would not
+have C++; we could just give the computer instructions in natural
+language. But processing natural language is very hard, and the main
+reason is words and sentences do not always (or possibly ever) convey
+a speaker's <em>intentions</em>.  The speaker's intentions are picked up by the
+listener (really, <em>guessed</em> by the listener) from the context of the
+situation, body language, lots of background knowledge, and
+commonsense. For example, &quot;I'll be at Kafe Kerouac's at 7&quot; could mean
+she'll be there at 7pm or that she won't if you believe she's lying.</p>
+
+<p>Formal languages like C++ do not allow this to happen. It's impossible
+to &quot;lie&quot; or express an intention other than what is explicitly
+written. And the computer never <em>guesses</em> about what is
+intended. Statements in a formal language can be thought of as
+<em>commands</em> that are always carried out just as you say. Even if your
+code is wrong (e.g. &quot;x=5&quot; whoops I meant x equals 4) the computer will
+do as you say. <em>And it will do nothing else.</em> I find in classes like
+this one that students sometimes expect something to work even though
+their code is incorrect. The computer will not figure out your
+intentions. It is completely unforgiving. Like that hard math
+teacher. It's right, or it's wrong.</p>
+
+<p>Success in this class requires that you treat C++ and computers <em>as
+physical objects</em>, i.e. as tools. They are like a hammer. The hammer
+understands nothing. It submits to your grip when you pick it up, it
+moves through the air only as much as you force it to (well, gravity
+has some influence, too).  <em>That</em> a hammer is used for so many practical
+purposes is besides the point, from the hammer's point of view. It
+simply has no idea. All of this is true for programming languages and
+computers as well. During this class you will become a computer
+programmer. You will have the ability to tell the computer to perform
+new and interesting tasks that you devise. The computer does not know
+what makes a problem interesting or boring, a program correct and
+efficient or buggy and slow.</p>
+
+<p>But neither C++ nor the hammer can enforce &quot;good habits&quot; or make you
+an artist. They'll both allow you to do terrible things, since they
+are just physical objects (more precisely in the case of C++, just let
+you control a physical object). But used as tools, they can be part of
+a larger process of expression.  Programmers &quot;express themselves&quot;
+every time they write a program.  Usually, this is not a very
+interesting process or result. But <em>it can be</em>. Programs are like essays
+or poems (after all, they are a written work, and more often than not
+they are intended to be read and understood by other humans as well as
+computers), and programmers are like essayists or poets. There are
+good programmers and less-good programmers. Some programmers do
+everything the easiest way (path of least resistance), while other
+programmers take great pride in their code and mull over it and revise
+it again and again. When a programmer is acting as an employee or as a
+student or professor who is trying to solve a problem by writing a
+program, there are several concurrent demands on the programmer:</p>
+
+<ul>
+<li>The program should correctly solve the problem.</li>
+
+<li>The program should work efficiently.</li>
+
+<li>The program code should be easy to understand and modify (because
+nearly all programs, at some point, must be changed).</li>
+
+<li>The program code should be written in a reasonable amount of time
+(so it probably won't be perfect).</li>
+</ul>
+
+<p>A programmer who is working on something just for his or her own
+enjoyment need not be concerned with any of those points. It is the
+responsibility of a teacher, however, to teach you how to meet all of
+these demands in real situations beyond the classroom.</p>
+
+<p>In this essay I have tried to illustrate many aspects of programming
+and learning to program. There are more subjects that I wish I could
+include here, but this essay is already far too long. In this class I
+hope to be able to address many of these issues and more, and ensure
+that you are not only being taught C++ &quot;in a vacuum&quot; (if it were
+possible) but that you are also taught about problem solving and style
+and exposed to the greater world of computer programming (not just
+C++), computer science, formal languages, writing as an art, pedagogy,
+....</p>
+
+<!-- Page published by Emacs Muse ends here -->
+  </body>
+</html>
