@@ -26,7 +26,7 @@ following types available to us:
   - =int= for integers (..., -2, -1, 0, 1, 2, ...)
 
   - =double= for "floating point" values (i.e. decimal values like -0.5
-    or 1.23040 * 10^-23)
+    or <math>1.23040 * 10^{-23}</math>)
 
   - =string= for "strings" (i.e. text)
     
