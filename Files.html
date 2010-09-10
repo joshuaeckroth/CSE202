@@ -1,0 +1,248 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>Files</title>
+    <meta name="generator" content="muse.el">
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=iso-8859-1">
+    <style type="text/css">
+body {
+  background: white; color: black;
+  margin-left: 3%; margin-right: 7%;
+  line-height: 1.5;
+  font-family: Nimbus Sans L, sans;
+}
+
+p { margin-top: 1% }
+p.verse { margin-left: 3% }
+
+.example { margin-left: 3% }
+
+li { margin: 0.5em 0; }
+
+h2 {
+  margin-top: 25px;
+  margin-bottom: 0px;
+}
+h3 { margin-bottom: 0px; }
+
+pre {
+  border: 1px solid #ccc;
+  margin: 5px;
+  padding: 5px;
+}
+
+code { color: #bc8f8f; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <h1>Files</h1>
+    <!-- Page published by Emacs Muse begins here -->
+<h2>Motivation</h2>
+
+<p class="first">It is extremely tedious to enter a lot of data by hand. It's far more
+common for programs to read data from files, and write data to files,
+than ask the user to enter the data one value at a time.</p>
+
+
+<h2>Saving a list of doubles into a file, with specific precision</h2>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;fstream&gt;</span>  <span style="color: #b22222;">// </span><span style="color: #b22222;">this is new; we need it for files
+</span><span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">string</span> <span style="color: #b8860b;">filename</span>;
+    <span style="color: #228b22;">ofstream</span> <span style="color: #b8860b;">file</span>;
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter file name to write (no spaces): "</span>;
+    cin &gt;&gt; filename;
+
+    file.open(filename.c_str());
+    <span style="color: #a020f0;">if</span>(!file.is_open())
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">"Error opening file!"</span> &lt;&lt; endl;
+        <span style="color: #a020f0;">return</span> EXIT_FAILURE;
+    }
+
+    file.precision(3);
+    file.setf(<span style="color: #5f9ea0;">ios</span>::fixed, <span style="color: #5f9ea0;">ios</span>::floatfield);
+
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; 100; i++)
+    {
+        file &lt;&lt; (i * 9.99838273) &lt;&lt; endl;
+    }
+    file.close();
+
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+
+
+<h2>Reading data from files and saving the data into arrays</h2>
+
+<p class="first">Assume your file looks like this:</p>
+
+<pre class="example">
+7
+3.4
+32.2
+58.6
+82.2
+9.4
+28.3
+48.4
+</pre>
+
+<p>The first line of this file means &quot;how many data values follow.&quot; Thus,
+we can set up an array to be of size 7 (in this case) and save all of
+the data in the file into the array. Once the data is in the array, we
+can close the file, and use the array to perform data analysis (like
+finding the sum, mean, standard deviation, etc.).</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;fstream&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">string</span> <span style="color: #b8860b;">name_of_the_file</span>;
+    <span style="color: #228b22;">ifstream</span> <span style="color: #b8860b;">file_access_variable</span>;
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">number_of_data_items</span>;
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter file name: "</span>;
+    cin &gt;&gt; name_of_the_file;
+
+    file_access_variable.open(name_of_the_file.c_str());
+    <span style="color: #a020f0;">if</span>(!file_access_variable.is_open())
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">"Error opening file."</span> &lt;&lt; endl;
+    }
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">save the first value in the file; this value is
+</span>    <span style="color: #b22222;">// </span><span style="color: #b22222;">an integer and tells us how big to make our array
+</span>    <span style="color: #b22222;">// </span><span style="color: #b22222;">to hold the file's data
+</span>    file_access_variable &gt;&gt; number_of_data_items;
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">now make the array (we are assuming the file has
+</span>    <span style="color: #b22222;">// </span><span style="color: #b22222;">values of type "double")
+</span>    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">array_of_values</span>[number_of_data_items];
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">now grab each value and put it in the array
+</span>    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">index</span> = 0; index &lt; number_of_data_items; index++)
+    {
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">get the value from the file and save it into the
+</span>        <span style="color: #b22222;">// </span><span style="color: #b22222;">proper array position
+</span>        file_access_variable &gt;&gt; array_of_values[index];
+    }
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">now the array has all the values; we can close the file
+</span>    file_access_variable.close();
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">now we can find the sum of the values (for example)
+</span>    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">sum</span> = 0.0;
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">index</span> = 0; index &lt; number_of_data_items; index++)
+    {
+        sum += array_of_values[index];
+    }
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">let's print our sum
+</span>    cout &lt;&lt; sum &lt;&lt; endl;
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">ok we are done
+</span>    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+
+
+<h2>Reading data from multiple columns and saving into multiple arrays</h2>
+
+<p class="first">Assume your file looks like this:</p>
+
+<pre class="example">
+7
+3.4 473.47 87.7
+32.2 44.3 13.23
+58.6 17.43 765.6
+82.2 568.4 878.78
+9.4 0.0 57.57
+28.3 0.0 0.0
+48.4 43.64 5745.0
+</pre>
+
+<p>Note that each of the columns has the <em>same number of values</em>. This is
+important, because it allows the 7 to refer to the number of values in
+each row. If each row had a different number of values, this program
+would be quite a bit more complicated.</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;fstream&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">string</span> <span style="color: #b8860b;">name_of_the_file</span>;
+    <span style="color: #228b22;">ifstream</span> <span style="color: #b8860b;">file_access_variable</span>;
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">number_of_data_items</span>;
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter file name: "</span>;
+    cin &gt;&gt; name_of_the_file;
+
+    file_access_variable.open(name_of_the_file.c_str());
+    <span style="color: #a020f0;">if</span>(!file_access_variable.is_open())
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">"Error opening file."</span> &lt;&lt; endl;
+    }
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">save the first value in the file; this value is
+</span>    <span style="color: #b22222;">// </span><span style="color: #b22222;">an integer and tells us how big to make our array
+</span>    <span style="color: #b22222;">// </span><span style="color: #b22222;">to hold the file's data
+</span>    file_access_variable &gt;&gt; number_of_data_items;
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">now make three arrays (one for each column)
+</span>    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">array_of_values_for_column_1</span>[number_of_data_items];
+    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">array_of_values_for_column_2</span>[number_of_data_items];
+    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">array_of_values_for_column_3</span>[number_of_data_items];
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">now grab each value and put it in the appropriate array
+</span>    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">index</span> = 0; index &lt; number_of_data_items; index++)
+    {
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">get the value from the file and save it into the
+</span>        <span style="color: #b22222;">// </span><span style="color: #b22222;">proper array position
+</span>        file_access_variable &gt;&gt; array_of_values_for_column_1[index];
+        file_access_variable &gt;&gt; array_of_values_for_column_2[index];
+        file_access_variable &gt;&gt; array_of_values_for_column_3[index];
+    }
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">now the array has all the values; we can close the file
+</span>    file_access_variable.close();
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">now we can find the sum of the values for each column
+</span>    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">sum_for_column_1</span> = 0.0;
+    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">sum_for_column_2</span> = 0.0;
+    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">sum_for_column_3</span> = 0.0;
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">index</span> = 0; index &lt; number_of_data_items; index++)
+    {
+        sum_for_column_1 += array_of_values_for_column_1[index];
+        sum_for_column_2 += array_of_values_for_column_2[index];
+        sum_for_column_3 += array_of_values_for_column_3[index];
+    }
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">let's print our sums
+</span>    cout &lt;&lt; <span style="color: #bc8f8f;">"Sum for column 1: "</span> &lt;&lt; sum_for_column_1 &lt;&lt; endl;
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Sum for column 2: "</span> &lt;&lt; sum_for_column_2 &lt;&lt; endl;
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Sum for column 3: "</span> &lt;&lt; sum_for_column_3 &lt;&lt; endl;
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">ok we are done
+</span>    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+
+
+
+<!-- Page published by Emacs Muse ends here -->
+  </body>
+</html>

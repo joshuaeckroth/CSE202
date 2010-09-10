@@ -1,0 +1,199 @@
+* Motivation
+
+It is extremely tedious to enter a lot of data by hand. It's far more
+common for programs to read data from files, and write data to files,
+than ask the user to enter the data one value at a time.
+
+* Saving a list of doubles into a file, with specific precision
+
+<src lang="c++">
+#include <iostream>
+#include <fstream>  // this is new; we need it for files
+using namespace std;
+
+int main()
+{
+    string filename;
+    ofstream file;
+    cout << "Enter file name to write (no spaces): ";
+    cin >> filename;
+
+    file.open(filename.c_str());
+    if(!file.is_open())
+    {
+        cout << "Error opening file!" << endl;
+        return EXIT_FAILURE;
+    }
+
+    file.precision(3);
+    file.setf(ios::fixed, ios::floatfield);
+
+    for(int i = 0; i < 100; i++)
+    {
+        file << (i * 9.99838273) << endl;
+    }
+    file.close();
+
+    return 0;
+}
+</src>
+
+* Reading data from files and saving the data into arrays
+
+Assume your file looks like this:
+
+<example>
+7
+3.4
+32.2
+58.6
+82.2
+9.4
+28.3
+48.4
+</example>
+
+The first line of this file means "how many data values follow." Thus,
+we can set up an array to be of size 7 (in this case) and save all of
+the data in the file into the array. Once the data is in the array, we
+can close the file, and use the array to perform data analysis (like
+finding the sum, mean, standard deviation, etc.).
+
+<src lang="c++">
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main()
+{
+    string name_of_the_file;
+    ifstream file_access_variable;
+    int number_of_data_items;
+
+    cout << "Enter file name: ";
+    cin >> name_of_the_file;
+
+    file_access_variable.open(name_of_the_file.c_str());
+    if(!file_access_variable.is_open())
+    {
+        cout << "Error opening file." << endl;
+    }
+
+    // save the first value in the file; this value is
+    // an integer and tells us how big to make our array
+    // to hold the file's data
+    file_access_variable >> number_of_data_items;
+
+    // now make the array (we are assuming the file has
+    // values of type "double")
+    double array_of_values[number_of_data_items];
+
+    // now grab each value and put it in the array
+    for(int index = 0; index < number_of_data_items; index++)
+    {
+        // get the value from the file and save it into the
+        // proper array position
+        file_access_variable >> array_of_values[index];
+    }
+
+    // now the array has all the values; we can close the file
+    file_access_variable.close();
+
+    // now we can find the sum of the values (for example)
+    double sum = 0.0;
+    for(int index = 0; index < number_of_data_items; index++)
+    {
+        sum += array_of_values[index];
+    }
+
+    // let's print our sum
+    cout << sum << endl;
+
+    // ok we are done
+    return 0;
+}
+</src>
+
+* Reading data from multiple columns and saving into multiple arrays
+
+Assume your file looks like this:
+
+<example>
+7
+3.4 473.47 87.7
+32.2 44.3 13.23
+58.6 17.43 765.6
+82.2 568.4 878.78
+9.4 0.0 57.57
+28.3 0.0 0.0 
+48.4 43.64 5745.0
+</example>
+
+Note that each of the columns has the *same number of values*. This is
+important, because it allows the 7 to refer to the number of values in
+each row. If each row had a different number of values, this program
+would be quite a bit more complicated.
+
+<src lang="c++">
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main()
+{
+    string name_of_the_file;
+    ifstream file_access_variable;
+    int number_of_data_items;
+
+    cout << "Enter file name: ";
+    cin >> name_of_the_file;
+
+    file_access_variable.open(name_of_the_file.c_str());
+    if(!file_access_variable.is_open())
+    {
+        cout << "Error opening file." << endl;
+    }
+
+    // save the first value in the file; this value is
+    // an integer and tells us how big to make our array
+    // to hold the file's data
+    file_access_variable >> number_of_data_items;
+
+    // now make three arrays (one for each column)
+    double array_of_values_for_column_1[number_of_data_items];
+    double array_of_values_for_column_2[number_of_data_items];
+    double array_of_values_for_column_3[number_of_data_items];
+
+    // now grab each value and put it in the appropriate array
+    for(int index = 0; index < number_of_data_items; index++)
+    {
+        // get the value from the file and save it into the
+        // proper array position
+        file_access_variable >> array_of_values_for_column_1[index];
+        file_access_variable >> array_of_values_for_column_2[index];
+        file_access_variable >> array_of_values_for_column_3[index];
+    }
+
+    // now the array has all the values; we can close the file
+    file_access_variable.close();
+
+    // now we can find the sum of the values for each column
+    double sum_for_column_1 = 0.0;
+    double sum_for_column_2 = 0.0;
+    double sum_for_column_3 = 0.0;
+    for(int index = 0; index < number_of_data_items; index++)
+    {
+        sum_for_column_1 += array_of_values_for_column_1[index];
+        sum_for_column_2 += array_of_values_for_column_2[index];
+        sum_for_column_3 += array_of_values_for_column_3[index];
+    }
+
+    // let's print our sums
+    cout << "Sum for column 1: " << sum_for_column_1 << endl;
+    cout << "Sum for column 2: " << sum_for_column_2 << endl;
+    cout << "Sum for column 3: " << sum_for_column_3 << endl;
+
+    // ok we are done
+    return 0;
+}
+</src>

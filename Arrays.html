@@ -1,0 +1,325 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>Arrays</title>
+    <meta name="generator" content="muse.el">
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=iso-8859-1">
+    <style type="text/css">
+body {
+  background: white; color: black;
+  margin-left: 3%; margin-right: 7%;
+  line-height: 1.5;
+  font-family: Nimbus Sans L, sans;
+}
+
+p { margin-top: 1% }
+p.verse { margin-left: 3% }
+
+.example { margin-left: 3% }
+
+li { margin: 0.5em 0; }
+
+h2 {
+  margin-top: 25px;
+  margin-bottom: 0px;
+}
+h3 { margin-bottom: 0px; }
+
+pre {
+  border: 1px solid #ccc;
+  margin: 5px;
+  padding: 5px;
+}
+
+code { color: #bc8f8f; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <h1>Arrays</h1>
+    <!-- Page published by Emacs Muse begins here -->
+<h2>Motivation</h2>
+
+<p class="first">Arrays are how we store <em>many values of the same type in one
+variable</em>. An array can be of any size. If an array is of size <code>n</code>, then
+the <em>elements</em> (values) of the array can be accessed with indices <code>0</code>
+through <code>n-1</code>. The memory &quot;allocated&quot; to an array is contiguous; you can
+think of each element sitting right next to its siblings somewhere in
+memory. Here is an example of how we create arrays, and give them
+their values:</p>
+
+<p class="image"><img src="array-1_0.png" alt=""></p>
+
+<pre class="src">
+<span style="color: #b22222;">// </span><span style="color: #b22222;">"int arr[6];" means create an integer array with 6 elements
+</span><span style="color: #228b22;">int</span> <span style="color: #b8860b;">arr</span>[6] = {4,8,3,6,6,0};
+cout &lt;&lt; arr[0] &lt;&lt; endl;  <span style="color: #b22222;">// </span><span style="color: #b22222;">prints 4
+</span>cout &lt;&lt; arr[1] &lt;&lt; endl;  <span style="color: #b22222;">// </span><span style="color: #b22222;">prints 8
+</span>cout &lt;&lt; arr[5] &lt;&lt; endl;  <span style="color: #b22222;">// </span><span style="color: #b22222;">prints 0
+</span></pre>
+
+<p>We can change the values of an array in the same way:</p>
+
+<p class="image"><img src="array-2_0.png" alt=""></p>
+
+<pre class="src">
+arr[1] = 9;
+cout &lt;&lt; arr[0] &lt;&lt; endl;  <span style="color: #b22222;">// </span><span style="color: #b22222;">prints 4
+</span>cout &lt;&lt; arr[1] &lt;&lt; endl;  <span style="color: #b22222;">// </span><span style="color: #b22222;">prints 9
+</span>cout &lt;&lt; arr[5] &lt;&lt; endl;  <span style="color: #b22222;">// </span><span style="color: #b22222;">prints 0
+</span></pre>
+
+<p>The value of the array itself (in this case, <code>arr</code>), is actually not an
+integer value but the <em>memory location</em> where the array <em>starts</em>. We can
+print this location, but it's more-or-less meaningless:</p>
+
+<pre class="src">
+cout &lt;&lt; arr &lt;&lt; endl;  <span style="color: #b22222;">// </span><span style="color: #b22222;">prints something like "0x22cd20"
+</span></pre>
+
+<p>Note that we cannot ask an array how large it is. Once the array is
+created, the computer essentially forgets how big it is. The size of
+the array is something we need to keep track of ourselves. (This is
+unlike the <code>string</code> function <code>length()</code>, which we can use to determine how
+big a string is.)</p>
+
+
+<h2>Assigning values</h2>
+
+<p class="first">We can assign the values to an array with a loop if we don't want to
+type all the values individually. In this case, the array is created
+by specifying a size but the values are missing. Inside a <code>for()</code> loop
+we will set the values:</p>
+
+<pre class="src">
+<span style="color: #228b22;">int</span> <span style="color: #b8860b;">arr</span>[100];
+<span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; 100; i++)
+{
+    arr[i] = i*i*i + 10;  <span style="color: #b22222;">// </span><span style="color: #b22222;">assign each element some silly value
+</span>}
+</pre>
+
+<p>An alternative is to get the values from the user. In the following
+example, we first ask for the size of the array, then ask for each
+value.</p>
+
+<pre class="src">
+<span style="color: #228b22;">int</span> <span style="color: #b8860b;">n</span>;
+cout &lt;&lt; <span style="color: #bc8f8f;">"How many values? "</span>;
+cin &gt;&gt; n;
+
+<span style="color: #228b22;">int</span> <span style="color: #b8860b;">numbers</span>[n];
+<span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; n; i++)
+{
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter value: "</span>;
+    cin &gt;&gt; numbers[i];
+}
+</pre>
+
+<p>Finally, we can provide the values in the code, like we did
+previously. However, note that if your make an array of size <code>n</code> but you
+do not provide <code>n</code> values between the braces, then the first values will
+be put in the array but the values that you have not defined will all
+be <code>0</code>. For example:</p>
+
+<pre class="src">
+<span style="color: #b22222;">// </span><span style="color: #b22222;">this array has values {3, 2, 0, 0, 0}
+</span><span style="color: #228b22;">int</span> <span style="color: #b8860b;">xs</span>[5] = {3, 2};
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">this array has values {3.0, 2.0, 0.0, 0.0, 0.0}
+</span><span style="color: #228b22;">double</span> <span style="color: #b8860b;">vals</span>[5] = {3.0, 2.0};
+</pre>
+
+
+<h2>Some simple array operations</h2>
+
+<p class="first">Find the sum of an array:</p>
+
+<pre class="src">
+<span style="color: #228b22;">int</span> <span style="color: #b8860b;">vals</span>[100];
+<span style="color: #b22222;">// </span><span style="color: #b22222;">put values in the array...
+</span>
+<span style="color: #228b22;">int</span> <span style="color: #b8860b;">sum</span> = 0;
+<span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; 100; i++)
+{
+    sum += vals[i];
+}
+</pre>
+
+<p>Find the product of an array:</p>
+
+<pre class="src">
+<span style="color: #b22222;">// </span><span style="color: #b22222;">assume we have some variable "size"...
+</span><span style="color: #228b22;">double</span> <span style="color: #b8860b;">vals</span>[size];
+<span style="color: #b22222;">// </span><span style="color: #b22222;">put values in the array...
+</span>
+<span style="color: #228b22;">double</span> <span style="color: #b8860b;">product</span> = 1.0;
+<span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; size; i++)
+{
+    product *= vals[i];
+}
+</pre>
+
+<p>Print the contents of an array:</p>
+
+<pre class="src">
+<span style="color: #b22222;">// </span><span style="color: #b22222;">this code prints an array like this: "{1, 3, 5, 2, 3}"
+</span>
+<span style="color: #228b22;">int</span> <span style="color: #b8860b;">xs</span>[100];
+<span style="color: #b22222;">// </span><span style="color: #b22222;">put values in the array...
+</span>
+cout &lt;&lt; <span style="color: #bc8f8f;">"{"</span>;
+<span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; 100; i++)
+{
+    cout &lt;&lt; xs[i];
+    <span style="color: #a020f0;">if</span>(i != 99)
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">", "</span>;
+    }
+}
+cout &lt;&lt; <span style="color: #bc8f8f;">"}"</span>;
+</pre>
+
+<p>Print the contents of an array in a function:</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">printIntegerArray</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">vals</span>[], <span style="color: #228b22;">int</span> <span style="color: #b8860b;">size</span>)
+{
+    cout &lt;&lt; <span style="color: #bc8f8f;">"{"</span>;
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; 100; i++)
+    {
+        cout &lt;&lt; vals[i];
+        <span style="color: #a020f0;">if</span>(i != (size-1))
+        {
+            cout &lt;&lt; <span style="color: #bc8f8f;">", "</span>;
+        }
+    }
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">n</span>;
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">cin &gt;&gt; n ...
+</span>
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">myArray</span>[n];
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">fill array...
+</span>
+    printIntegerArray(myArray, n);
+
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+
+<p>Sum a double array in a function:</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">double</span> <span style="color: #0000ff;">sumDoubleArray</span>(<span style="color: #228b22;">double</span> <span style="color: #b8860b;">xs</span>[], <span style="color: #228b22;">int</span> <span style="color: #b8860b;">n</span>)
+{
+    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">sum</span> = 0.0;
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; n; j++)
+    {
+        sum += xs[j];
+    }
+    <span style="color: #a020f0;">return</span> sum;
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">size</span>;
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">cin &gt;&gt; size ...
+</span>
+    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">array</span>[size];
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">fill array ...
+</span>
+    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">sum</span> = sumDoubleArray(array, size);
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Sum is "</span> &lt;&lt; sum &lt;&lt; endl;
+
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+
+<p>Copy one array to another, in reverse, in a function:</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">copyIntegerArrayReversed</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">arr1</span>[], <span style="color: #228b22;">int</span> <span style="color: #b8860b;">arr2</span>[], <span style="color: #228b22;">int</span> <span style="color: #b8860b;">n</span>)
+{
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = (n-1), <span style="color: #b8860b;">j</span> = 0; i &gt;= 0; i--, j++)
+    {
+        arr2[j] = arr1[i];
+    }
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">size</span>;
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">cin &gt;&gt; size ...
+</span>
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">myArray</span>[size];
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">fill array ...
+</span>
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">create second array, but don't fill it yet
+</span>    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">myArray2</span>[size];
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">use the function to fill the array
+</span>    copyIntegerArrayReversed(myArray, myArray2, size);
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">print array contents...
+</span>
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+
+<p>Concatenate two arrays (make a new array that contains the contents of
+two arrays), in a function:</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">appendTwoIntegerArrays</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">arr1</span>[], <span style="color: #228b22;">int</span> <span style="color: #b8860b;">arr2</span>[], <span style="color: #228b22;">int</span> <span style="color: #b8860b;">arr3</span>[]
+                            <span style="color: #228b22;">int</span> size1, <span style="color: #228b22;">int</span> <span style="color: #b8860b;">size2</span>)
+{
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; size1; i++)
+    {
+        arr3[i] = arr1[i];
+    }
+
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; size2; i++)
+    {
+        arr3[i+size1] = arr2[i];
+    }
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">size1</span>, <span style="color: #b8860b;">size2</span>;
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">cin &gt;&gt; size1 &gt;&gt; size2 ...
+</span>
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">array1</span>[size1];
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">array2</span>[size2];
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">array3</span>[size1 + size2]; <span style="color: #b22222;">// </span><span style="color: #b22222;">make it big enough to contain both
+</span>
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">fill array1, fill array2 ...
+</span>
+    appendTwoIntegerArrays(array1, array2, array3, size1, size2);
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">print array3 contents ...
+</span>
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+
+
+
+<!-- Page published by Emacs Muse ends here -->
+  </body>
+</html>

@@ -10,6 +10,7 @@ body {
   background: white; color: black;
   margin-left: 3%; margin-right: 7%;
   line-height: 1.5;
+  font-family: Nimbus Sans L, sans;
 }
 
 p { margin-top: 1% }
@@ -24,6 +25,14 @@ h2 {
   margin-bottom: 0px;
 }
 h3 { margin-bottom: 0px; }
+
+pre {
+  border: 1px solid #ccc;
+  margin: 5px;
+  padding: 5px;
+}
+
+code { color: #bc8f8f; font-weight: bold; }
     </style>
   </head>
   <body>
@@ -178,7 +187,38 @@ cout &lt;&lt; <span style="color: #bc8f8f;">"1 bottle of beer ..."</span> &lt;&l
 outside the loop.</p>
 
 
+<h2>What's really happening</h2>
+
+<p class="first">The <code>while()</code> loop is basically converted into an <code>if</code> and <code>goto</code>
+statement. For example, this loop:</p>
+
+<pre class="src">
+<span style="color: #228b22;">int</span> <span style="color: #b8860b;">x</span> = 0;
+<span style="color: #a020f0;">while</span>(x &lt; 10)
+{
+    cout &lt;&lt; <span style="color: #bc8f8f;">"blah"</span>;
+    x++;
+}
+</pre>
+
+<p>becomes this code:</p>
+
+<pre class="src">
+<span style="color: #228b22;">int</span> <span style="color: #b8860b;">x</span> = 0;
+<span style="color: #a020f0;">if</span>(x &lt; 10)      <span style="color: #b22222;">// </span><span style="color: #b22222;">name this line of code "CHECK"
+</span>{
+    cout &lt;&lt; <span style="color: #bc8f8f;">"blah"</span>;
+    x++;
+    <span style="color: #a020f0;">goto</span> <span style="color: #5f9ea0;">CHECK</span>; <span style="color: #b22222;">// </span><span style="color: #b22222;">here is the "loop" action
+</span>}
+</pre>
+
+
+
 <h2>Interactive program</h2>
+
+<p class="first">The following program repeated asks the user for a letter; if the user
+ever types &quot;q&quot; then the program is done.</p>
 
 <pre class="src">
 <span style="color: #228b22;">char</span> <span style="color: #b8860b;">c</span>;
@@ -193,6 +233,24 @@ cin &gt;&gt; c;
     cout &lt;&lt; <span style="color: #bc8f8f;">"Enter a letter, 's' to skip the message, 'q' to quit: "</span>;
     cin &gt;&gt; c;
 }
+</pre>
+
+<p>This program is better written with a <code>do-while</code> loop because we want
+the <code>cout</code> and <code>cin</code> pair to be done even before the check. Here it is
+with <code>do-while</code>:</p>
+
+<pre class="src">
+<span style="color: #228b22;">char</span> <span style="color: #b8860b;">c</span>;
+<span style="color: #a020f0;">do</span>
+{
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter a letter, 's' to skip the message, 'q' to quit: "</span>;
+    cin &gt;&gt; c;
+
+    <span style="color: #a020f0;">if</span>(c != <span style="color: #bc8f8f;">'s'</span> &amp;&amp; c != <span style="color: #bc8f8f;">'q'</span>)
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">"You typed "</span> &lt;&lt; c &lt;&lt; endl;
+    }
+} <span style="color: #a020f0;">while</span>(c != <span style="color: #bc8f8f;">'q'</span>);
 </pre>
 
 

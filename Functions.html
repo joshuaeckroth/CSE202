@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>Functions</title>
+    <meta name="generator" content="muse.el">
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=iso-8859-1">
+    <style type="text/css">
+body {
+  background: white; color: black;
+  margin-left: 3%; margin-right: 7%;
+  line-height: 1.5;
+  font-family: Nimbus Sans L, sans;
+}
+
+p { margin-top: 1% }
+p.verse { margin-left: 3% }
+
+.example { margin-left: 3% }
+
+li { margin: 0.5em 0; }
+
+h2 {
+  margin-top: 25px;
+  margin-bottom: 0px;
+}
+h3 { margin-bottom: 0px; }
+
+pre {
+  border: 1px solid #ccc;
+  margin: 5px;
+  padding: 5px;
+}
+
+code { color: #bc8f8f; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <h1>Functions</h1>
+    <!-- Page published by Emacs Muse begins here -->
+<h2>Motivation</h2>
+
+<p class="first">All of our programs so far have lived entirely inside the <code>main()</code>
+function. In other words, all the code was in one big pile.
+Mathematics were mixed in with <code>cout</code> statements were mixed with file
+operations. So far this has not been much of a problem because our
+programs were small.</p>
+
+<p>But we did use functions that others have written. We used the <code>string</code>
+<code>at()</code> function, the <code>cmath</code> <code>pow()</code> and <code>sqrt()</code> functions, and the <code>open()</code>
+and <code>is_open()</code> functions from <code>fstream</code>. Even <code>cout</code> and <code>cin</code> are functions,
+though they are quite a bit more complicated and a little bit special
+(actually, the stream operators <code>&lt;&lt;</code> and <code>&gt;&gt;</code> are functions too but that's
+beyond the scope of this class).</p>
+
+<p>If we did not have, say, <code>sqrt()</code>, at our disposal as functions, we
+would have had to include our own code for <code>sqrt()</code> (using an
+approximation method like Newton's) in our big pile of code in
+<code>main()</code>. This is undesirable.</p>
+
+<p>So the moral is that functions allow the programmer to <em>modularize</em> and
+<em>isolate</em> code, so that in any single function, only one task is being
+performed. This generally makes code more understandable.</p>
+
+<p>You can think of a function as simply code that has a name. The name
+of some chunk of code is what the code <em>does</em>. The <code>sqrt()</code> function
+contains only enough code to find the square root of a number, for
+example.</p>
+
+
+<h2>Where to write your own functions</h2>
+
+<p class="first">For now, we will write functions in the same file as <code>main()</code> so that
+our programs still consist of just one file. Programs need not be just
+one file, however, and in the future we will explore ways to split up
+code into multiple files (by putting functions in different files).</p>
+
+<p>Functions can be defined above <code>main()</code>, or they can have just a
+<em>prototype</em> (or <em>signature</em>) above <code>main()</code> with the function definition
+below <code>main()</code>. (Function prototypes or definitions cannot be placed
+inside other functions.) Here are examples:</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+<span style="color: #b22222;">// </span><span style="color: #b22222;">this is an example of a function fully defined above main()
+</span>
+<span style="color: #228b22;">double</span> <span style="color: #0000ff;">timesTwo</span>(<span style="color: #228b22;">double</span> <span style="color: #b8860b;">x</span>)
+{
+    <span style="color: #a020f0;">return</span> 2*x;
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    cout &lt;&lt; timesTwo(4.5) &lt;&lt; endl;
+}
+</pre>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">this is an example of just a prototype above main()
+</span><span style="color: #b22222;">// </span><span style="color: #b22222;">the function code itself is below main()
+</span>
+<span style="color: #228b22;">double</span> <span style="color: #0000ff;">timesTwo</span>(<span style="color: #228b22;">double</span>);
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    cout &lt;&lt; timesTwo(4.5) &lt;&lt; endl;
+}
+
+<span style="color: #228b22;">double</span> <span style="color: #0000ff;">timesTwo</span>(<span style="color: #228b22;">double</span> <span style="color: #b8860b;">x</span>)
+{
+    <span style="color: #a020f0;">return</span> 2*x;
+}
+</pre>
+
+<p>The importance of where the function is defined (above <code>main()</code> or not)
+is that the compiler requires that either the function prototype or
+the whole function itself is found <em>above the code that uses the
+function</em>. If you try to use a function called <code>timesTwo()</code> but the
+compiler has not seen any function by that name yet, then you get a
+compiler error.</p>
+
+
+<h2>Function return types and parameter types and names</h2>
+
+<p class="first">Every function must have a return type, or <code>void</code>. The return type can
+be any type we know about (e.g. <code>int</code>, <code>double</code>, <code>string</code>, <code>bool</code>, etc.). Or,
+the function can be a <em>void function</em>, which means we write <code>void</code> instead
+of a return type (<code>void</code> is not technically a type). The return type
+goes before the function name. If the function is not a void function,
+then the code inside the function must use <code>return</code> somewhere, returning
+a value of the proper type. A void function does not need the <code>return</code>
+command; it can include the <code>return</code> command (this causes the function
+to finish) but cannot use <code>return</code> to return a value.</p>
+
+<p>A function may have <em>arguments</em>. But it need not. A function that has no
+arguments has empty parentheses. A function that has two <code>int</code> arguments
+would have <code>int x, int y</code> in the parentheses. The <code>x</code> and <code>y</code> are usually
+not typed in the function prototype (though they can be). The <code>x</code> and <code>y</code>
+should be included, however, when the function is being defined.</p>
+
+<p>The <code>x</code> and <code>y</code> variable names <em>exist only inside the function</em>. Assume a
+function is called <code>add</code> and it takes two <code>int</code> arguments. This is what it
+looks like:</p>
+
+<pre class="src">
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">add</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">a</span>, <span style="color: #228b22;">int</span> <span style="color: #b8860b;">b</span>)
+{
+    <span style="color: #a020f0;">return</span> a+b;
+}
+</pre>
+
+<p>Then when the function is called (say, from some code in <code>main()</code>), two
+integer values must be provided: <code>add(4, 12)</code> (the result of that
+function call is <code>16</code>, naturally). Inside the function, the <code>4</code> is
+assigned to the variable name <code>a</code> and the <code>12</code> is assigned to <code>b</code>. This <code>a</code>
+and <code>b</code> exist only inside the function.</p>
+
+<p>Consider this example:</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">add</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">a</span>, <span style="color: #228b22;">int</span> <span style="color: #b8860b;">b</span>)
+{
+    <span style="color: #a020f0;">return</span> a+b;
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">a</span> = 15;
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">b</span> = 20;
+    cout &lt;&lt; add(a, b) &lt;&lt; endl;
+}
+</pre>
+
+<p>Then the <code>a</code> and <code>b</code> inside <code>main()</code> are different variables than those
+inside <code>add()</code>. Even if the code inside the function <code>add()</code> decided to
+change the values of <code>a</code> and <code>b</code>, it would only change the values for the
+variables known by those names inside the <code>add()</code> function, not those
+known by those names inside <code>main()</code>. The function <code>add()</code> cannot access
+the variables declared inside <code>main()</code>.</p>
+
+<p>Since the variables inside a function are not the same as those inside
+a different function, they need not have the same names:</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">add</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">someSillyNameX</span>, <span style="color: #228b22;">int</span> <span style="color: #b8860b;">someSillyNameY</span>)
+{
+    <span style="color: #a020f0;">return</span> (someSillyNameX + someSillyNameY);
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">a</span> = 15;
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">b</span> = 20;
+    cout &lt;&lt; add(a, b) &lt;&lt; endl;
+}
+</pre>
+
+<p>Note that function names (e.g. <code>add</code>) have the same restrictions as
+variable names (i.e. they cannot start with a number or special
+symbol, etc.).</p>
+
+
+
+<!-- Page published by Emacs Muse ends here -->
+  </body>
+</html>

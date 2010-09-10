@@ -1,0 +1,170 @@
+* Motivation
+
+All of our programs so far have lived entirely inside the =main()=
+function. In other words, all the code was in one big pile.
+Mathematics were mixed in with =cout= statements were mixed with file
+operations. So far this has not been much of a problem because our
+programs were small.
+
+But we did use functions that others have written. We used the =string=
+=at()= function, the =cmath= =pow()= and =sqrt()= functions, and the =open()=
+and =is_open()= functions from =fstream=. Even =cout= and =cin= are functions,
+though they are quite a bit more complicated and a little bit special
+(actually, the stream operators =<<= and =>>= are functions too but that's
+beyond the scope of this class).
+ 
+If we did not have, say, =sqrt()=, at our disposal as functions, we
+would have had to include our own code for =sqrt()= (using an
+approximation method like Newton's) in our big pile of code in
+=main()=. This is undesirable.
+
+So the moral is that functions allow the programmer to *modularize* and
+*isolate* code, so that in any single function, only one task is being
+performed. This generally makes code more understandable.
+
+You can think of a function as simply code that has a name. The name
+of some chunk of code is what the code *does*. The =sqrt()= function
+contains only enough code to find the square root of a number, for
+example.
+ 
+* Where to write your own functions
+ 
+For now, we will write functions in the same file as =main()= so that
+our programs still consist of just one file. Programs need not be just
+one file, however, and in the future we will explore ways to split up
+code into multiple files (by putting functions in different files).
+
+Functions can be defined above =main()=, or they can have just a
+*prototype* (or *signature*) above =main()= with the function definition
+below =main()=. (Function prototypes or definitions cannot be placed
+inside other functions.) Here are examples:
+
+<src lang="c++">
+#include <iostream>
+using namespace std;
+// this is an example of a function fully defined above main()
+
+double timesTwo(double x)
+{
+    return 2*x;
+}
+
+int main()
+{
+    cout << timesTwo(4.5) << endl;
+}
+</src>
+
+<src lang="c++">
+#include <iostream>
+using namespace std;
+
+// this is an example of just a prototype above main()
+// the function code itself is below main()
+
+double timesTwo(double);
+
+int main()
+{
+    cout << timesTwo(4.5) << endl;
+}
+
+double timesTwo(double x)
+{
+    return 2*x;
+}
+</src>
+
+The importance of where the function is defined (above =main()= or not)
+is that the compiler requires that either the function prototype or
+the whole function itself is found *above the code that uses the
+function*. If you try to use a function called =timesTwo()= but the
+compiler has not seen any function by that name yet, then you get a
+compiler error.
+ 
+* Function return types and parameter types and names
+ 
+Every function must have a return type, or =void=. The return type can
+be any type we know about (e.g. =int=, =double=, =string=, =bool=, etc.). Or,
+the function can be a *void function*, which means we write =void= instead
+of a return type (=void= is not technically a type). The return type
+goes before the function name. If the function is not a void function,
+then the code inside the function must use =return= somewhere, returning
+a value of the proper type. A void function does not need the =return=
+command; it can include the =return= command (this causes the function
+to finish) but cannot use =return= to return a value.
+
+A function may have *arguments*. But it need not. A function that has no
+arguments has empty parentheses. A function that has two =int= arguments
+would have =int x, int y= in the parentheses. The =x= and =y= are usually
+not typed in the function prototype (though they can be). The =x= and =y=
+should be included, however, when the function is being defined.
+
+The =x= and =y= variable names *exist only inside the function*. Assume a
+function is called =add= and it takes two =int= arguments. This is what it
+looks like:
+
+<src lang="c++">
+int add(int a, int b)
+{
+    return a+b;
+}
+</src>
+
+Then when the function is called (say, from some code in =main()=), two
+integer values must be provided: =add(4, 12)= (the result of that
+function call is =16=, naturally). Inside the function, the =4= is
+assigned to the variable name =a= and the =12= is assigned to =b=. This =a=
+and =b= exist only inside the function.
+ 
+Consider this example: 
+
+<src lang="c++">
+#include <iostream>
+using namespace std;
+
+int add(int a, int b)
+{
+    return a+b;
+}
+
+int main()
+{
+    int a = 15;
+    int b = 20;
+    cout << add(a, b) << endl;
+}
+</src>
+
+Then the =a= and =b= inside =main()= are different variables than those
+inside =add()=. Even if the code inside the function =add()= decided to
+change the values of =a= and =b=, it would only change the values for the
+variables known by those names inside the =add()= function, not those
+known by those names inside =main()=. The function =add()= cannot access
+the variables declared inside =main()=.
+
+Since the variables inside a function are not the same as those inside
+a different function, they need not have the same names:
+
+<src lang="c++">
+#include <iostream>
+using namespace std;
+
+int add(int someSillyNameX, int someSillyNameY)
+{
+    return (someSillyNameX + someSillyNameY);
+}
+
+int main()
+{
+    int a = 15;
+    int b = 20;
+    cout << add(a, b) << endl;
+}
+</src> 
+
+Note that function names (e.g. =add=) have the same restrictions as
+variable names (i.e. they cannot start with a number or special
+symbol, etc.).
+
+ 

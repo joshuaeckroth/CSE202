@@ -10,6 +10,7 @@ body {
   background: white; color: black;
   margin-left: 3%; margin-right: 7%;
   line-height: 1.5;
+  font-family: Nimbus Sans L, sans;
 }
 
 p { margin-top: 1% }
@@ -24,6 +25,14 @@ h2 {
   margin-bottom: 0px;
 }
 h3 { margin-bottom: 0px; }
+
+pre {
+  border: 1px solid #ccc;
+  margin: 5px;
+  padding: 5px;
+}
+
+code { color: #bc8f8f; font-weight: bold; }
     </style>
   </head>
   <body>
@@ -83,7 +92,7 @@ easiest way to do this is with the &quot;tab&quot; character <code>&quot;\t&quot
 
 <li><em>(Just for fun)</em> On Linux in the lab, Visualize a surface
 representing the output of your program using Matlab. Type
-&quot;matlab &amp;&quot; to start matlab. Within Matlab, type <code>load outdata.txt</code>
+<code>matlab &amp;</code> to start matlab. Within Matlab, type <code>load outdata.txt</code>
 and then type <code>surf(outdata)</code> . Also try clicking, in the &quot;Figure&quot;
 window, the menu &quot;Tools&quot; and the option &quot;Rotate3D&quot;, to rotate the
 figure. Note that for Matlab to correctly read and process the

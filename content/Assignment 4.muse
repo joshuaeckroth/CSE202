@@ -46,7 +46,7 @@ In more detail:
 
   7. *(Just for fun)* On Linux in the lab, Visualize a surface
      representing the output of your program using Matlab. Type
-     "matlab &" to start matlab. Within Matlab, type =load outdata.txt=
+     =matlab &= to start matlab. Within Matlab, type =load outdata.txt=
      and then type =surf(outdata)= . Also try clicking, in the "Figure"
      window, the menu "Tools" and the option "Rotate3D", to rotate the
      figure. Note that for Matlab to correctly read and process the

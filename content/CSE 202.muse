@@ -11,6 +11,12 @@ Lectures:
 
   5. [[Loops 2]]
 
+  6. [[Functions]]
+
+  7. [[Arrays]]
+
+  8. [[Files]]
+
 Assignments:
 
   1. [[Assignment 1]]
@@ -28,6 +34,8 @@ Miscellaneous:
   - [[Adventure and hackers]]
 
   - [[Risk and reassurance]]
+
+  - [[John von Neumann on subroutines]]
 
 Office hours:
 

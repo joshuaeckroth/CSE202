@@ -10,6 +10,7 @@ body {
   background: white; color: black;
   margin-left: 3%; margin-right: 7%;
   line-height: 1.5;
+  font-family: Nimbus Sans L, sans;
 }
 
 p { margin-top: 1% }
@@ -24,6 +25,14 @@ h2 {
   margin-bottom: 0px;
 }
 h3 { margin-bottom: 0px; }
+
+pre {
+  border: 1px solid #ccc;
+  margin: 5px;
+  padding: 5px;
+}
+
+code { color: #bc8f8f; font-weight: bold; }
     </style>
   </head>
   <body>
@@ -369,6 +378,41 @@ operators.</p>
 
     <span style="color: #a020f0;">return</span> 0; <span style="color: #b22222;">// </span><span style="color: #b22222;">exit program
 </span>}
+</pre>
+
+
+<h3>Conversion example</h3>
+
+<p class="first">This code converts teaspoons to other units of measurement.</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">teaspoons</span>;
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Please enter the number of teaspoons: "</span>;
+    cin &gt;&gt; teaspoons;
+
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">gallons</span> = teaspoons/(3*16*2*8);
+    teaspoons -= gallons*(3*16*2*8);
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">pints</span> = teaspoons/(3*16*2);
+    teaspoons -= pints*(3*16*2);
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">cups</span> = teaspoons/(16*3);
+    teaspoons -= cups*(16*3);
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">tablespoons</span> = teaspoons/3;
+    teaspoons -= tablespoons*3;
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Number of gallons: "</span> &lt;&lt; gallons &lt;&lt; endl;
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Number of pints: "</span> &lt;&lt; pints &lt;&lt; endl;
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Number of cups: "</span> &lt;&lt; cups &lt;&lt; endl;
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Number of tablespoons: "</span> &lt;&lt; tablespoons &lt;&lt; endl;
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Number of teaspoons: "</span> &lt;&lt; teaspoons &lt;&lt; endl;
+
+    <span style="color: #a020f0;">return</span> 0;
+}
 </pre>
 
 

@@ -135,7 +135,37 @@ cout << "1 bottle of beer ..." << endl;
 The last case, when <code>n == 1</code>, is special so we put it
 outside the loop.
 
+* What's really happening
+
+The =while()= loop is basically converted into an =if= and =goto=
+statement. For example, this loop:
+
+<src lang="c++">
+int x = 0;
+while(x < 10)
+{
+    cout << "blah";
+    x++;
+}
+</src>
+
+becomes this code:
+
+<src lang="c++">
+int x = 0;
+if(x < 10)      // name this line of code "CHECK"
+{
+    cout << "blah";
+    x++;
+    goto CHECK; // here is the "loop" action
+}
+</src>
+
+
 * Interactive program
+
+The following program repeated asks the user for a letter; if the user
+ever types "q" then the program is done.
 
 <src lang="c++">
 char c;
@@ -152,3 +182,20 @@ while(c != 'q')
 }
 </src>
 
+This program is better written with a =do-while= loop because we want
+the =cout= and =cin= pair to be done even before the check. Here it is
+with =do-while=:
+
+<src lang="c++">
+char c;
+do
+{
+    cout << "Enter a letter, 's' to skip the message, 'q' to quit: ";
+    cin >> c;
+
+    if(c != 's' && c != 'q')
+    {
+        cout << "You typed " << c << endl;
+    }
+} while(c != 'q');
+</src>
