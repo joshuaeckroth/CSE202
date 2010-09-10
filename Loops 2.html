@@ -1,0 +1,263 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>Loops 2</title>
+    <meta name="generator" content="muse.el">
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=iso-8859-1">
+    <style type="text/css">
+body {
+  background: white; color: black;
+  margin-left: 3%; margin-right: 7%;
+  line-height: 1.5;
+}
+
+p { margin-top: 1% }
+p.verse { margin-left: 3% }
+
+.example { margin-left: 3% }
+
+li { margin: 0.5em 0; }
+
+h2 {
+  margin-top: 25px;
+  margin-bottom: 0px;
+}
+h3 { margin-bottom: 0px; }
+    </style>
+  </head>
+  <body>
+    <h1>Loops 2</h1>
+    <!-- Page published by Emacs Muse begins here -->
+<h2>Motivation</h2>
+
+<p class="first">Anything a <code>while</code> loop can do, a <code>for</code> loop can do, and vice
+versa. However, each kind of loop is used equally often in practice
+because they have slightly different &quot;styles.&quot;  First, we will look at
+how <code>for</code> loops work.</p>
+
+<p>This is the basic structure of a <code>for</code> loop:</p>
+
+<pre class="src">
+<span style="color: #a020f0;">for</span>(initialization; conditional; update)
+{
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">do stuff...
+</span>}
+</pre>
+
+<p>This is what the three parts inside the parentheses (commonly) mean:</p>
+
+<ul>
+<li><code>initialization</code> &mdash; create counting variables and set their values</li>
+
+<li><code>conditional</code> &mdash; determine if the loop should repeat; this
+conditional usually refers to a variable defined in the
+<code>initialization</code></li>
+
+<li><code>update</code> &mdash; commonly used to change a variable defined in the
+<code>initialization</code> and referred to in the <code>conditional</code>; changing this
+variable should eventually cause the conditional to be false,
+causing the loop to complete</li>
+</ul>
+
+<p><code>for</code> loops follow this sequence of steps:</p>
+
+<ol>
+<li>execute whatever is put in the <code>initialization</code></li>
+
+<li>check the <code>conditional</code>; if it evaluates to <code>false</code> (<code>0</code>) then skip the
+loop; if it evaluates to <code>true</code> (any integer not equal to <code>0</code>),
+continue to the next step</li>
+
+<li>execute the <code>stuff</code> inside the block</li>
+
+<li>execute the <code>update</code></li>
+
+<li>go to step 2</li>
+</ol>
+
+<p>It's useful to see how a <code>while</code> loop can be converted to a <code>for</code> loop. In
+this example, the <code>while</code> loop and the <code>for</code> loop are (nearly) equivalent:</p>
+
+<pre class="src">
+<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0;
+<span style="color: #a020f0;">while</span>(i &lt; 10)
+{
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">do stuff...
+</span>    i++;
+}
+
+<span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; 10; i++)
+{
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">do stuff...
+</span>}
+</pre>
+
+<p>(The two are only &quot;nearly&quot; equivalent for the following reason: in the
+<code>while</code> loop case, the integer <code>i</code> is declared outside of the loop, so
+code that follows the loop block can still refer to <code>i</code>. In the <code>for</code> loop
+case, the integer <code>i</code> can only be used inside the <code>for</code> loop block; it
+does not exist when the loop is finished.)</p>
+
+<p>Let's dissect that <code>for</code> loop above:</p>
+
+<ul>
+<li><code>initialization</code> &mdash; 
+<code>int i = 0</code></li>
+
+<li><code>conditional</code> &mdash; 
+<code>i &lt; 10</code></li>
+
+<li><code>update</code> &mdash; 
+<code>i++</code></li>
+</ul>
+
+
+<p>You should be able to see these same three components present in the
+<code>while</code> loop, but the <code>while</code> loop does not have special handling of the
+three components. On the other hand, a <code>for</code> loop is specifically
+designed to have exactly those three components (initialization,
+conditional, and update).</p>
+
+<p>A <code>for</code> loop need not have anything in any of the three components. If
+none of the components have code in them, it is equivalent to an
+infinite loop. In other words, these two loops are equivalent:</p>
+
+<pre class="src">
+<span style="color: #a020f0;">while</span>(<span style="color: #5f9ea0;">true</span>)
+{
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">do stuff forever... (or until "break" is encountered)
+</span>}
+<span style="color: #a020f0;">for</span>(;;)
+{
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">do stuff forever... (or until "break" is encountered)
+</span>}
+</pre>
+
+<p>Here is the bottles-of-beer example again, this time using a <code>for</code> loop:</p>
+
+<pre class="src">
+<span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">n</span> = 99; n &gt; 1; n--)
+{
+    cout &lt;&lt; n &lt;&lt; <span style="color: #bc8f8f;">" bottles of beer..."</span> &lt;&lt; <span style="color: #bc8f8f;">"take one down..."</span>
+         &lt;&lt; (n-1) &lt;&lt; <span style="color: #bc8f8f;">" bottles of beer..."</span> &lt;&lt; endl;
+}
+cout &lt;&lt; <span style="color: #bc8f8f;">"1 bottle of beer ..."</span> &lt;&lt; endl;
+</pre>
+
+<p>Here is an example that is equivalent to</p>
+
+<blockquote>
+<p class="quoted">
+<!-- $\sum_{j=1}^{100} \sum_{k=1}^{100} (j+k)^2$--><img src="./latex/latex2png-Loops 2__194609049.png" alt="latex2png equation" class="latex-inline"></p>
+
+</blockquote>
+
+<pre class="src">
+<span style="color: #228b22;">int</span> <span style="color: #b8860b;">sum</span> = 0;
+<span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 1; j &lt;= 100; j++)
+{
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">k</span> = 1; k &lt;= 100; k++)
+    {
+        sum += (j+k)*(j+k);
+    }
+}
+</pre>
+
+<p>Here is an example that prints a triangle of stars:</p>
+
+<pre class="src">
+<span style="color: #b22222;">// </span><span style="color: #b22222;">the maximum width of a line of stars
+</span><span style="color: #228b22;">int</span> <span style="color: #b8860b;">width</span> = 30;
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">print 2 stars, then 4 stars, etc., centered on the line
+</span><span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 2; i &lt;= width; i += 2)
+{
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">we want to print "i" stars in the middle of the line,
+</span>    <span style="color: #b22222;">// </span><span style="color: #b22222;">so we need to add spaces before the stars, then print
+</span>    <span style="color: #b22222;">// </span><span style="color: #b22222;">the stars (we don't need spaces after the stars, just
+</span>    <span style="color: #b22222;">// </span><span style="color: #b22222;">a newline)
+</span>
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">print spaces
+</span>    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; ((width - i) / 2); j++)
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">" "</span>;
+    }
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">print stars
+</span>    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; i; j++)
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">"*"</span>;
+    }
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">print newline
+</span>    cout &lt;&lt; endl;
+}
+</pre>
+
+<p>Here is the result:</p>
+
+<pre class="example">
+              **
+             ****
+            ******
+           ********
+          **********
+         ************
+        **************
+       ****************
+      ******************
+     ********************
+    **********************
+   ************************
+  **************************
+ ****************************
+******************************
+
+</pre>
+
+<p>Let's fix that extra blank line at the bottom. We will check if the
+loop is on the last iteration; if it is, we don't print the last line:</p>
+
+<pre class="src">
+<span style="color: #b22222;">// </span><span style="color: #b22222;">the maximum width of a line of stars
+</span><span style="color: #228b22;">int</span> <span style="color: #b8860b;">width</span> = 30;
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">print 2 stars, then 4 stars, etc., centered on the line
+</span><span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 2; i &lt;= width; i += 2)
+{
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">we want to print "i" stars in the middle of the line,
+</span>    <span style="color: #b22222;">// </span><span style="color: #b22222;">so we need to add spaces before the stars, then print
+</span>    <span style="color: #b22222;">// </span><span style="color: #b22222;">the stars (we don't need spaces after the stars, just
+</span>    <span style="color: #b22222;">// </span><span style="color: #b22222;">a newline)
+</span>
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">print spaces
+</span>    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; ((width - i) / 2); j++)
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">" "</span>;
+    }
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">print stars
+</span>    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; i; j++)
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">"*"</span>;
+    }
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">print newline only if we aren't on the last line
+</span>    <span style="color: #a020f0;">if</span>(i != width)
+    {
+        cout &lt;&lt; endl;
+    }
+}
+</pre>
+
+<p>Notice that in each of these examples, we are doing <code>stuff</code> some
+particular number of times (the number of times is already known, like
+<code>100</code>, or stored in an integer or a calculation, such as <code>((width - i)
+/ 2)</code>).  These are the typical use cases for the <code>for</code> loop.</p>
+
+
+
+<!-- Page published by Emacs Muse ends here -->
+  </body>
+</html>

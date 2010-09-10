@@ -1,0 +1,154 @@
+* Motivation
+
+So far our programs have not used any loops. A loop is a repetition of
+some section of code. Loops are essential in the common situation
+where user input or data determines how many times something should
+occur. In other cases, the programmer just wants to save time by
+reducing the amount of typing or copy-pasting required, as our first
+example below shows.
+
+Consider the simple example of the "bottles of beer" song.  This is
+how it goes (as far as I know):
+
+  99 bottles of beer on the wall, 99 bottles of beer, take one down,
+  pass it around, 98 bottles of beer on the wall.
+
+  98 bottles of beer on the wall, 98 bottles of beer, take one down,
+  pass it around, 97 bottles of beer on the wall.
+
+  97 bottles of beer on the wall, 97 bottles of beer, take one down,
+  pass it around, 96 bottles of beer on the wall.
+
+  ...
+
+  1 bottle of beer on the wall, 1 bottle of beer, take it down, pass
+  it around, no more bottles of beer on the wall.
+
+Clearly this is a loop. (But a program that prints these lyrics need
+not use loops, since you know it should print 100 lines. You could
+just use 100 separate =cout= statements.  Using a loop, on the
+other hand, saves us from such tedium.)
+
+There are many examples of tasks that require loops. An interactive
+program that asks the user to input a value, then performs a
+computation on that input, then asks the user to input another value,
+and so on, until the user decides to quit, must use loops.
+
+In this lecture, we will look at the 99-bottles-of-beer loop and the
+interactive program loop.
+
+* Building up to 99 bottles of beer
+
+In C++, the simplest loop is the =while= loop. Here is a =while= loop that
+prints the first line of the song, forever and ever (infinitely-many
+copies of this same lyric are shown on the screen):
+
+<src lang="c++">
+while(true)
+{
+    cout << "99 bottles of beer on the wall... "
+         << "pass it around, 98 bottles..."
+         << endl;
+}
+</src>
+
+The general format for a <tt>while</tt> loop is:
+
+<src lang="c++">
+while(conditional)
+{
+    // do stuff...
+}
+</src>
+
+where =conditional= is the same kind of conditional used in =if=
+statements. In other words, =conditional= must be something that is a
+=bool= result.
+
+In an =if= statement, there is no repetition, so the conditional is only
+checked once. In a =while= loop, on the other hand, the conditional is
+checked before the loop begins and after every time the stuff inside
+the loop is executed. In other words, first =conditional= is checked. If
+it turns out to be true, then =stuff...= is executed. Then =conditional=
+is checked again. If it is true, =stuff...= is executed. And so on,
+looping over and over so long as =conditional= is true. If at some point
+=conditional= is false, then =stuff...= is not executed and the loop is
+finished. Execution resumes after the =while= loop block (a block starts
+with ={= and ends with =}=).
+
+We saw a "degenerate" loop earlier. It started with =while(true)=. A
+loop like that never stops because the conditional is always
+true. Another degenerate case is =while(false)=. In this case, since the
+conditional is never true, the stuff inside the block never
+executes. We will see later that =while(true)= actually can be useful in
+a program, but =while(false)= is never useful.
+
+A loop can be stopped by two techniques. The first technique will be
+discussed now. A loop stops when the conditional is false. Consider
+this loop:
+
+<src lang="c++">
+while(x != 0)
+{
+    // do stuff...
+}
+</src>
+
+This loop is stopped only when <code>x == 0</code> because that is the
+only case when the conditional is false. This suggests that somewhere
+inside the loop, =x= has to change such that, eventually, =x= is given the
+value =0=. If that never happens inside the loop, the loop never ends.
+
+Consider the bottles of beer again. Here is a loop that mostly works:
+
+<src lang="c++">
+int n = 99;
+while(n > 0)
+{
+    cout << n << " bottles of beer..."
+         << "take one down..."
+         << (n-1) << " bottles of beer..."
+         << endl;
+    n--;
+}
+</src>
+
+See how in that case, the conditional =n > 0= does eventually become
+false, because =n= is decreased each time the loop executes.
+
+In the last code segment, the final bottles-of-beer lyric is not
+handled properly. Here is a fix:
+
+<src lang="c++">
+int n = 99;
+while(n > 1)
+{
+    cout << n << " bottles of beer..."
+         << "take one down..."
+         << (n-1) << " bottles of beer..."
+         << endl;
+    n--;
+}
+cout << "1 bottle of beer ..." << endl;
+</src>
+
+The last case, when <code>n == 1</code>, is special so we put it
+outside the loop.
+
+* Interactive program
+
+<src lang="c++">
+char c;
+cout << "Enter a letter, 's' to skip the message, 'q' to quit: ";
+cin >> c;
+while(c != 'q')
+{
+    if(c != 's')
+    {
+        cout << "You typed " << c << endl;
+    }
+    cout << "Enter a letter, 's' to skip the message, 'q' to quit: ";
+    cin >> c;
+}
+</src>
+

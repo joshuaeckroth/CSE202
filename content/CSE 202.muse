@@ -7,6 +7,10 @@ Lectures:
 
   3. [[Conditionals]]
 
+  4. [[Loops 1]]
+
+  5. [[Loops 2]]
+
 Miscellaneous:
 
   - [[Pedagogical foundations]]
