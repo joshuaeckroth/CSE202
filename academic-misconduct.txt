@@ -1,0 +1,10 @@
+* Academic misconduct policy
+
+All writing (prose) and coding for every one of the programming
+assignments, labs, and quizzes is to be done individually. DO NOT LOOK
+AT OR COPY anyone else's writing or code. DO NOT SHARE your writing or
+code with anyone else. The only code you can copy is what you see in
+the book and what I provide to you (in class or on this website). If
+you are stuck on an assignment or lab, please visit me (or another TA)
+during office hours. Suspected cases of academic misconduct will be
+filed with the Committee of Academic Misconduct.

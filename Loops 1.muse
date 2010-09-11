@@ -161,7 +161,6 @@ if(x < 10)      // name this line of code "CHECK"
 }
 </src>
 
-
 * Interactive program
 
 The following program repeated asks the user for a letter; if the user
@@ -199,3 +198,7 @@ do
     }
 } while(c != 'q');
 </src>
+
+* Diagram of while() loop (and for() loop)
+
+[[loops-diagram.png]]

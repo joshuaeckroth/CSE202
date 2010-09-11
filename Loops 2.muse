@@ -213,3 +213,7 @@ Notice that in each of these examples, we are doing =stuff= some
 particular number of times (the number of times is already known, like
 =100=, or stored in an integer or a calculation, such as =((width - i)
 / 2)=).  These are the typical use cases for the =for= loop.
+
+* Diagram of for() loop (and while() loop)
+
+[[loops-diagram.png]]

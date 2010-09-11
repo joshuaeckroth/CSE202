@@ -1,5 +1,18 @@
+* Weekly tasks
 
-Lectures:
+  - Week 1: [[Lab 1]] [[Assignment 1]] (and quiz 1, on Carmen)
+
+  - Week 2: [[Lab 2]] [[Assignment 2]] (and quiz 2, on Carmen)
+
+  - Week 3: [[Lab 3]] [[Assignment 3]] (and quiz 3, on Carmen)
+
+  - Week 4: [[Lab 4]] [[Assignment 4]] (and quiz 4, on Carmen)
+
+  - Week 5: [[Lab 5]] [[Assignment 5]] (and quiz 5, on Carmen)
+
+  - Week 6: [[Lab 6]] [[Assignment 6]] (and quiz 6, on Carmen)
+
+* Lectures
 
   1. [[Fundamentals]]
 
@@ -27,17 +40,7 @@ Lectures:
 
   13. [[Vectors]]
 
-Assignments:
-
-  1. [[Assignment 1]]
-
-  2. [[Assignment 2]]
-
-  3. [[Assignment 3]]
-
-  4. [[Assignment 4]]
-
-Miscellaneous:
+* Miscellaneous
 
   - [[Pedagogical foundations]]
 
@@ -47,11 +50,11 @@ Miscellaneous:
 
   - [[John von Neumann on subroutines]]
 
-Office hours:
+* Office hours
 
 
 
-Contact info:
+* Contact info
 
   - [[mailto:joshuaeckroth@gmail.com][joshuaeckroth@gmail.com]]
 
@@ -67,5 +70,6 @@ Contact info:
 
 Feel free to message me whenever I'm "available" on chat.
 
+* About the class
 
-
+  - [[Syllabus]]
