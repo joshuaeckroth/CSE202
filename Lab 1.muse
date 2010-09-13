@@ -1,0 +1,144 @@
+* Log into Windows
+
+  1. Go to Caldwell (CL) 112A; (Note: Tuesday labs meet in CL 112A. At
+     other times, you can use 112A as long as there is no class in
+     there. The computers outside 112A are the same so you can use
+     those, too.)
+
+  2. Log into a computer. I will give you your username. Your starting
+     password for Windows is of the format: =####xx!= where =####= are the
+     last 4 digits of your OSU ID number and =xx= are your first and
+     last initials in lowercase. For example, assume Jim Smith's OSU
+     ID is 123456789, then his initial password would be =6789js!=
+
+  3. You'll be prompted to create a new password. Your new password
+     must contain a secret mix of symbols, uppercase/lowercase
+     letters, numbers, etc. We've never been able to figure out the
+     exact rules. But choose something you won't forget! (I cannot
+     help you if you forget your password. If you do forget your
+     password, you will have to reset the password in the "SOC" lab on
+     the 8th floor of Dreese.)
+
+* Log into Linux
+
+*Note: These same steps can be performed on your own computer. You will
+be able to connect to the lab computers from home with these same
+steps.*
+
+  1. Download Putty and save to your Desktop. Putty is here:
+     http://the.earth.li/~sgtatham/putty/latest/x86/putty.exe
+
+  2. Double-click putty.exe to open it. Type in the "host name" field
+     the following: =stdlogin.cse.ohio-state.edu=
+
+  3. Then click the "Open" button at the bottom of the window.
+
+  4. You will be asked if you want to trust the "host key"; say "yes."
+
+  5. Then provide your user name, press Enter, and then provide your
+     password. Your password (until you change it) is the same as your
+     first password (with your ID numbers) but without the exclamation
+     point. That is, =####xx= -- in the example above, it would be
+     =6789js=
+
+  6. After this, you should be logged in and looking at the "shell",
+     which is waiting for you to type commands.
+
+* Create a new directory for Lab 1
+
+  1. In the Putty window, type =cd= and press enter. The =cd= command
+     ("change directory") changes your "location" in the terminal
+     window. Typing =cd= and pressing enter changes the directory (your
+     location) to your "home directory".
+
+  2. Type =mkdir lab1= and press enter. The =mkdir= command creates
+     ("makes") a new directory.
+
+  3. Now we will change our location to the directory you just
+     made. Type =cd lab1= and press enter.
+
+  4. This process (=cd= then =mkdir labX= then =cd labX=) should be
+     performed at the start of each lab or programming
+     assignment. Each lab/assignment will have its own directory so
+     that your files are organized.
+
+  5. Each time you come back to work on a lab or assignment, after you
+     log in to Linux with Putty (whether from home or school, it is
+     the same), you must change your location to the lab's or
+     assignment's directory. For example, if you come back later to
+     work on this lab, you must open Putty, log in, and type =cd= then
+     =cd lab1=. You do not need to type =mkdir lab1= again.
+
+* Type some code
+
+  1. Once you are done with the previous steps, you can begin writing
+     code (or continue working on code you have already started). You
+     have a choice of programs to use to write your code; there are
+     many available (I mention several in [[Compilers and editors]]). In
+     these notes, I'll use "nano".
+
+     Type =nano main.cpp= to open the nano editor with the file (which
+     is blank since it does not exist) called "main.cpp". We will
+     write our code in this file.
+
+  2. Type the following code:
+
+     <src lang="c++">
+// lab 1
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    cout << "Wow C++ is easy!" << endl;
+    return 0;
+}
+</src>
+
+     Change the message in the quotes if you don't agree.
+
+  3. Then save the file by typing Ctrl-O. Hit Enter when it asks for
+     the file name.
+
+  4. Then quit nano by typing Ctrl-X.
+
+* Compile the code
+
+  1. Back at the shell (outside of your editor), type: =g++ main.cpp=
+
+  2. If the command was successful (which means you see nothing), then
+     you can type =a.out= to run the program. (The program is called
+     "a.out" since we did not tell the compiler to call the program
+     anything in particular; it has to choose a name and "a.out" is
+     what it always chooses).
+
+  3. If you see a bunch of errors, ask me for help and go back to the
+     steps in the "Type some code" section.
+
+* Submit your code
+
+  1. Assuming your program works, you'll need to send it to me so I
+     can grade it. I want the programs sent in an email (not as an
+     attachment, just inside the email, copy-and-pasted if
+     necessary). If you are still in Linux/Putty, it's super easy
+     to email me your code. Just type
+
+     <example>
+mail joshuaeckroth@gmail.com < main.cpp
+</example>
+
+     and press Enter. That command sends me an email (because that's
+     my email address) and makes the text of the email the same as
+     your code (in the file "main.cpp"). So I get an email that just
+     contains your code (not even an email "subject"; just your
+     code). This is why it is important to put a comment at the top of
+     your code indicating which lab/assignment you are sending me.
+
+* Put your code on a flash drive (if you want)
+
+  1. You can quit Putty (type "exit" at the shell) and still get to
+     your code if you are using a lab computer. Your "home directory"
+     in Linux is the same as the Z: drive in Windows. So just open up
+     "Computer" in the Start Menu and find the Z: drive. You'll see
+     the directory "lab1" that you made earlier.
+

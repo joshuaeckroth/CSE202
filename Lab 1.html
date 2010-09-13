@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>Lab 1</title>
+    <meta name="generator" content="muse.el">
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=iso-8859-1">
+    <style type="text/css">
+body {
+  background: white; color: black;
+  margin-left: 3%; margin-right: 7%;
+  line-height: 1.5;
+  font-family: Nimbus Sans L, sans;
+}
+
+p { margin-top: 1% }
+p.verse { margin-left: 3% }
+
+.example { margin-left: 3% }
+
+li { margin: 0.5em 0; }
+
+h2 {
+  margin-top: 25px;
+  margin-bottom: 0px;
+}
+h3 { margin-bottom: 0px; }
+
+pre {
+  border: 1px solid #ccc;
+  margin: 5px;
+  padding: 5px;
+}
+
+code { color: #bc8f8f; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <h1>Lab 1</h1>
+    <!-- Page published by Emacs Muse begins here -->
+<h2>Log into Windows</h2>
+
+<ol>
+<li>Go to Caldwell (CL) 112A; (Note: Tuesday labs meet in CL 112A. At
+other times, you can use 112A as long as there is no class in
+there. The computers outside 112A are the same so you can use
+those, too.)</li>
+
+<li>Log into a computer. I will give you your username. Your starting
+password for Windows is of the format: <code>####xx!</code> where <code>####</code> are the
+last 4 digits of your OSU ID number and <code>xx</code> are your first and
+last initials in lowercase. For example, assume Jim Smith's OSU
+ID is 123456789, then his initial password would be <code>6789js!</code></li>
+
+<li>You'll be prompted to create a new password. Your new password
+must contain a secret mix of symbols, uppercase/lowercase
+letters, numbers, etc. We've never been able to figure out the
+exact rules. But choose something you won't forget! (I cannot
+help you if you forget your password. If you do forget your
+password, you will have to reset the password in the &quot;SOC&quot; lab on
+the 8th floor of Dreese.)</li>
+</ol>
+
+
+<h2>Log into Linux</h2>
+
+<p><em>Note: These same steps can be performed on your own computer. You will
+be able to connect to the lab computers from home with these same
+steps.</em></p>
+
+<ol>
+<li>Download Putty and save to your Desktop. Putty is here:
+<a href="http://the.earth.li/~sgtatham/putty/latest/x86/putty.exe">http://the.earth.li/~sgtatham/putty/latest/x86/putty.exe</a></li>
+
+<li>Double-click putty.exe to open it. Type in the &quot;host name&quot; field
+the following: <code>stdlogin.cse.ohio-state.edu</code></li>
+
+<li>Then click the &quot;Open&quot; button at the bottom of the window.</li>
+
+<li>You will be asked if you want to trust the &quot;host key&quot;; say &quot;yes.&quot;</li>
+
+<li>Then provide your user name, press Enter, and then provide your
+password. Your password (until you change it) is the same as your
+first password (with your ID numbers) but without the exclamation
+point. That is, <code>####xx</code> &mdash; in the example above, it would be
+<code>6789js</code></li>
+
+<li>After this, you should be logged in and looking at the &quot;shell&quot;,
+which is waiting for you to type commands.</li>
+</ol>
+
+
+<h2>Create a new directory for Lab 1</h2>
+
+<ol>
+<li>In the Putty window, type <code>cd</code> and press enter. The <code>cd</code> command
+(&quot;change directory&quot;) changes your &quot;location&quot; in the terminal
+window. Typing <code>cd</code> and pressing enter changes the directory (your
+location) to your &quot;home directory&quot;.</li>
+
+<li>Type <code>mkdir lab1</code> and press enter. The <code>mkdir</code> command creates
+(&quot;makes&quot;) a new directory.</li>
+
+<li>Now we will change our location to the directory you just
+made. Type <code>cd lab1</code> and press enter.</li>
+
+<li>This process (<code>cd</code> then <code>mkdir labX</code> then <code>cd labX</code>) should be
+performed at the start of each lab or programming
+assignment. Each lab/assignment will have its own directory so
+that your files are organized.</li>
+
+<li>Each time you come back to work on a lab or assignment, after you
+log in to Linux with Putty (whether from home or school, it is
+the same), you must change your location to the lab's or
+assignment's directory. For example, if you come back later to
+work on this lab, you must open Putty, log in, and type <code>cd</code> then
+<code>cd lab1</code>. You do not need to type <code>mkdir lab1</code> again.</li>
+</ol>
+
+
+<h2>Type some code</h2>
+
+<ol>
+<li>Once you are done with the previous steps, you can begin writing
+code (or continue working on code you have already started). You
+have a choice of programs to use to write your code; there are
+many available (I mention several in <a href="Compilers%20and%20editors.html">Compilers and editors</a>). In
+these notes, I'll use &quot;nano&quot;.
+
+<p>Type <code>nano main.cpp</code> to open the nano editor with the file (which
+is blank since it does not exist) called &quot;main.cpp&quot;. We will
+write our code in this file.</p></li>
+
+<li>Type the following code:</li>
+</ol>
+
+<blockquote>
+<p class="quoted"></p>
+</blockquote> 
+
+<pre class="src">
+<span style="color: #b22222;">// </span><span style="color: #b22222;">lab 1
+</span><span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Wow C++ is easy!"</span> &lt;&lt; endl;
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+
+<blockquote>
+<p class="quoted">Change the message in the quotes if you don't agree.</p>
+</blockquote>
+
+<ol>
+<li>Then save the file by typing Ctrl-O. Hit Enter when it asks for
+the file name.</li>
+
+<li>Then quit nano by typing Ctrl-X.</li>
+</ol>
+
+
+<h2>Compile the code</h2>
+
+<ol>
+<li>Back at the shell (outside of your editor), type: <code>g++ main.cpp</code></li>
+
+<li>If the command was successful (which means you see nothing), then
+you can type <code>a.out</code> to run the program. (The program is called
+&quot;a.out&quot; since we did not tell the compiler to call the program
+anything in particular; it has to choose a name and &quot;a.out&quot; is
+what it always chooses).</li>
+
+<li>If you see a bunch of errors, ask me for help and go back to the
+steps in the &quot;Type some code&quot; section.</li>
+</ol>
+
+
+<h2>Submit your code</h2>
+
+<ol>
+<li>Assuming your program works, you'll need to send it to me so I
+can grade it. I want the programs sent in an email (not as an
+attachment, just inside the email, copy-and-pasted if
+necessary). If you are still in Linux/Putty, it's super easy
+to email me your code. Just type</li>
+</ol>
+
+<blockquote>
+<p class="quoted"></p>
+</blockquote> 
+
+<pre class="example">
+mail joshuaeckroth@gmail.com &lt; main.cpp
+</pre>
+
+<blockquote>
+<p class="quoted">and press Enter. That command sends me an email (because that's
+my email address) and makes the text of the email the same as
+your code (in the file &quot;main.cpp&quot;). So I get an email that just
+contains your code (not even an email &quot;subject&quot;; just your
+code). This is why it is important to put a comment at the top of
+your code indicating which lab/assignment you are sending me.</p>
+</blockquote>
+
+
+<h2>Put your code on a flash drive (if you want)</h2>
+
+<ol>
+<li>You can quit Putty (type &quot;exit&quot; at the shell) and still get to
+your code if you are using a lab computer. Your &quot;home directory&quot;
+in Linux is the same as the Z: drive in Windows. So just open up
+&quot;Computer&quot; in the Start Menu and find the Z: drive. You'll see
+the directory &quot;lab1&quot; that you made earlier.</li>
+</ol>
+
+
+
+<!-- Page published by Emacs Muse ends here -->
+  </body>
+</html>

@@ -1,0 +1,50 @@
+* Task
+
+Write a complete program that asks the user for a "formula." A formula
+is of the form "number operation number" where "number" is some
+decimal number, and "operation" is one of =+=, =-=, =*=, and =/= (you can use
+a =char= variable to get the operation, since they are always just one
+symbol). An example is the formula =4.3 + 3.2=.  Your program should
+compute the answer to the formula and print it (with fixed precision
+3). Be sure to use a =switch= statement to determine which operation was
+entered.
+
+* Examples
+
+<example>
+Enter a simple mathematical formula: 0.0 + 0.0
+Answer: 0.000
+</example>
+
+<example>
+Enter a simple mathematical formula: 123.45 - 123.45
+Answer: 0.000
+</example>
+
+<example>
+Enter a simple mathematical formula: 5.67 * -84.27
+Answer: -477.811
+</example>
+
+<example>
+Enter a simple mathematical formula: -3497.45 / 354.3385045
+Answer: -9.870
+</example>
+
+For the following example, "inf" is automatically printed whenever you
+divided a double by 0.0. You do not need a special check for 0.0.
+
+<example>
+Enter a simple mathematical formula: 35 / 0
+Answer: inf
+</example>
+
+Same with "nan" ("not a number"); it is automatically printed when 0.0
+is divided by 0.0.
+
+<example>
+Enter a simple mathematical formula: 0.0 / 0.0
+Answer: nan
+</example>
+
+<include file="academic-misconduct.txt">

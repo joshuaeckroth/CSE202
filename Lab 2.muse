@@ -1,0 +1,54 @@
+* Task
+
+Write a complete program that asks the user for some input: two
+integers called <math>a</math> and <math>b</math>, and one "double"
+(real-valued number) called <math>c</math>. You can expect none of the
+values to be zero. Then compute the following values and print the
+results:
+
+  1. The quotient <math>a/b</math>
+
+  2. The remainder of <math>a/b</math>
+
+  3. <math>a^3</math>
+
+  4. <math>c/a</math>
+
+The last value (<math>c/a</math>) must be shown with fixed precision
+of three digits.
+
+* Examples
+
+<example>
+Enter non-zero integers a, b, and real c: 1 1 1
+Quotient a/b: 1
+Remainder of a/b: 0
+a^3: 1
+Division c/a: 1.000
+</example>
+
+<example>
+Enter non-zero integers a, b, and real c: 1 2 3
+Quotient a/b: 0
+Remainder of a/b: 1
+a^3: 1
+Division c/a: 3.000
+</example>
+
+<example>
+Enter non-zero integers a, b, and real c: -1 2 -3.5
+Quotient a/b: 0
+Remainder of a/b: -1
+a^3: -1
+Division c/a: 3.500
+</example>
+
+<example>
+Enter non-zero integers a, b, and real c: 73493 -23472 347.34457656
+Quotient a/b: -3
+Remainder of a/b: 3077
+a^3: -1823844051
+Division c/a: 0.005
+</example>
+
+<include file="academic-misconduct.txt">

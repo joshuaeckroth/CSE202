@@ -1,0 +1,20 @@
+You have your choice of compilers and editors. Here is a small list.
+
+* Editors to use on Linux (with Putty)
+
+  - =emacs= ([[http://www.physics.ucsb.edu/~pcs/apps/editors/emacs-basics.html][guide]])
+
+  - =nano= ([[http://www.gentoo.org/doc/en/nano-basics-guide.xml][guide]])
+
+  - =vim= ([[http://linux.startcom.org/docs/en/Introduction%20to%20Linux/sect_06_02.html][guide]])
+
+* Editors/compilers to use at home (Windows)
+
+  - CodeBlocks ([[http://www.codeblocks.org/home][webpage]]; [[http://prdownload.berlios.de/codeblocks/codeblocks-10.05mingw-setup.exe][download]])
+
+  - wxDev-C++ ([[http://wxdsgn.sourceforge.net/][webpage]]; [[http://sourceforge.net/projects/wxdsgn/files/wxDev-C%2B%2B/Version%207/wxdevcpp_webbased_setup.exe/download][download]])
+
+  - CodeLite ([[http://www.codelite.org/][webpage]]; [[http://sourceforge.net/projects/codelite/files/Releases/codelite-2.6.0/codelite-2.6.0.4189-mingw4.4.1.exe/download][download]])
+
+
+
