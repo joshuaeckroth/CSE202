@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
   <head>
-    <title>Lab 3</title>
+    <title>Lab 5</title>
     <meta name="generator" content="muse.el">
     <meta http-equiv="Content-Type"
           content="text/html; charset=iso-8859-1">
@@ -41,60 +41,40 @@ code { color: #bc8f8f; font-weight: bold; }
     </style>
   </head>
   <body>
-    <h1>Lab 3</h1>
+    <h1>Lab 5</h1>
     <!-- Page published by Emacs Muse begins here -->
 <h2>Task</h2>
 
-<p class="first">Write a program that asks the user for two integers: <!-- $m$--><img src="./latex/latex2png-Lab 3__10356.png" alt="latex2png equation" class="latex-inline">
-and <!-- $n$--><img src="./latex/latex2png-Lab 3__10372.png" alt="latex2png equation" class="latex-inline">. It then calculates the following sum:</p>
-
-<blockquote>
-<p class="quoted"><!-- $\sum_{i=1}^m \sum_{j=1}^n \frac{(i+j)}{2}$--><img src="./latex/latex2png-Lab 3__260662291.png" alt="latex2png equation" class="latex-inline"></p>
-</blockquote>
-
-<p>The program must calculate this sum using two <code>while()</code> loops.</p>
+<p class="first">Write a complete program that asks the user for two non-negative
+integer values that represent a distance divided into feet and inches,
+respectively, then prints that same distance converted to meters
+(there are 2.54 centimeters, or 0.0254 meters, in one inch). This
+conversion should take place in a function called &quot;convertMeters&quot; that
+takes two parameters representing the feet and inches and returns the
+number of meters (the return value of this function should be a double
+even though its parameters are integers).</p>
 
 
 <h2>Examples</h2>
 
 <pre class="example">
-Enter m and n: -1 -1
-Result: 0
+Enter number of feet and inches: 0 0
+Converted to meters: 0.000 meters.
 </pre>
 
 <pre class="example">
-Enter m and n: 0 0
-Result: 0
+Enter number of feet and inches: 5 11
+Converted to meters: 1.803 meters.
 </pre>
 
 <pre class="example">
-Enter m and n: 1 1
-Result: 1
+Enter number of feet and inches: 0 1
+Converted to meters: 0.025 meters.
 </pre>
 
 <pre class="example">
-Enter m and n: 1 -1
-Result: 0
-</pre>
-
-<pre class="example">
-Enter m and n: -1 1
-Result: 0
-</pre>
-
-<pre class="example">
-Enter m and n: 100 100
-Result: 505000
-</pre>
-
-<pre class="example">
-Enter m and n: 10000 10000
-Result: 5.0005e+11
-</pre>
-
-<pre class="example">
-Enter m and n: 372 43329
-Result: 1.76105e+11
+Enter number of feet and inches: 11 55
+Converted to meters: 4.750 meters.
 </pre>
 
 <h2>Academic misconduct policy</h2>

@@ -1,0 +1,59 @@
+* Background
+
+A Gauss curve is defined by the function:
+
+  <math>\phi(t) = \frac{1}{\sqrt{2\pi}} \exp(-t^2/2)</math>
+
+The normal distribution is a function which is widely used in
+statistics. It is defined as the integral of the Gauss curve:
+
+  <math>\Phi(x) = \int_{-\infty}^x \phi(t) dt</math>
+
+We know that <math>\Phi(\infty) = 1</math> (the integral from
+<math>-\infty</math> to <math>\infty</math>). The Gauss function is
+symmetrical so we can rewrite the integral as:
+
+  <math>\Phi(x) = \frac{1}{2} + \int_0^x \phi(t) dt</math>
+
+(since the complete integral equals <math>1</math>), and we get rid of
+the infinity.
+
+Now, the big issue here is that <math>\Phi(x)</math> cannot be
+calculated analytically; it can only be approximated. Your program
+will do this approximation.
+
+* Task
+
+Write a program that asks the user for an integer <math>n</math> and a
+floating-point value <math>x</math>. Calculate <math>\Phi(x)</math> by
+adding together the areas of small rectangles defined below for
+<math>n</math> intervals between <math>0</math> and <math>x</math>. We
+consider the height of the rectangle to be the value of
+<math>\phi</math> at the midpoint. Thus, the area of one of these
+rectangles is:
+
+  <math>A(a,b) = \phi(\frac{a+b}{2}) (b-a)</math>
+
+where <math>a</math> and <math>b</math> are the start and end values
+on the x-axis of the small interval.
+
+Since you have to divide the distance between <math>0</math> and
+<math>x</math> into <math>n</math> intervals, it is easy to calculate
+<math>a</math> and <math>b</math> for interval number <math>i</math>
+(where <math>0 \leq i < n</math>):
+
+  <math>a = \frac{ix}{n}</math>
+
+  <math>b = \frac{(i+1)x}{n}</math>
+
+Remember that you need to add up these small rectangular areas and the
+value <math>1/2</math> since we are using the modified integral above.
+
+You must write a separate function for <math>\phi(t)</math> and
+<math>A(a,b)</math>. Both functions will return a =double=.
+
+* Examples
+
+<include file="academic-misconduct.txt">
+
+

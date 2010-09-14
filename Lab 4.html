@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
   <head>
-    <title>Lab 3</title>
+    <title>Lab 4</title>
     <meta name="generator" content="muse.el">
     <meta http-equiv="Content-Type"
           content="text/html; charset=iso-8859-1">
@@ -41,60 +41,41 @@ code { color: #bc8f8f; font-weight: bold; }
     </style>
   </head>
   <body>
-    <h1>Lab 3</h1>
+    <h1>Lab 4</h1>
     <!-- Page published by Emacs Muse begins here -->
 <h2>Task</h2>
 
-<p class="first">Write a program that asks the user for two integers: <!-- $m$--><img src="./latex/latex2png-Lab 3__10356.png" alt="latex2png equation" class="latex-inline">
-and <!-- $n$--><img src="./latex/latex2png-Lab 3__10372.png" alt="latex2png equation" class="latex-inline">. It then calculates the following sum:</p>
+<p class="first">Write a program that asks the user for a positive integer (greater
+than 1), then determines if that integer is a prime number. It's easy
+to check if an integer is prime by just attempting to divide every
+number between 1 and the number itself (from the user), exclusive (do
+not try to divide by 1 nor the user's number itself because of course
+those numbers do divide the user's number); if no such number divides
+the number the user provided, then that number is a prime number.</p>
 
-<blockquote>
-<p class="quoted"><!-- $\sum_{i=1}^m \sum_{j=1}^n \frac{(i+j)}{2}$--><img src="./latex/latex2png-Lab 3__260662291.png" alt="latex2png equation" class="latex-inline"></p>
-</blockquote>
+<p>For example, if the user enters the number 37, then your program would
+check if 2 divides 37 (it doesn't), then if 3 divides 37 (it doesn't),
+and so on, up to if 36 divides 37 (it doesn't). Since no number
+between 2 and 36 divides 37, 37 is a prime number.</p>
 
-<p>The program must calculate this sum using two <code>while()</code> loops.</p>
+<p>You must use a <code>for()</code> loop.</p>
 
 
 <h2>Examples</h2>
 
 <pre class="example">
-Enter m and n: -1 -1
-Result: 0
+Enter a positive integer: 36
+Not a prime.
 </pre>
 
 <pre class="example">
-Enter m and n: 0 0
-Result: 0
+Enter a positive integer: 2
+Prime.
 </pre>
 
 <pre class="example">
-Enter m and n: 1 1
-Result: 1
-</pre>
-
-<pre class="example">
-Enter m and n: 1 -1
-Result: 0
-</pre>
-
-<pre class="example">
-Enter m and n: -1 1
-Result: 0
-</pre>
-
-<pre class="example">
-Enter m and n: 100 100
-Result: 505000
-</pre>
-
-<pre class="example">
-Enter m and n: 10000 10000
-Result: 5.0005e+11
-</pre>
-
-<pre class="example">
-Enter m and n: 372 43329
-Result: 1.76105e+11
+Enter a positive integer: 79
+Prime.
 </pre>
 
 <h2>Academic misconduct policy</h2>

@@ -1,0 +1,42 @@
+* Task
+
+Write a program that asks the user for a positive integer (greater
+than 1), then determines if that integer is a prime number. It's easy
+to check if an integer is prime by just attempting to divide every
+number between 1 and the number itself (from the user), exclusive (do
+not try to divide by 1 nor the user's number itself because of course
+those numbers do divide the user's number); if no such number divides
+the number the user provided, then that number is a prime number.
+
+For example, if the user enters the number 37, then your program would
+check if 2 divides 37 (it doesn't), then if 3 divides 37 (it doesn't),
+and so on, up to if 36 divides 37 (it doesn't). Since no number
+between 2 and 36 divides 37, 37 is a prime number.
+
+You must use a =for()= loop.
+
+* Examples
+
+<example>
+Enter a positive integer: 36
+Not a prime.
+</example>
+
+<example>
+Enter a positive integer: 2
+Prime.
+</example>
+
+<example>
+Enter a positive integer: 79
+Prime.
+</example>
+
+<include file="academic-misconduct.txt">
+
+
+
+
+
+
+

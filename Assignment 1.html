@@ -32,6 +32,11 @@ pre {
   padding: 5px;
 }
 
+td {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
 code { color: #bc8f8f; font-weight: bold; }
     </style>
   </head>
@@ -40,54 +45,58 @@ code { color: #bc8f8f; font-weight: bold; }
     <!-- Page published by Emacs Muse begins here -->
 <h2>Task</h2>
 
-<p class="first">Write a complete program that asks the user to input an integer
-representing the number of seconds from now until some event will
-happen in the future or did happen in the past. Your program will
-convert that number into days, hours, minutes, and seconds and tell
-the user the results of this conversion. If the user entered a
-negative number of seconds, your program will say the event happened
-&quot;D days, H hours, M minutes, and S seconds ago&quot;; if the user entered a
-positive number of seconds, your program will say the same thing but
-change &quot;ago&quot; to &quot;from now&quot;.</p>
+<p class="first">Write a complete program that asks the user for some input: two
+integers called <!-- $a$--><img src="./latex/latex2png-Assignment 1__10164.png" alt="latex2png equation" class="latex-inline"> and <!-- $b$--><img src="./latex/latex2png-Assignment 1__10180.png" alt="latex2png equation" class="latex-inline">, and one &quot;double&quot;
+(real-valued number) called <!-- $c$--><img src="./latex/latex2png-Assignment 1__10196.png" alt="latex2png equation" class="latex-inline">. You can expect none of the
+values to be zero. Then compute the following values and print the
+results:</p>
+
+<ol>
+<li>The quotient <!-- $a/b$--><img src="./latex/latex2png-Assignment 1__2605764.png" alt="latex2png equation" class="latex-inline"></li>
+
+<li>The remainder of <!-- $a/b$--><img src="./latex/latex2png-Assignment 1__2605764.png" alt="latex2png equation" class="latex-inline"></li>
+
+<li><!-- $a^3$--><img src="./latex/latex2png-Assignment 1__2617684.png" alt="latex2png equation" class="latex-inline"></li>
+
+<li><!-- $c/a$--><img src="./latex/latex2png-Assignment 1__2613940.png" alt="latex2png equation" class="latex-inline"></li>
+</ol>
+
+<p>The last value (<!-- $c/a$--><img src="./latex/latex2png-Assignment 1__2613940.png" alt="latex2png equation" class="latex-inline">) must be shown with fixed precision
+of three digits.</p>
 
 
 <h2>Examples</h2>
 
-<p class="first">Be sure your program works with the following examples:</p>
-
 <pre class="example">
-Enter number of seconds: 0
-0 days, 0 hours, 0 minutes, 0 seconds from now.
+Enter non-zero integers a, b, and real c: 1 1 1
+Quotient a/b: 1
+Remainder of a/b: 0
+a^3: 1
+Division c/a: 1.000
 </pre>
 
 <pre class="example">
-Enter number of seconds: 55
-0 days, 0 hours, 0 minutes, 55 seconds from now.
+Enter non-zero integers a, b, and real c: 1 2 3
+Quotient a/b: 0
+Remainder of a/b: 1
+a^3: 1
+Division c/a: 3.000
 </pre>
 
 <pre class="example">
-Enter number of seconds: -55
-0 days, 0 hours, 0 minutes, 55 seconds ago.
+Enter non-zero integers a, b, and real c: -1 2 -3.5
+Quotient a/b: 0
+Remainder of a/b: -1
+a^3: -1
+Division c/a: 3.500
 </pre>
 
 <pre class="example">
-Enter number of seconds: 1000
-0 days, 0 hours, 16 minutes, 40 seconds from now.
-</pre>
-
-<pre class="example">
-Enter number of seconds: -1000
-0 days, 0 hours, 16 minutes, 40 seconds ago.
-</pre>
-
-<pre class="example">
-Enter number of seconds: 12345678
-142 days, 21 hours, 21 minutes, 18 seconds from now.
-</pre>
-
-<pre class="example">
-Enter number of seconds: -12345678
-142 days, 21 hours, 21 minutes, 18 seconds ago.
+Enter non-zero integers a, b, and real c: 73493 -23472 347.34457656
+Quotient a/b: -3
+Remainder of a/b: 3077
+a^3: -1823844051
+Division c/a: 0.005
 </pre>
 
 <h2>Academic misconduct policy</h2>

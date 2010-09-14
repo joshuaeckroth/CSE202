@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>Assignment 7</title>
+    <meta name="generator" content="muse.el">
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=iso-8859-1">
+    <style type="text/css">
+body {
+  background: white; color: black;
+  margin-left: 3%; margin-right: 7%;
+  line-height: 1.5;
+  font-family: Nimbus Sans L, sans;
+}
+
+p { margin-top: 1% }
+p.verse { margin-left: 3% }
+
+.example { margin-left: 3% }
+
+li { margin: 0.5em 0; }
+
+h2 {
+  margin-top: 25px;
+  margin-bottom: 0px;
+}
+h3 { margin-bottom: 0px; }
+
+pre {
+  border: 1px solid #ccc;
+  margin: 5px;
+  padding: 5px;
+}
+
+td {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+code { color: #bc8f8f; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <h1>Assignment 7</h1>
+    <!-- Page published by Emacs Muse begins here -->
+<h2>Task</h2>
+
+<p class="first">Let <!-- $f$--><img src="./latex/latex2png-Assignment 7__10244.png" alt="latex2png equation" class="latex-inline"> be the function</p>
+
+<blockquote>
+<p class="quoted"><!-- $f(x, y) = \cos(x) \sin(y) \log(x + y + 1)$--><img src="./latex/latex2png-Assignment 7__112621488.png" alt="latex2png equation" class="latex-inline"></p>
+</blockquote>
+
+<p>where <!-- $\log$--><img src="./latex/latex2png-Assignment 7__44075796.png" alt="latex2png equation" class="latex-inline"> is the natural logarithm (sometimes written
+<!-- $\ln$--><img src="./latex/latex2png-Assignment 7__2754692.png" alt="latex2png equation" class="latex-inline">).</p>
+
+<p>Write a program that asks the user for integers <!-- $m$--><img src="./latex/latex2png-Assignment 7__10356.png" alt="latex2png equation" class="latex-inline"> and
+<!-- $n$--><img src="./latex/latex2png-Assignment 7__10372.png" alt="latex2png equation" class="latex-inline"> and computes and writes <!-- $f(i/5,j/5)$--><img src="./latex/latex2png-Assignment 7__134719608.png" alt="latex2png equation" class="latex-inline"> to the
+file &quot;outfile.txt&quot; for <!-- $0 \leq i < m$--><img src="./latex/latex2png-Assignment 7__156875531.png" alt="latex2png equation" class="latex-inline"> and <!-- $0 \leq j <
+n$--><img src="./latex/latex2png-Assignment 7__155832571.png" alt="latex2png equation" class="latex-inline">. The output (in the file) should be formatted as an <!-- $m
+\times n$--><img src="./latex/latex2png-Assignment 7__93608581.png" alt="latex2png equation" class="latex-inline"> matrix where <!-- $i$--><img src="./latex/latex2png-Assignment 7__10292.png" alt="latex2png equation" class="latex-inline"> is the matrix row number
+and <!-- $j$--><img src="./latex/latex2png-Assignment 7__10308.png" alt="latex2png equation" class="latex-inline"> is the matrix column number.</p>
+
+<p>In more detail:</p>
+
+<ol>
+<li>Prompt and then read in the values of <!-- $m$--><img src="./latex/latex2png-Assignment 7__10356.png" alt="latex2png equation" class="latex-inline"> and
+<!-- $n$--><img src="./latex/latex2png-Assignment 7__10372.png" alt="latex2png equation" class="latex-inline">. (These two numbers may be different.)</li>
+
+<li>Your program should open the file &quot;outdata.txt&quot; and check that
+the file is open.  Output an error message and exit if the
+program could not open the file.</li>
+
+<li>For each value of <!-- $i$--><img src="./latex/latex2png-Assignment 7__10292.png" alt="latex2png equation" class="latex-inline"> from <!-- $0$--><img src="./latex/latex2png-Assignment 7__10020.png" alt="latex2png equation" class="latex-inline"> to
+<!-- $m-1$--><img src="./latex/latex2png-Assignment 7__2654260.png" alt="latex2png equation" class="latex-inline"> and for each value of <!-- $j$--><img src="./latex/latex2png-Assignment 7__10308.png" alt="latex2png equation" class="latex-inline"> from
+<!-- $0$--><img src="./latex/latex2png-Assignment 7__10020.png" alt="latex2png equation" class="latex-inline"> to <!-- $n-1$--><img src="./latex/latex2png-Assignment 7__2658356.png" alt="latex2png equation" class="latex-inline">, compute and output
+<!-- $f(i/5,j/5)$--><img src="./latex/latex2png-Assignment 7__134719608.png" alt="latex2png equation" class="latex-inline">. Note that the first values of
+<!-- $i$--><img src="./latex/latex2png-Assignment 7__10292.png" alt="latex2png equation" class="latex-inline"> and <!-- $j$--><img src="./latex/latex2png-Assignment 7__10308.png" alt="latex2png equation" class="latex-inline"> are both <!-- $0$--><img src="./latex/latex2png-Assignment 7__10020.png" alt="latex2png equation" class="latex-inline"> and the
+last values are <!-- $m-1$--><img src="./latex/latex2png-Assignment 7__2654260.png" alt="latex2png equation" class="latex-inline"> and <!-- $n-1$--><img src="./latex/latex2png-Assignment 7__2658356.png" alt="latex2png equation" class="latex-inline">,
+respectively.</li>
+
+<li>Output should be formatted in an <!-- $m \times n$--><img src="./latex/latex2png-Assignment 7__93608933.png" alt="latex2png equation" class="latex-inline">
+matrix. Each row of the matrix should be a single line in the
+output file consisting of m numbers. An example of the output
+format is shown below.</li>
+
+<li>Output the numbers in fixed precision with precision set to
+
+<ol>
+<li>Format the output so that the decimal point lines up in each
+column and columns are separated by one or more blanks. Note that
+the output may be negative, so leave space for a minus sign. The
+easiest way to do this is with the &quot;tab&quot; character <code>&quot;\t&quot;</code>.</li>
+</ol></li>
+
+<li>Close the file &quot;outdata.txt&quot;.</li>
+
+<li><em>(Just for fun)</em> On Linux in the lab, Visualize a surface
+representing the output of your program using Matlab. Type
+<code>matlab &amp;</code> to start matlab. Within Matlab, type <code>load outdata.txt</code>
+and then type <code>surf(outdata)</code> . Also try clicking, in the &quot;Figure&quot;
+window, the menu &quot;Tools&quot; and the option &quot;Rotate3D&quot;, to rotate the
+figure. Note that for Matlab to correctly read and process the
+output, output must be formatted in an <!-- $m \times n$--><img src="./latex/latex2png-Assignment 7__93608933.png" alt="latex2png equation" class="latex-inline">
+matrix where each row of the matrix is a single line in the
+output file consisting of <!-- $n$--><img src="./latex/latex2png-Assignment 7__10372.png" alt="latex2png equation" class="latex-inline"> numbers.</li>
+</ol>
+
+
+<h2>Examples</h2>
+
+<pre class="example">
+</pre>
+
+<h2>Academic misconduct policy</h2>
+
+<p class="first">All writing (prose) and coding for every one of the programming
+assignments, labs, and quizzes is to be done individually. DO NOT LOOK
+AT OR COPY anyone else's writing or code. DO NOT SHARE your writing or
+code with anyone else. The only code you can copy is what you see in
+the book and what I provide to you (in class or on this website). If
+you are stuck on an assignment or lab, please visit me (or another TA)
+during office hours. Suspected cases of academic misconduct will be
+filed with the Committee of Academic Misconduct.</p>
+
+
+
+
+<!-- Page published by Emacs Muse ends here -->
+  </body>
+</html>

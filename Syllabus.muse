@@ -25,8 +25,7 @@ to learn what we can about programming in general.
 
 * Prerequisites
 
-Math 151 (Calculus I) is required, though we'll use little if any
-Calculus.
+Math 151 (Calculus I) is required.
 
 * Textbook
 

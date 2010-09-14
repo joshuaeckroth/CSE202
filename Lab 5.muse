@@ -1,0 +1,35 @@
+* Task
+
+Write a complete program that asks the user for two non-negative
+integer values that represent a distance divided into feet and inches,
+respectively, then prints that same distance converted to meters
+(there are 2.54 centimeters, or 0.0254 meters, in one inch). This
+conversion should take place in a function called "convertMeters" that
+takes two parameters representing the feet and inches and returns the
+number of meters (the return value of this function should be a double
+even though its parameters are integers).
+
+* Examples
+
+<example>
+Enter number of feet and inches: 0 0
+Converted to meters: 0.000 meters.
+</example>
+
+<example>
+Enter number of feet and inches: 5 11
+Converted to meters: 1.803 meters.
+</example>
+
+<example>
+Enter number of feet and inches: 0 1
+Converted to meters: 0.025 meters.
+</example>
+
+<example>
+Enter number of feet and inches: 11 55
+Converted to meters: 4.750 meters.
+</example>
+
+<include file="academic-misconduct.txt">
+

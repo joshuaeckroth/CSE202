@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>Assignment 5</title>
+    <meta name="generator" content="muse.el">
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=iso-8859-1">
+    <style type="text/css">
+body {
+  background: white; color: black;
+  margin-left: 3%; margin-right: 7%;
+  line-height: 1.5;
+  font-family: Nimbus Sans L, sans;
+}
+
+p { margin-top: 1% }
+p.verse { margin-left: 3% }
+
+.example { margin-left: 3% }
+
+li { margin: 0.5em 0; }
+
+h2 {
+  margin-top: 25px;
+  margin-bottom: 0px;
+}
+h3 { margin-bottom: 0px; }
+
+pre {
+  border: 1px solid #ccc;
+  margin: 5px;
+  padding: 5px;
+}
+
+td {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+code { color: #bc8f8f; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <h1>Assignment 5</h1>
+    <!-- Page published by Emacs Muse begins here -->
+<h2>Background</h2>
+
+<p class="first">A Gauss curve is defined by the function:</p>
+
+<blockquote>
+<p class="quoted"><!-- $\phi(t) = \frac{1}{\sqrt{2\pi}} \exp(-t^2/2)$--><img src="./latex/latex2png-Assignment 5__114464672.png" alt="latex2png equation" class="latex-inline"></p>
+</blockquote>
+
+<p>The normal distribution is a function which is widely used in
+statistics. It is defined as the integral of the Gauss curve:</p>
+
+<blockquote>
+<p class="quoted"><!-- $\Phi(x) = \int_{-\infty}^x \phi(t) dt$--><img src="./latex/latex2png-Assignment 5__207111518.png" alt="latex2png equation" class="latex-inline"></p>
+</blockquote>
+
+<p>We know that <!-- $\Phi(\infty) = 1$--><img src="./latex/latex2png-Assignment 5__135136392.png" alt="latex2png equation" class="latex-inline"> (the integral from
+<!-- $-\infty$--><img src="./latex/latex2png-Assignment 5__262524581.png" alt="latex2png equation" class="latex-inline"> to <!-- $\infty$--><img src="./latex/latex2png-Assignment 5__5910838.png" alt="latex2png equation" class="latex-inline">). The Gauss function is
+symmetrical so we can rewrite the integral as:</p>
+
+<blockquote>
+<p class="quoted"><!-- $\Phi(x) = \frac{1}{2} + \int_0^x \phi(t) dt$--><img src="./latex/latex2png-Assignment 5__98049032.png" alt="latex2png equation" class="latex-inline"></p>
+</blockquote>
+
+<p>(since the complete integral equals <!-- $1$--><img src="./latex/latex2png-Assignment 5__10036.png" alt="latex2png equation" class="latex-inline">), and we get rid of
+the infinity.</p>
+
+<p>Now, the big issue here is that <!-- $\Phi(x)$--><img src="./latex/latex2png-Assignment 5__196881698.png" alt="latex2png equation" class="latex-inline"> cannot be
+calculated analytically; it can only be approximated. Your program
+will do this approximation.</p>
+
+
+<h2>Task</h2>
+
+<p class="first">Write a program that asks the user for an integer <!-- $n$--><img src="./latex/latex2png-Assignment 5__10372.png" alt="latex2png equation" class="latex-inline"> and a
+floating-point value <!-- $x$--><img src="./latex/latex2png-Assignment 5__10532.png" alt="latex2png equation" class="latex-inline">. Calculate <!-- $\Phi(x)$--><img src="./latex/latex2png-Assignment 5__196881698.png" alt="latex2png equation" class="latex-inline"> by
+adding together the areas of small rectangles defined below for
+<!-- $n$--><img src="./latex/latex2png-Assignment 5__10372.png" alt="latex2png equation" class="latex-inline"> intervals between <!-- $0$--><img src="./latex/latex2png-Assignment 5__10020.png" alt="latex2png equation" class="latex-inline"> and <!-- $x$--><img src="./latex/latex2png-Assignment 5__10532.png" alt="latex2png equation" class="latex-inline">. We
+consider the height of the rectangle to be the value of
+<!-- $\phi$--><img src="./latex/latex2png-Assignment 5__44090420.png" alt="latex2png equation" class="latex-inline"> at the midpoint. Thus, the area of one of these
+rectangles is:</p>
+
+<blockquote>
+<p class="quoted"><!-- $A(a,b) = \phi(\frac{a+b}{2}) (b-a)$--><img src="./latex/latex2png-Assignment 5__12363324.png" alt="latex2png equation" class="latex-inline"></p>
+</blockquote>
+
+<p>where <!-- $a$--><img src="./latex/latex2png-Assignment 5__10164.png" alt="latex2png equation" class="latex-inline"> and <!-- $b$--><img src="./latex/latex2png-Assignment 5__10180.png" alt="latex2png equation" class="latex-inline"> are the start and end values
+on the x-axis of the small interval.</p>
+
+<p>Since you have to divide the distance between <!-- $0$--><img src="./latex/latex2png-Assignment 5__10020.png" alt="latex2png equation" class="latex-inline"> and
+<!-- $x$--><img src="./latex/latex2png-Assignment 5__10532.png" alt="latex2png equation" class="latex-inline"> into <!-- $n$--><img src="./latex/latex2png-Assignment 5__10372.png" alt="latex2png equation" class="latex-inline"> intervals, it is easy to calculate
+<!-- $a$--><img src="./latex/latex2png-Assignment 5__10164.png" alt="latex2png equation" class="latex-inline"> and <!-- $b$--><img src="./latex/latex2png-Assignment 5__10180.png" alt="latex2png equation" class="latex-inline"> for interval number <!-- $i$--><img src="./latex/latex2png-Assignment 5__10292.png" alt="latex2png equation" class="latex-inline">
+(where <!-- $0 \leq i < n$--><img src="./latex/latex2png-Assignment 5__156875515.png" alt="latex2png equation" class="latex-inline">):</p>
+
+<blockquote>
+<p class="quoted"><!-- $a = \frac{ix}{n}$--><img src="./latex/latex2png-Assignment 5__172315713.png" alt="latex2png equation" class="latex-inline"></p>
+</blockquote>
+
+<blockquote>
+<p class="quoted"><!-- $b = \frac{(i+1)x}{n}$--><img src="./latex/latex2png-Assignment 5__245831442.png" alt="latex2png equation" class="latex-inline"></p>
+</blockquote>
+
+<p>Remember that you need to add up these small rectangular areas and the
+value <!-- $1/2$--><img src="./latex/latex2png-Assignment 5__2572868.png" alt="latex2png equation" class="latex-inline"> since we are using the modified integral above.</p>
+
+<p>You must write a separate function for <!-- $\phi(t)$--><img src="./latex/latex2png-Assignment 5__205770462.png" alt="latex2png equation" class="latex-inline"> and
+<!-- $A(a,b)$--><img src="./latex/latex2png-Assignment 5__62651574.png" alt="latex2png equation" class="latex-inline">. Both functions will return a <code>double</code>.</p>
+
+
+<h2>Examples</h2>
+
+<h2>Academic misconduct policy</h2>
+
+<p class="first">All writing (prose) and coding for every one of the programming
+assignments, labs, and quizzes is to be done individually. DO NOT LOOK
+AT OR COPY anyone else's writing or code. DO NOT SHARE your writing or
+code with anyone else. The only code you can copy is what you see in
+the book and what I provide to you (in class or on this website). If
+you are stuck on an assignment or lab, please visit me (or another TA)
+during office hours. Suspected cases of academic misconduct will be
+filed with the Committee of Academic Misconduct.</p>
+
+
+
+
+<!-- Page published by Emacs Muse ends here -->
+  </body>
+</html>
