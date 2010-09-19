@@ -1,11 +1,51 @@
 * Motivation
 
+Vectors are just improved arrays. As we have seen, arrays can be a
+real hassle. They don't know how big they are, they can't grow, and we
+can't "return" an array from a function. C++ introduced vectors so
+that we can avoid those issues.
 
-* Vector functions
+Arrays are used more often, however, only because they are simple and
+the computer can work with them more efficiently. But vectors are
+usually much more convenient for the programmer. (Note that vectors
+are really just arrays with some fancy functions.)
 
+* Vector usage
 
-* Strings are (just like) vectors
+Vectors are one of many "containers" introduced in C++. A container
+holds data. Recall that when you created an array, you had to decide
+what kind of array it was going to be (ints, doubles, etc.). The same
+is true with vectors, except that the type is specified a little
+differently (as it is with all "containers" in C++).
 
+Here is how you create a vector full of ints:
+
+<src lang="c++">
+vector<int> myvec;
+</src>
+
+(Don't forget =#include <vector>= at the top of your files when you use
+vectors).
+
+If you want doubles instead:
+
+<src lang="c++">
+vector<double> vals;
+</src>
+
+It's not possible to have a vector full of doubles *and* ints, for
+example ("heterogeneous" containers are not possible).
+
+You can put elements in your vector with several methods. Most common
+is =push_back=:
+
+<src lang="c++">
+vector<double> vals;
+vals.push_back(5.3);
+vals.push_back(0.66);
+</src>
+
+More examples are shown below.
 
 * Example 1 - simple vector
 
@@ -41,6 +81,10 @@ Value at index 2 is 1
 </example>
 
 * Example 2 - vector with initial values
+
+You can create a vector of some specific size and give it an initial
+(repeated) value. This is most often used to give a vector a bunch of
+zeros.
 
 <src lang="c++">
 #include <iostream>
@@ -86,6 +130,8 @@ Value at index 12 is 1
 </example>
 
 * Example 3 - clearing a vector
+
+The =clear()= function deletes all the values in the vector.
 
 <src lang="c++">
 #include <iostream>
@@ -137,6 +183,10 @@ Size of vals: 0
 
 * Example 4 - vector of strings
 
+You can put anything in vectors, even strings (which are themselves
+more-or-less vectors, too). (You can put vectors inside vectors, ad
+nauseum).
+
 <src lang="c++">
 #include <iostream>
 #include <vector>
@@ -173,6 +223,9 @@ Name at index 3 is Church
 </example>
 
 * Example 5 - using the empty() function
+
+The =clear()= function deletes all the values in the vector. The =empty()=
+function tells us if a vector has no values.
 
 <src lang="c++">
 #include <iostream>
@@ -211,6 +264,10 @@ Names vector is empty.
 
 * Example 6 - sorting
 
+It turns out we only need those sort functions from an earlier lecture
+if we are using arrays. Vectors can sort themselves (using the "quick
+sort" technique).
+
 <src lang="c++">
 #include <iostream>
 #include <vector>
@@ -248,6 +305,9 @@ Name at index 3 is Turing
 </example> 
 
 * Example 7 - random shuffling
+
+The reverse of sorting is shuffling; sometimes useful to randomize the
+order of our data for experiments.
 
 <src lang="c++">
 #include <iostream>
@@ -324,6 +384,13 @@ Riemann
 </example>
 
 * Example 8 - passing a vector to a function
+
+When you pass a vector to the function, the whole package is copied
+and given to the function; so if you change the vector in the
+function, the rest of the world is not affected. Also note that while
+you have to provide a function the size of the array when you use
+arrays and functions together, the vector already knows how big it is,
+so we don't need a "size" parameter.
 
 <src lang="c++">
 #include <iostream>
@@ -463,6 +530,9 @@ col 1: 12.9, col 2: 26.4, col 3: 82
 
 * Example 11 - returning a vector from a function
 
+While arrays cannot be returned by a function, vectors can, in the
+usual way:
+
 <src lang="c++">
 #include <iostream>
 #include <fstream>
@@ -570,6 +640,13 @@ int main()
     return 0;
 }
 </src>
+
+* Strings are (just like) vectors
+
+Interestingly enough, strings are just vectors of =char= things (more or
+less). We can use the same vector functions on strings (mostly). For
+example, we can ask a string its size (=s.size()=), reverse it
+(=s.reverse()=), etc.
 
 * Readings (not required)
 

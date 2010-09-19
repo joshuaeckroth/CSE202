@@ -43,7 +43,105 @@ code { color: #bc8f8f; font-weight: bold; }
   <body>
     <h1>Sorting</h1>
     <!-- Page published by Emacs Muse begins here -->
+<h2>Motivation</h2>
+
+<p class="first">Humans love lists, and the best list is the sorted list (sorted by
+name, sorted by date, sorted by net worth, etc.). Rarely does our data
+come to use already sorted, so we'll need to sort it. Usually data has
+a lot of fields (such as first name, last name, date of birth, ...)
+so, in practice, we have to decide which fields will be
+sorted. However, for the purposes of this class, we'll (probably) only
+be dealing with numerical data, so the we will simply sort the numbers
+by their values.</p>
+
+<p>In this class, we'll have an array of doubles or ints and wish to sort
+it. How do we do it? You may not be surprised to learn that, in
+computer science, sorting is a very big issue and there are many ways
+to do it. Since a sort is a sort, they should all give the same
+result; the techniques only differ in how fast they do it. As you
+might expect, the most efficient sorting techniques are somewhat
+complicated, so we will focus on the boring, inefficient,
+easy-to-understand techniques.</p>
+
+<p>You can see animations of many kinds of sorts here:
+<a href="http://www.sorting-algorithms.com/">http://www.sorting-algorithms.com/</a></p>
+
+
+<h2>Selection sort</h2>
+
+<p class="first">(Visualize this sort: <a href="http://www.sorting-algorithms.com/selection-sort">http://www.sorting-algorithms.com/selection-sort</a>)</p>
+
+<p>From your textbook,</p>
+
+<blockquote>
+<p class="quoted">The selection sort algorithm begins by finding the position of the
+minimum value and exchanging the minimum with the value in the first
+position in the array. Then, the algorithm finds the minimum value
+beginning with the second element, and exchanges this minimum with
+the second element. This process continues until reaching the
+next-to-last element, which is compared to the last element; the
+values are exchanged if they are out of order. At this point, the
+entire array of values is no in ascending order.</p>
+</blockquote>
+
+<p>Here is the code.</p>
+
+<pre class="src">
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">selectionSort</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">arr</span>[], <span style="color: #228b22;">int</span> <span style="color: #b8860b;">size</span>)
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">minpos</span>;
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">temp</span>;
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt;= (size-2); i++)
+    {
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">find position of mininum value beginning at index i
+</span>
+        minpos = i; <span style="color: #b22222;">// </span><span style="color: #b22222;">assume it is at i; this may change
+</span>        <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = (i+1); j &lt;= (size-1); j++)
+        {
+            <span style="color: #b22222;">// </span><span style="color: #b22222;">is the value at minpos actually not the min?
+</span>            <span style="color: #a020f0;">if</span>(arr[minpos] &gt; arr[j])
+            {
+                <span style="color: #b22222;">// </span><span style="color: #b22222;">update minpos
+</span>                minpos = j;
+            }
+        }
+
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">now that the inner-loop is over, minpos is the
+</span>        <span style="color: #b22222;">// </span><span style="color: #b22222;">index of the smallest value, so swap index i with
+</span>        <span style="color: #b22222;">// </span><span style="color: #b22222;">the minpos
+</span>        temp = arr[minpos];
+        arr[minpos] = arr[i];
+        arr[i] = temp;
+    }
+}
+</pre>
+
+<p>How efficient is this sort? On average, with an array of
+<!-- $n$--><img src="./latex/latex2png-Sorting__10372.png" alt="latex2png equation" class="latex-inline"> random values (completely unsorted), this sort will
+require about <!-- $n^2$--><img src="./latex/latex2png-Sorting__2670916.png" alt="latex2png equation" class="latex-inline"> &quot;comparisons&quot; (in that <code>if()</code> statement)
+and about <!-- $n$--><img src="./latex/latex2png-Sorting__10372.png" alt="latex2png equation" class="latex-inline"> swaps. That's actually not very efficient at
+all; the good sorts require only <!-- $n \log n$--><img src="./latex/latex2png-Sorting__9115404.png" alt="latex2png equation" class="latex-inline"> comparisons; oh
+well.</p>
+
+
 <h2>Bubble sort</h2>
+
+<p class="first">Bubble sort is actually used in practice if there is an expectation
+that the values are already nearly-sorted. It starts at the beginning
+of the array, and tries to move the first element to its correct
+position by swapping that element with the next every time the next
+element is smaller. The effect is that each element from the beginning
+appears to &quot;bubble up&quot; to its final position.</p>
+
+<p>The way its programmed below, we use the <code>bool swapped</code> variable to keep
+track if any swapping took place. If nobody swapped, then it's already
+sorted, so we can stop, even if we did not consider each element
+separately. This is why it is used in practice; if the array is
+already nearly-sorted, then bubble sort finishes much sooner than
+other sorts. Other sorts are not able to (efficiently) detect if their
+work is done.</p>
+
+<p>(Visualize this sort: <a href="http://www.sorting-algorithms.com/bubble-sort">http://www.sorting-algorithms.com/bubble-sort</a>)</p>
 
 <pre class="src">
 <span style="color: #228b22;">void</span> <span style="color: #0000ff;">bubbleSort</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">arr</span>[], <span style="color: #228b22;">int</span> <span style="color: #b8860b;">size</span>)

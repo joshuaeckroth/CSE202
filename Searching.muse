@@ -1,3 +1,19 @@
+* Motivation
+
+If you have data in a computer but you don't have a search technique,
+you have to manually find information. This is like a phonebook: we
+search with our eyes and hands. But if the data is in a computer, why
+bother? We just ask the computer to search for us.
+
+Imagine if the phonebook was not sorted, but just a random collection
+of names and phone numbers. You'd have to look from page 1 to find the
+phone number you want. So, somehow, sorting your data first helps you
+search more efficiently. The same is true in computer "phonebooks"
+(arrays, for example). The first search we will look at does not
+require that the data be sorted but does require we search the hard
+way (start with page 1). The second search takes advantage of sorted
+data to perform the search much faster.
+
 * Sequential search
 
 Sequential search is as simple as it gets. If we have an array of
@@ -27,31 +43,30 @@ search (if there are <math>n</math> elements in the array then, on
 average, sequential search looks at <math>n/2</math> elements) and (2)
 the array need not be sorted.
 
-But what if the array *is* sorted? Isn't there some kind of advantage
-for searching?
-
 * Binary search
 
-Imagine somebody gives you a portion of a phone book. The book is like
-a sorted array of names (sorted by last name). We are considering just
-a portion of the phone book because not all sorted arrays start at
-letter A and end at letter Z. Perhaps our book has last names between
-C and Q.
+Back to the phonebook analogy. Imagine somebody gives you a portion of
+a phonebook. The book is like a sorted array of names (sorted by last
+name). We are considering just a portion of the phonebook because not
+all sorted arrays start at letter A and end at letter Z. Perhaps our
+book has last names between B and H.
 
 How do we most efficiently search for a particular name in this book?
-You do a binary search:
+We perform a binary search:
 
   1. Open the book to the exact middle. Look at a name in the exact
      middle of the page. Is this name equal to the name we are looking
      for? Is this name after/before the name we are looking for?
 
-  2. If the name is the one we are looking for, then we are done.
+  2. If the name is the one we are looking for, then we are done (yay,
+     we found it).
 
-  3. If the name is after the one we are looking for (e.g. we are
-     looking for Einstein but the name in the middle is Riemann), then
-     throw out the second half of the book (rip it apart, keep the
-     first half); we know what we are looking for is in the first half
-     of the book.
+  3. If the name in the middle is after the one we are looking for
+     (e.g. we are looking for Einstein but the name in the middle is
+     Fourier), then throw out the second half of the book (rip it
+     apart, keep the first half); we know what we are looking for is
+     in the first half of the book, since we know the names are
+     sorted.
 
   4. If the name is before the one we are looking for (e.g. we are
      looking for Einstein but the name in the middle is Descartes),
@@ -62,12 +77,12 @@ You do a binary search:
 
 Is it clear that this is a *binary* search? Binary means two. So a
 binary search is a "two"-search. If we don't find our target in the
-array (or the phone book), we cut the array or book in half and search
-in that half. Half=two=binary.
+array (or the phonebook), we cut the array or book in half and search
+in that half.
 
 While sequential search required, on average, looking at
 <math>n/2</math> elements (where <math>n</math> is the size of the
-array, or the number of names in a phone book), binary search
+array, or the number of names in a phonebook), binary search
 requires, on average, looking at <math>\log_2(n)</math> elements. This
 means that if an array has size 1024 (which is <math>2^{10}</math>),
 then sequential search requires about 500 comparisons while binary
@@ -324,4 +339,3 @@ show two extra lines of output.
   - Learning C++: (none)
 
   - Videos: (none)
-

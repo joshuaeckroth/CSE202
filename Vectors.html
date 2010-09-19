@@ -45,14 +45,53 @@ code { color: #bc8f8f; font-weight: bold; }
     <!-- Page published by Emacs Muse begins here -->
 <h2>Motivation</h2>
 
+<p class="first">Vectors are just improved arrays. As we have seen, arrays can be a
+real hassle. They don't know how big they are, they can't grow, and we
+can't &quot;return&quot; an array from a function. C++ introduced vectors so
+that we can avoid those issues.</p>
+
+<p>Arrays are used more often, however, only because they are simple and
+the computer can work with them more efficiently. But vectors are
+usually much more convenient for the programmer. (Note that vectors
+are really just arrays with some fancy functions.)</p>
 
 
-<h2>Vector functions</h2>
+<h2>Vector usage</h2>
 
+<p class="first">Vectors are one of many &quot;containers&quot; introduced in C++. A container
+holds data. Recall that when you created an array, you had to decide
+what kind of array it was going to be (ints, doubles, etc.). The same
+is true with vectors, except that the type is specified a little
+differently (as it is with all &quot;containers&quot; in C++).</p>
 
+<p>Here is how you create a vector full of ints:</p>
 
-<h2>Strings are (just like) vectors</h2>
+<pre class="src">
+<span style="color: #228b22;">vector</span>&lt;<span style="color: #228b22;">int</span>&gt; <span style="color: #b8860b;">myvec</span>;
+</pre>
 
+<p>(Don't forget <code>#include &lt;vector&gt;</code> at the top of your files when you use
+vectors).</p>
+
+<p>If you want doubles instead:</p>
+
+<pre class="src">
+<span style="color: #228b22;">vector</span>&lt;<span style="color: #228b22;">double</span>&gt; <span style="color: #b8860b;">vals</span>;
+</pre>
+
+<p>It's not possible to have a vector full of doubles <em>and</em> ints, for
+example (&quot;heterogeneous&quot; containers are not possible).</p>
+
+<p>You can put elements in your vector with several methods. Most common
+is <code>push_back</code>:</p>
+
+<pre class="src">
+<span style="color: #228b22;">vector</span>&lt;<span style="color: #228b22;">double</span>&gt; <span style="color: #b8860b;">vals</span>;
+vals.push_back(5.3);
+vals.push_back(0.66);
+</pre>
+
+<p>More examples are shown below.</p>
 
 
 <h2>Example 1 - simple vector</h2>
@@ -90,6 +129,10 @@ Value at index 2 is 1
 
 
 <h2>Example 2 - vector with initial values</h2>
+
+<p class="first">You can create a vector of some specific size and give it an initial
+(repeated) value. This is most often used to give a vector a bunch of
+zeros.</p>
 
 <pre class="src">
 <span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
@@ -136,6 +179,8 @@ Value at index 12 is 1
 
 
 <h2>Example 3 - clearing a vector</h2>
+
+<p class="first">The <code>clear()</code> function deletes all the values in the vector.</p>
 
 <pre class="src">
 <span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
@@ -188,6 +233,10 @@ Size of vals: 0
 
 <h2>Example 4 - vector of strings</h2>
 
+<p class="first">You can put anything in vectors, even strings (which are themselves
+more-or-less vectors, too). (You can put vectors inside vectors, ad
+nauseum).</p>
+
 <pre class="src">
 <span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
 <span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;vector&gt;</span>
@@ -225,6 +274,9 @@ Name at index 3 is Church
 
 
 <h2>Example 5 - using the empty() function</h2>
+
+<p class="first">The <code>clear()</code> function deletes all the values in the vector. The <code>empty()</code>
+function tells us if a vector has no values.</p>
 
 <pre class="src">
 <span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
@@ -264,6 +316,10 @@ Names vector is empty.
 
 <h2>Example 6 - sorting</h2>
 
+<p class="first">It turns out we only need those sort functions from an earlier lecture
+if we are using arrays. Vectors can sort themselves (using the &quot;quick
+sort&quot; technique).</p>
+
 <pre class="src">
 <span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
 <span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;vector&gt;</span>
@@ -302,6 +358,9 @@ Name at index 3 is Turing
 
 
 <h2>Example 7 - random shuffling</h2>
+
+<p class="first">The reverse of sorting is shuffling; sometimes useful to randomize the
+order of our data for experiments.</p>
 
 <pre class="src">
 <span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
@@ -379,6 +438,13 @@ Riemann
 
 
 <h2>Example 8 - passing a vector to a function</h2>
+
+<p class="first">When you pass a vector to the function, the whole package is copied
+and given to the function; so if you change the vector in the
+function, the rest of the world is not affected. Also note that while
+you have to provide a function the size of the array when you use
+arrays and functions together, the vector already knows how big it is,
+so we don't need a &quot;size&quot; parameter.</p>
 
 <pre class="src">
 <span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
@@ -521,6 +587,9 @@ col 1: 12.9, col 2: 26.4, col 3: 82
 
 <h2>Example 11 - returning a vector from a function</h2>
 
+<p class="first">While arrays cannot be returned by a function, vectors can, in the
+usual way:</p>
+
 <pre class="src">
 <span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
 <span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;fstream&gt;</span>
@@ -629,6 +698,14 @@ col 1: 12.9, col 2: 26.4, col 3: 82
     <span style="color: #a020f0;">return</span> 0;
 }
 </pre>
+
+
+<h2>Strings are (just like) vectors</h2>
+
+<p class="first">Interestingly enough, strings are just vectors of <code>char</code> things (more or
+less). We can use the same vector functions on strings (mostly). For
+example, we can ask a string its size (<code>s.size()</code>), reverse it
+(<code>s.reverse()</code>), etc.</p>
 
 
 <h2>Readings (not required)</h2>
