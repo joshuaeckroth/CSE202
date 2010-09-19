@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>Assignment 6</title>
+    <meta name="generator" content="muse.el">
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=iso-8859-1">
+    <style type="text/css">
+body {
+  background: white; color: black;
+  margin-left: 3%; margin-right: 7%;
+  line-height: 1.5;
+  font-family: Nimbus Sans L, sans;
+}
+
+p { margin-top: 1% }
+p.verse { margin-left: 3% }
+
+.example { margin-left: 3% }
+
+li { margin: 0.5em 0; }
+
+h2 {
+  margin-top: 25px;
+  margin-bottom: 0px;
+}
+h3 { margin-bottom: 0px; }
+
+pre {
+  border: 1px solid #ccc;
+  margin: 5px;
+  padding: 5px;
+}
+
+td {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+code { color: #bc8f8f; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <h1>Assignment 6</h1>
+    <!-- Page published by Emacs Muse begins here -->
+<h2>Task</h2>
+
+<p class="first">Write a program that asks the user for an integer <!-- $n$--><img src="./latex/latex2png-Assignment 6__10372.png" alt="latex2png equation" class="latex-inline"> that
+represents how many values the user will provide. Then ask the user
+for each of these <!-- $n$--><img src="./latex/latex2png-Assignment 6__10372.png" alt="latex2png equation" class="latex-inline"> values. (Since you do not know ahead
+of time how many values will be provided by the user, you will need to
+use an array to store their values. The array should have size
+<!-- $n$--><img src="./latex/latex2png-Assignment 6__10372.png" alt="latex2png equation" class="latex-inline">.) After the user finishes typing <!-- $n$--><img src="./latex/latex2png-Assignment 6__10372.png" alt="latex2png equation" class="latex-inline"> values,
+your program must calculate and print the standard deviation of the
+values. The formula for the standard deviation is the following:</p>
+
+<blockquote>
+<p class="quoted"><!-- $\sigma = \sqrt{\frac{1}{n} \sum_{i=1}^n (x_i - \mu)^2}$--><img src="./latex/latex2png-Assignment 6__200612889.png" alt="latex2png equation" class="latex-inline"></p>
+</blockquote>
+
+<p>where <!-- $\sigma$--><img src="./latex/latex2png-Assignment 6__16070838.png" alt="latex2png equation" class="latex-inline"> is the standard deviation, <!-- $x_i$--><img src="./latex/latex2png-Assignment 6__2712372.png" alt="latex2png equation" class="latex-inline">
+is a particular value from the collection of <!-- $n$--><img src="./latex/latex2png-Assignment 6__10372.png" alt="latex2png equation" class="latex-inline"> values,
+and <!-- $\mu$--><img src="./latex/latex2png-Assignment 6__2755060.png" alt="latex2png equation" class="latex-inline"> is the mean (average) of the collection of
+<!-- $n$--><img src="./latex/latex2png-Assignment 6__10372.png" alt="latex2png equation" class="latex-inline"> values. Clearly, you'll need a loop to calculate the
+sum (you can call this sum &quot;innersum&quot; if you like). Also, in order to
+find the square root, use the function <code>sqrt()</code>, for example:</p>
+
+<pre class="src">
+<span style="color: #228b22;">double</span> <span style="color: #b8860b;">stddev</span> = sqrt((1.0/n) * innersum);
+</pre>
+
+<p>In order to use <code>sqrt()</code>, you also must include &quot;cmath&quot;, like so:</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;cmath&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+</pre>
+
+
+<h2>Examples</h2>
+
+<pre class="example">
+Enter n: 1
+Enter value 1: 4.3
+Standard deviation: 0.000000
+</pre>
+
+<pre class="example">
+Enter n: 2
+Enter value 1: 45.2
+Enter value 2: 2383.543
+Standard deviation: 1169.171500
+</pre>
+
+<pre class="example">
+Enter n: 3
+Enter value 1: 435.45
+Enter value 2: 435.45
+Enter value 3: 435.45
+Standard deviation: 0.000000
+</pre>
+
+<pre class="example">
+Enter n: 10
+Enter value 1: 345
+Enter value 2: 47
+Enter value 3: 234
+Enter value 4: 87
+Enter value 5: 21
+Enter value 6: -197
+Enter value 7: -273
+Enter value 8: 5
+Enter value 9: 385
+Enter value 10: 2739
+Standard deviation: 824.406702
+</pre>
+
+<h2>Academic misconduct policy</h2>
+
+<p class="first">All writing (prose) and coding for every one of the programming
+assignments, labs, and quizzes is to be done individually. DO NOT LOOK
+AT OR COPY anyone else's writing or code. DO NOT SHARE your writing or
+code with anyone else. The only code you can copy is what you see in
+the book and what I provide to you (in class or on this website). If
+you are stuck on an assignment or lab, please visit me (or another TA)
+during office hours. Suspected cases of academic misconduct will be
+filed with the Committee of Academic Misconduct.</p>
+
+
+
+
+<!-- Page published by Emacs Muse ends here -->
+  </body>
+</html>

@@ -1,0 +1,71 @@
+* Task
+
+Write a program that asks the user for an integer <math>n</math> that
+represents how many values the user will provide. Then ask the user
+for each of these <math>n</math> values. (Since you do not know ahead
+of time how many values will be provided by the user, you will need to
+use an array to store their values. The array should have size
+<math>n</math>.) After the user finishes typing <math>n</math> values,
+your program must calculate and print the standard deviation of the
+values. The formula for the standard deviation is the following:
+
+  <math>\sigma = \sqrt{\frac{1}{n} \sum_{i=1}^n (x_i - \mu)^2}</math>
+
+where <math>\sigma</math> is the standard deviation, <math>x_i</math>
+is a particular value from the collection of <math>n</math> values,
+and <math>\mu</math> is the mean (average) of the collection of
+<math>n</math> values. Clearly, you'll need a loop to calculate the
+sum (you can call this sum "innersum" if you like). Also, in order to
+find the square root, use the function =sqrt()=, for example:
+
+<src lang="c++">
+double stddev = sqrt((1.0/n) * innersum);
+</src>
+
+In order to use =sqrt()=, you also must include "cmath", like so:
+
+<src lang="c++">
+#include <iostream>
+#include <cmath>
+using namespace std;
+</src>
+
+* Examples
+
+<example>
+Enter n: 1
+Enter value 1: 4.3
+Standard deviation: 0.000000
+</example>
+
+<example>
+Enter n: 2
+Enter value 1: 45.2
+Enter value 2: 2383.543
+Standard deviation: 1169.171500
+</example>
+
+<example>
+Enter n: 3
+Enter value 1: 435.45
+Enter value 2: 435.45
+Enter value 3: 435.45
+Standard deviation: 0.000000
+</example>
+
+<example>
+Enter n: 10
+Enter value 1: 345
+Enter value 2: 47
+Enter value 3: 234
+Enter value 4: 87
+Enter value 5: 21
+Enter value 6: -197
+Enter value 7: -273
+Enter value 8: 5
+Enter value 9: 385
+Enter value 10: 2739
+Standard deviation: 824.406702
+</example>
+
+<include file="academic-misconduct.txt">

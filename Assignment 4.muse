@@ -1,4 +1,77 @@
 * Task
 
+Write a program that asks the user for a size =n= and prints a square
+of stars with width and height equal to =n=. You must use =for()= loops
+(not =while()= loops).
+
+* Examples
+
+<example>
+Enter n: 1
+*
+</example>
+
+<example>
+Enter n: 2
+**
+**
+</example>
+
+<example>
+Enter n: 4
+****
+*  *
+*  *
+****
+</example>
+
+<example>
+Enter n: 5
+*****
+*   *
+*   *
+*   *
+*****
+</example>
+
+<example>
+Enter n: 6
+******
+*    *
+*    *
+*    *
+*    *
+******
+</example>
+
+<example>
+Enter n: 7
+*******
+*     *
+*     *
+*     *
+*     *
+*     *
+*******
+</example>
+
+<example>
+Enter n: 15
+***************
+*             *
+*             *
+*             *
+*             *
+*             *
+*             *
+*             *
+*             *
+*             *
+*             *
+*             *
+*             *
+*             *
+***************
+</example>
 
 <include file="academic-misconduct.txt">
