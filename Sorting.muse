@@ -25,3 +25,17 @@ void bubbleSort(int arr[], int size)
     } 
 }
 </src>
+
+* Readings (not required)
+
+  - Textbook (Etter & Ingber): pp 254-259
+
+  - cplusplus.com: (none)
+
+  - learncpp.com: [[http://www.learncpp.com/cpp-tutorial/64-sorting-an-array-using-selection-sort/][Sorting an array using selection sort]]
+
+  - Teach yourself C++ in 21 days: (none)
+
+  - Learning C++: (none)
+
+  - Videos: [[http://xoax.net/comp/cpp/console/Lesson20.php][Sorting with bubblesort]]

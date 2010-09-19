@@ -325,3 +325,17 @@ void updateXYZ(double &w0, double &w1, double y)
     }
 }
 </src>
+
+* Readings (not required)
+
+  - Textbook (Etter & Ingber): pp 160-172
+
+  - cplusplus.com: [[http://www.cplusplus.com/doc/tutorial/functions/][Functions (I)]]
+
+  - learncpp.com: [[http://www.learncpp.com/cpp-tutorial/71-function-parameters-and-arguments/][Function parameters and arguments]]; [[http://www.learncpp.com/cpp-tutorial/72-passing-arguments-by-value/][Passing arguments by value]]
+
+  - Teach yourself C++ in 21 days: [[http://newdata.box.sk/bx/c/htm/ch05.htm][Functions]]
+
+  - Learning C++: [[http://www.isotton.com/devel/docs/lcpp/unpacked/node9.html][Functions]]
+
+  - Videos: [[http://xoax.net/comp/cpp/console/Lesson12.php][Basic functions]]

@@ -202,3 +202,17 @@ do
 * Diagram of while() loop (and for() loop)
 
 [[loops-diagram.png]]
+
+* Readings (not required)
+
+  - Textbook (Etter & Ingber): pp 97-99
+
+  - cplusplus.com: [[http://www.cplusplus.com/doc/tutorial/control/][Control structures]] (middle of page)
+
+  - learncpp.com: [[http://www.learncpp.com/cpp-tutorial/55-while-statements/][while statements]]; [[http://www.learncpp.com/cpp-tutorial/56-do-while-statements/][do-while statements]]
+
+  - Teach yourself C++ in 21 days: [[http://newdata.box.sk/bx/c/htm/ch07.htm][More program flow]] (first half)
+
+  - Learning C++: [[http://www.isotton.com/devel/docs/lcpp/unpacked/node8.html][Loops]] (first half)
+
+  - Videos: [[http://xoax.net/comp/cpp/console/Lesson8.php][while and do-while loops]]

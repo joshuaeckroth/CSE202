@@ -197,3 +197,18 @@ int main()
     return 0;
 }
 </src>
+
+* Readings (not required)
+
+  - Textbook (Etter & Ingber): pp 121-136
+
+  - cplusplus.com: [[http://www.cplusplus.com/doc/tutorial/files/][Files]]
+
+  - learncpp.com: [[http://www.learncpp.com/cpp-tutorial/136-basic-file-io/][Basic file IO]]
+
+  - Teach yourself C++ in 21 days: [[http://newdata.box.sk/bx/c/htm/ch16.htm][Streams]]
+
+  - Learning C++: (none)
+
+  - Videos: [[http://xoax.net/comp/cpp/console/Lesson47.php][Basic file IO]]
+

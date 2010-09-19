@@ -1,33 +1,4 @@
 * Task
 
-Write a program that asks the user for a phrase. Save this phrase into
-a string (use =getline(cin, s)=, where =s= is your =string= variable). Then
-check if the string is a palindrome or not. A palindrome is word or
-phrase that reads the same forwards as it does backwards. In our case,
-the phrase must have spaces and punctuation in the correct locations
-both forwards and backwards (in other words, we are not "ignoring"
-spaces and punctuation).
-
-* Examples
-
-<example>
-Enter a phrase: hello
-Not a palindrome.
-</example>
-
-<example>
-Enter a phrase: able was I ere I saw elba
-Is a palindrome.
-</example>
-
-<example>
-Enter a phrase: racecar
-Is a palindrome.
-</example>
-
-<example>
-Enter a phrase: ! !oxo! !
-Is a palindrome.
-</example>
 
 <include file="academic-misconduct.txt">

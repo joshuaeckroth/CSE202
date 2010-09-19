@@ -1,3 +1,12 @@
+* Motivation
+
+
+* Vector functions
+
+
+* Strings are (just like) vectors
+
+
 * Example 1 - simple vector
 
 <src lang="c++">
@@ -561,3 +570,17 @@ int main()
     return 0;
 }
 </src>
+
+* Readings (not required)
+
+  - Textbook (Etter & Ingber): pp 270-276
+
+  - cplusplus.com: (none)
+
+  - learncpp.com: Look at Chapter 17 at [[http://www.learncpp.com/]] (covers strings)
+
+  - Teach yourself C++ in 21 days: (none)
+
+  - Learning C++: (none)
+
+  - Videos: [[http://xoax.net/comp/cpp/console/Lesson46.php][Using STL strings]]

@@ -276,3 +276,17 @@ int main()
 } 
 </src>
 
+* Readings (not required)
+
+  - Textbook (Etter & Ingber): pp 227-243
+
+  - cplusplus.com: [[http://www.cplusplus.com/doc/tutorial/arrays/][Arrays]] (first half)
+
+  - learncpp.com: [[http://www.learncpp.com/cpp-tutorial/61-arrays-part-i/][Arrays (I)]]; [[http://www.learncpp.com/cpp-tutorial/62-arrays-part-ii/][Arrays (II)]]; [[http://www.learncpp.com/cpp-tutorial/63-arrays-and-loops/][Arrays and loops]]
+
+  - Teach yourself C++ in 21 days: [[http://newdata.box.sk/bx/c/htm/ch11.htm][Arrays]] (first half)
+
+  - Learning C++: (none)
+
+  - Videos: [[http://xoax.net/comp/cpp/console/Lesson10.php][One-dimensional arrays]]
+

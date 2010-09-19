@@ -310,3 +310,18 @@ most comparisons that a binary search would require is
 <math>\log_2(100000) \approxeq 17</math>. The extra two lines of
 output occurred because of how we wrote our code. Our code will always
 show two extra lines of output.
+
+* Readings (not required)
+
+  - Textbook (Etter & Ingber): pp 259-262
+
+  - cplusplus.com: (none)
+
+  - learncpp.com: (none)
+
+  - Teach yourself C++ in 21 days: (none)
+
+  - Learning C++: (none)
+
+  - Videos: (none)
+

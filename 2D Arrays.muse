@@ -238,3 +238,18 @@ int sumAllColumns(int arr[], int rows, int cols) // CORRECT
     // ...
 }
 </src>
+
+* Readings (not required)
+
+  - Textbook (Etter & Ingber): pp 283-292
+
+  - cplusplus.com: [[http://www.cplusplus.com/doc/tutorial/arrays/][Arrays]] (second half)
+
+  - learncpp.com: [[http://www.learncpp.com/cpp-tutorial/65-multidimensional-arrays/][Multidimensional arrays]]
+
+  - Teach yourself C++ in 21 days: [[http://newdata.box.sk/bx/c/htm/ch11.htm][Arrays]] (first half)
+
+  - Learning C++: (none)
+
+  - Videos: [[http://xoax.net/comp/cpp/console/Lesson28.php][Multidimensional arrays]]
+

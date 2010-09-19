@@ -320,3 +320,19 @@ int main()
     return 0;
 }
 </src>
+
+* Readings (not required)
+
+  - Textbook (Etter & Ingber): pp 86-96
+
+  - cplusplus.com: [[http://www.cplusplus.com/doc/tutorial/control/][Control structures]] (top and bottom of page; middle
+    of page is about loops)
+
+  - learncpp.com: [[http://www.learncpp.com/cpp-tutorial/52-if-statements/][if statements]]; [[http://www.learncpp.com/cpp-tutorial/53-switch-statements/][switch statements]]
+
+  - Teach yourself C++ in 21 days: [[http://newdata.box.sk/bx/c/htm/ch04.htm][Expressions and statements]]
+
+  - Learning C++: [[http://www.isotton.com/devel/docs/lcpp/unpacked/node7.html][Make decisions]]
+
+  - Videos: [[http://xoax.net/comp/cpp/console/Lesson7.php][if statements]]; [[http://xoax.net/comp/cpp/console/Lesson27.php][switch statements]]
+

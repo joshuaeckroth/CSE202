@@ -217,3 +217,17 @@ particular number of times (the number of times is already known, like
 * Diagram of for() loop (and while() loop)
 
 [[loops-diagram.png]]
+
+* Readings (not required)
+
+  - Textbook (Etter & Ingber): pp 99-102
+
+  - cplusplus.com: [[http://www.cplusplus.com/doc/tutorial/control/][Control structures]] (second half of page)
+
+  - learncpp.com: [[http://www.learncpp.com/cpp-tutorial/57-for-statements/][for loops]]
+
+  - Teach yourself C++ in 21 days: [[http://newdata.box.sk/bx/c/htm/ch07.htm][More program flow]] (second half)
+
+  - Learning C++: [[http://www.isotton.com/devel/docs/lcpp/unpacked/node8.html][Loops]] (second half)
+
+  - Videos: [[http://xoax.net/comp/cpp/console/Lesson16.php][for loops]]
