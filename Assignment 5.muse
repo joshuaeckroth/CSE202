@@ -54,6 +54,45 @@ You must write a separate function for <math>\phi(t)</math> and
 
 * Examples
 
+<example>
+Enter n and x: 5 2.0
+Area under the curve: 0.977966262206
+</example>
+
+<example>
+Enter n and x: 1000 2.0
+Area under the curve: 0.977249890119
+</example>
+
+<example>
+Enter n and x: 10 0.5
+Area under the curve: 0.691480803321
+</example>
+
+<example>
+Enter n and x: 1000 0.5
+Area under the curve: 0.691462464741
+</example>
+
+<example>
+Enter n and x: 1000000 0.5
+Area under the curve: 0.691462462907
+</example>
+
+<example>
+Enter n and x: 1000000 -0.285
+Area under the curve: 0.387822070006
+</example>
+
+* Make your own examples
+
+Go to this site: [[http://people.hofstra.edu/Stefan_Waner/RealWorld/integral/integral.html]]
+
+Enter this formula: =1/sqrt(2*pi) * exp(-x^2/2)=
+
+Use left-end-point: -50, right-end-point: (whatever you want), and
+click Adaptive Quadrature. Your answer should be close.
+
 <include file="academic-misconduct.txt">
 
 
