@@ -1,0 +1,63 @@
+* Task
+
+Write a complete program that asks the user how many values will be
+entered, then asks for each value and stores them in an array. These
+values will be doubles. Once all the values have been provided, your
+program shows the minimum value, the maximum value, and the mean
+(average) of the values in the array. This min, max, and mean are
+calculated in three separate functions, called "min", "max", and
+"mean", respectively. Each of these functions must have two arguments:
+the array and the size of the array. They each also return a single
+double value (the min, max, or the mean). You must use three functions
+(besides the "main" function) with the names and functionality that
+have been described.
+
+* Examples
+
+<example>
+Enter n: 1
+Enter value 1: 34.32
+Min = 34.320, max = 34.320, mean = 34.320
+</example>
+
+<example>
+Enter n: 2
+Enter value 1: 385.56
+Enter value 2: 203.54
+Min = 203.540, max = 385.560, mean = 294.550
+</example>
+
+<example>
+Enter n: 4
+Enter value 1: -550
+Enter value 2: -550
+Enter value 3: -550
+Enter value 4: -550
+Min = -550.000, max = -550.000, mean = -550.000
+</example>
+
+In this next example, since the precision is 3, the minimum (1.0e-25)
+is shown only with 3 of its 24 zeros. Also note that the maximum is
+not represented precisely (a double only has 15 digits of precision).
+
+<example>
+Enter n: 3
+Enter value 1: 1.0e-25        
+Enter value 2: 1.0e25
+Enter value 3: 4.3
+Min = 0.000, max = 10000000000000000905969664.000, mean = 3333333333333333814280192.000
+</example>
+
+<example>
+Enter n: 7
+Enter value 1: -138.435
+Enter value 2: 2385.245
+Enter value 3: -3282.52435
+Enter value 4: 82345.23
+Enter value 5: 74.346
+Enter value 6: 208.433
+Enter value 7: 32754.345
+Min = -3282.524, max = 82345.230, mean = 16335.234
+</example>
+
+<include file="academic-misconduct.txt">
