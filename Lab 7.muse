@@ -1,12 +1,12 @@
 * Task
 
-Write a complete program that asks the user for an input filename and
-an output filename. Your program will open the input file and read
-values (doubles) from the file. At the top of the file will be an
-integer representing how many doubles are in the file. The doubles in
-the input file will be scattered, with weird spacing and such (see
-example below). Your program will read these values and save them into
-the output file with one value per line (with precision 3). Thus, your
+Write a program that asks the user for an input filename and an output
+filename. Your program will open the input file and read values
+(doubles) from the file. At the top of the file will be an integer
+representing how many doubles are in the file. The doubles in the
+input file will be scattered, with weird spacing and such (see example
+below). Your program will read these values and save them into the
+output file with one value per line (with precision 3). Thus, your
 program will bascially "clean up" the input file.
 
 Example input file:

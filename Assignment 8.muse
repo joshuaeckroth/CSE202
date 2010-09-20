@@ -1,0 +1,80 @@
+* Task
+
+Write a program that reads a list of doubles from a file and computes
+the smoothed values as well as the smoothed first and second
+derivatives.
+
+These are the functions you must make:
+
+  - A function named =smooth()=, that is provided two "double" arrays
+    and a integer size =n=. The first array, =A=, is the array with the
+    data; the second array, =B=, is "blank" (but the same size as the
+    first). The second array is filled with values from the first,
+    following this formula, for =i= between =2= and =n-3= (inclusive):
+    <code>B[i] = (A[i-2] + 2*A[i-1] + 4*A[i] + 2*A[i+1] +
+    A[i+2])/10.0</code>
+
+    The formula should not be used when =i= equals =0=, =1=, =n-2=, or
+    =n-1=. For those values of =i=, <code>B[i]=A[i]</code>.
+
+    In this =smooth()= function, array =A= should not be modified.
+
+  - A function named =firstD()= (approximate first derivative), that has
+    the same kind of parameters as =smooth()= (with the same names in
+    this description), and fills array =B= with values according to this
+    formula: <code>B[i] = (A[i+1] - A[i-1])/0.2</code> for values of
+    =i= from =1= to =n-2= (inclusive). When <code>i=0</code> or
+    <code>i=n-1</code>, <code>B[0]=B[1]</code> and
+    <code>B[n-1]=B[n-2]</code> (these last two values must be computed
+    after you have computed all the others).
+
+Your program should follow these steps:
+
+  1. Ask the user for an input filename.
+
+  2. Open the input file and read the number at the top of the file
+     (an integer representing how many values are in the file); call
+     this number =n=. Create a "double" array of that size called =vals=
+     and save all the following values in into the array.
+
+  3. Create an array of the same size called =smoothed= and call the
+     function =smooth()= with =vals= and =smoothed= and =n= so that the array
+     =smoothed= will have the "smoothed" version of the numbers in =vals=.
+
+  4. Create an array of the same size called =vals1D= and call the
+     function =firstD()= with =smoothed= and =vals1D= and =n= so that the
+     array =vals1D= will have the "first derivative" of the smoothed
+     values.
+
+  5. Create an array of the same size called =smoothed1D= and call the
+     function =smooth()= with =vals1D= and =smoothed1D= and =n= so that the
+     array =smoothed1D= will have the "smoothed first derivative" of the
+     smoothed values.
+
+  6. Create an array of the same size called =vals2D= and call the
+     function =firstD()= with =smoothed1D= and =vals2D= and =n= so that
+     the array =vals2D= will have the "first derivative of the smoothed first
+     derivative" of the smoothed values.
+
+  7. Create an array of the same size called =smoothed2D= and call the
+     function =smooth()= with =vals2D= and =smoothed2D= and =n= so that the
+     array =smoothed2D= will have the "smoothed first derivative of the
+     smoothed first derivative" of the smoothed values.
+
+  8. Open an output file "outdata.txt" that prints four columns of
+     numbers: the first column is the array =vals=, the second column is
+     the array =smoothed=, the third column is the array =smoothed1D=, and
+     the fourth column is the array =smoothed2D=. Separate the columns
+     with a tab, and print the numbers with precision three.
+
+  9. Close the file "outdata.txt".
+
+  10. On Linux in the lab, visualize the data using Matlab. Type
+     =matlab &= to start Matlab. Within Matlab, type =load outdata.txt=
+     and then type =plot(outdata)= . You will need to do this step to
+     verify your results.
+
+* Examples
+
+
+<include file="academic-misconduct.txt">

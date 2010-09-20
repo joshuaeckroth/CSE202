@@ -9,7 +9,7 @@ where <math>\log</math> is the natural logarithm (sometimes written
 
 Write a program that asks the user for integers <math>m</math> and
 <math>n</math> and computes and writes <math>f(i/5,j/5)</math> to the
-file "outfile.txt" for <math>0 \leq i < m</math> and <math>0 \leq j <
+file "outdata.txt" for <math>0 \leq i < m</math> and <math>0 \leq j <
 n</math>. The output (in the file) should be formatted as an <math>m
 \times n</math> matrix where <math>i</math> is the matrix row number
 and <math>j</math> is the matrix column number.
@@ -44,9 +44,9 @@ In more detail:
 
   6. Close the file "outdata.txt".
 
-  7. *(Just for fun)* On Linux in the lab, Visualize a surface
+  7. *(Just for fun)* On Linux in the lab, visualize a surface
      representing the output of your program using Matlab. Type
-     =matlab &= to start matlab. Within Matlab, type =load outdata.txt=
+     =matlab &= to start Matlab. Within Matlab, type =load outdata.txt=
      and then type =surf(outdata)= . Also try clicking, in the "Figure"
      window, the menu "Tools" and the option "Rotate3D", to rotate the
      figure. Note that for Matlab to correctly read and process the
