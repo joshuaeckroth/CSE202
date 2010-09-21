@@ -65,7 +65,7 @@ Your program should follow these steps:
      numbers: the first column is the array =vals=, the second column is
      the array =smoothed=, the third column is the array =smoothed1D=, and
      the fourth column is the array =smoothed2D=. Separate the columns
-     with a tab, and print the numbers with precision three.
+     with a tab, and print the numbers with precision ten.
 
   9. Close the file "outdata.txt".
 
@@ -76,5 +76,67 @@ Your program should follow these steps:
 
 * Examples
 
+** Example 1
+
+Input file: [[a-8-input1.txt]], output: [[a-8-outdata1.txt]]
+
+Graph of input (note: to graph the input file, delete the first line
+in the file since that line is an integer indicating how many values
+are in the file; Matlab does not need that).
+
+[[a-8-input1.png]]
+
+Graph of output:
+
+[[a-8-outdata1.png]]
+
+
+** Example 2
+
+Input file: [[a-8-input2.txt]], output: [[a-8-outdata2.txt]]
+
+Graph of input:
+
+[[a-8-input2.png]]
+
+Graph of output:
+
+[[a-8-outdata2.png]]
+
+** Example 3
+
+Input file: [[a-8-input3.txt]], output: [[a-8-outdata3.txt]]
+
+Graph of input:
+
+[[a-8-input3.png]]
+
+Graph of output:
+
+[[a-8-outdata3.png]]
+
+** Example 4
+
+Input file: [[a-8-input4.txt]], output: [[a-8-outdata4.txt]]
+
+Graph of input:
+
+[[a-8-input4.png]]
+
+Graph of output:
+
+[[a-8-outdata4.png]]
+
+** Example 5
+
+Input file: [[a-8-input5.txt]], output: [[a-8-outdata5.txt]]
+
+Graph of input:
+
+[[a-8-input5.png]]
+
+Graph of output:
+
+[[a-8-outdata5.png]]
 
 <include file="academic-misconduct.txt">
