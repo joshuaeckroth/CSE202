@@ -70,6 +70,9 @@ labs/assignments/quizzes.
 I usually provide extra credit in some form. I'm sure it will happen
 again, but I'm not sure yet in what form.
 
+You are allowed to drop one lab and one assignment and one quiz
+(Carmen will automatically drop the lowest grade from each category).
+
 * Due dates, late work
 
 Every week is the same:

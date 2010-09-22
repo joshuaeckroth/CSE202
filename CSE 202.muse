@@ -32,6 +32,8 @@
 
 * Miscellaneous
 
+  - [[Compilers and editors]]
+
   - [[Pedagogical foundations]]
 
   - [[Adventure and hackers]]
