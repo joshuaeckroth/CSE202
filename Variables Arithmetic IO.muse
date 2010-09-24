@@ -16,7 +16,7 @@ The reason the letters <math>a</math>, <math>b</math>, and
 <math>c</math> are used in the formula is because they *stand in* for
 whatever values some particular right triangle has. Our program would
 ask for these values (specifically, the values for <math>a</math> and
-<math>b</math> from the user (or read them from a file, or
+<math>b</math>) from the user (or read them from a file, or
 whatever). Our program must also save these values in variables.
 
 However, unlike mathematics, C++ variables are *typed*.  This means that
@@ -51,7 +51,7 @@ values or arbitrarily small values (i.e. teeny-tiny fractions). Most
 programs do not need extremely large or small values, so very rarely
 is the fact that computers are finite an issue. However, C++ types
 also have their limits, and some of these limits need to be considered
-when writing any program.
+when writing certain kinds of programs.
 
 For any general category of types such as integers, decimal numbers,
 etc. C++ has multiple specific types that you can choose from to use
@@ -97,21 +97,21 @@ this:
 <src lang="c++">
 double x;
 cin >> x;
-if(x == 2.5) // NOT GOOD
+if(x == 2.6) // NOT GOOD
 {
     // blah...
 }
 </src>
 
-The value 2.5 cannot be represented precisely, so even if the user
-inputs 2.5, it may not be stored as 2.5. Thus we cannot test if the
-value is "exactly" 2.5. We must check, instead, if the value is
-"close" to 2.5, using the following approach:
+The value 2.6 cannot be represented precisely, so even if the user
+inputs 2.6, it may not be stored as 2.6. Thus we cannot test if the
+value is "exactly" 2.6. We must check, instead, if the value is
+"close" to 2.6, using the following approach:
 
 <src lang="c++">
 double x;
 cin >> x;
-if(x < 2.50001 && x > 2.49999) // YES, GOOD
+if(x < 2.60001 && x > 2.59999) // YES, GOOD
 {
     // blah...
 }

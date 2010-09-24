@@ -32,6 +32,11 @@ pre {
   padding: 5px;
 }
 
+td {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
 code { color: #bc8f8f; font-weight: bold; }
     </style>
   </head>
@@ -56,7 +61,7 @@ useful (though perhaps not as its own program).</p>
 <!-- $c$--><img src="./latex/latex2png-Variables Arithmetic IO__10196.png" alt="latex2png equation" class="latex-inline"> are used in the formula is because they <em>stand in</em> for
 whatever values some particular right triangle has. Our program would
 ask for these values (specifically, the values for <!-- $a$--><img src="./latex/latex2png-Variables Arithmetic IO__10164.png" alt="latex2png equation" class="latex-inline"> and
-<!-- $b$--><img src="./latex/latex2png-Variables Arithmetic IO__10180.png" alt="latex2png equation" class="latex-inline"> from the user (or read them from a file, or
+<!-- $b$--><img src="./latex/latex2png-Variables Arithmetic IO__10180.png" alt="latex2png equation" class="latex-inline">) from the user (or read them from a file, or
 whatever). Our program must also save these values in variables.</p>
 
 <p>However, unlike mathematics, C++ variables are <em>typed</em>.  This means that
@@ -93,7 +98,7 @@ values or arbitrarily small values (i.e. teeny-tiny fractions). Most
 programs do not need extremely large or small values, so very rarely
 is the fact that computers are finite an issue. However, C++ types
 also have their limits, and some of these limits need to be considered
-when writing any program.</p>
+when writing certain kinds of programs.</p>
 
 <p>For any general category of types such as integers, decimal numbers,
 etc. C++ has multiple specific types that you can choose from to use
@@ -145,21 +150,21 @@ this:</p>
 <pre class="src">
 <span style="color: #228b22;">double</span> <span style="color: #b8860b;">x</span>;
 cin &gt;&gt; x;
-<span style="color: #a020f0;">if</span>(x == 2.5) <span style="color: #b22222;">// </span><span style="color: #b22222;">NOT GOOD
+<span style="color: #a020f0;">if</span>(x == 2.6) <span style="color: #b22222;">// </span><span style="color: #b22222;">NOT GOOD
 </span>{
     <span style="color: #b22222;">// </span><span style="color: #b22222;">blah...
 </span>}
 </pre>
 
-<p>The value 2.5 cannot be represented precisely, so even if the user
-inputs 2.5, it may not be stored as 2.5. Thus we cannot test if the
-value is &quot;exactly&quot; 2.5. We must check, instead, if the value is
-&quot;close&quot; to 2.5, using the following approach:</p>
+<p>The value 2.6 cannot be represented precisely, so even if the user
+inputs 2.6, it may not be stored as 2.6. Thus we cannot test if the
+value is &quot;exactly&quot; 2.6. We must check, instead, if the value is
+&quot;close&quot; to 2.6, using the following approach:</p>
 
 <pre class="src">
 <span style="color: #228b22;">double</span> <span style="color: #b8860b;">x</span>;
 cin &gt;&gt; x;
-<span style="color: #a020f0;">if</span>(x &lt; 2.50001 &amp;&amp; x &gt; 2.49999) <span style="color: #b22222;">// </span><span style="color: #b22222;">YES, GOOD
+<span style="color: #a020f0;">if</span>(x &lt; 2.60001 &amp;&amp; x &gt; 2.59999) <span style="color: #b22222;">// </span><span style="color: #b22222;">YES, GOOD
 </span>{
     <span style="color: #b22222;">// </span><span style="color: #b22222;">blah...
 </span>}
