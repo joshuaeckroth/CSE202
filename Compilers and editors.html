@@ -32,6 +32,11 @@ pre {
   padding: 5px;
 }
 
+td {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
 code { color: #bc8f8f; font-weight: bold; }
     </style>
   </head>
@@ -59,6 +64,57 @@ code { color: #bc8f8f; font-weight: bold; }
 <li>wxDev-C++ (<a href="http://wxdsgn.sourceforge.net/">webpage</a>; <a href="http://sourceforge.net/projects/wxdsgn/files/wxDev-C%2B%2B/Version%207/wxdevcpp_webbased_setup.exe/download">download</a>)</li>
 
 <li>CodeLite (<a href="http://www.codelite.org/">webpage</a>; <a href="http://sourceforge.net/projects/codelite/files/Releases/codelite-2.6.0/codelite-2.6.0.4189-mingw4.4.1.exe/download">download</a>)</li>
+</ul>
+
+
+<h2>Software for Mac OS X</h2>
+
+<ul>
+<li>Putty-replacement:
+
+<ul>
+<li>Open your Applications folder, then find the Utilities folder
+and open that. In there you will see the Terminal app; open
+that.</li>
+
+<li>You will see a prompt like <code>imac:~ Josh$</code> It is here
+where you can type the following command to connect to the
+server like we do with Putty:</li>
+</ul></li>
+</ul>
+
+<blockquote>
+<p class="quoted"></p>
+</blockquote> 
+
+<pre class="example">
+ssh eckroth@stdlogin.cse.ohio-state.edu
+</pre>
+
+<ul>
+<li>Press enter (of course change &quot;eckroth&quot; to your Putty
+username). You will be asked if you trust the server; type
+&quot;yes&quot;. Then type your password. If all that works, you will see
+exactly what you see in Putty, and you can do all the same
+things you would have done in Putty.</li>
+</ul>
+
+<ul>
+<li>To work on assignments on your Mac without connecting to the
+server, you can use <a href="http://developer.apple.com/technologies/xcode.html">Xcode</a> or <a href="http://qt.nokia.com/downloads/sdk-mac-os-cpp">Qt Creator</a> (I've used Xcode, and have
+extensively used Qt Creator; ask me questions if you'd like).
+
+<p>Both of those programs come with the compiler, too. If you want to
+use a different editor, you still should download and install
+Xcode, but then you can get <a href="http://aquamacs.org/">Aquamacs</a> (Emacs for Mac), <a href="http://code.google.com/p/macvim/">macvim</a> (Vim
+for Mac), or <a href="http://macromates.com/">textmate</a> (which has a very loyal following; try the
+&quot;Education&quot; purchase option, it may be free).</p>
+
+<p>In any event, if you download and install Xcode, then you can type
+<code>g++ main.cpp</code> just like we do in Putty, but without
+ever connecting to the server. So that would work when you are
+&quot;offline&quot; and when your server account is deleted (after the class
+ends).</p></li>
 </ul>
 
 
