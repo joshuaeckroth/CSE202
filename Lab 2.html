@@ -96,6 +96,51 @@ Enter number of seconds: -12345678
 </pre>
 
 
+<h2>My solution</h2>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">days</span>, <span style="color: #b8860b;">hours</span>, <span style="color: #b8860b;">minutes</span>, <span style="color: #b8860b;">seconds</span>;
+    <span style="color: #228b22;">bool</span> <span style="color: #b8860b;">ago</span>;
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter number of seconds: "</span>;
+    cin &gt;&gt; seconds;
+
+    <span style="color: #a020f0;">if</span>(seconds &lt; 0)
+    {
+        ago = <span style="color: #5f9ea0;">true</span>;
+        seconds = -seconds;
+    }
+    <span style="color: #a020f0;">else</span>
+    {
+        ago = <span style="color: #5f9ea0;">false</span>;
+    }
+
+    days = seconds / (60*60*24);
+    seconds -= days * 60 * 60 * 24;
+
+    hours = seconds / (60 * 60);
+    seconds -= hours * 60 * 60;
+
+    minutes = seconds / 60;
+    seconds -= minutes * 60;
+
+    cout &lt;&lt; days &lt;&lt; <span style="color: #bc8f8f;">" days, "</span> &lt;&lt; hours &lt;&lt; <span style="color: #bc8f8f;">" hours, "</span>
+            &lt;&lt; minutes &lt;&lt; <span style="color: #bc8f8f;">" minutes, "</span> &lt;&lt; seconds &lt;&lt; <span style="color: #bc8f8f;">" seconds"</span>;
+    <span style="color: #a020f0;">if</span>(ago)
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">" ago."</span> &lt;&lt; endl;
+    }
+    <span style="color: #a020f0;">else</span>
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">" from now."</span> &lt;&lt; endl;
+    }
+
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
 
 <h2>Academic misconduct policy</h2>
 
