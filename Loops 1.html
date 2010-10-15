@@ -258,6 +258,34 @@ with <code>do-while</code>:</p>
 </pre>
 
 
+<h2>Newton example</h2>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;cmath&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+        <span style="color: #228b22;">double</span> <span style="color: #b8860b;">x1</span>, <span style="color: #b8860b;">x2</span>;
+
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">initial guess
+</span>        x1 = 2.0;
+        x2 = x1 - (-2*sin(cos(sqrt(x1))))
+                   / ((cos(cos(sqrt(x1)))*sin(sqrt(x1)))
+                  / sqrt(x1));
+        <span style="color: #a020f0;">while</span>(fabs(x2-x1) &gt; 0.00001)
+        {
+                x1 = x2;
+                x2 = x1 - (-2*sin(cos(sqrt(x1))))
+                           / ((cos(cos(sqrt(x1)))*sin(sqrt(x1)))
+                          / sqrt(x1));
+        }
+        cout &lt;&lt; x2 &lt;&lt; endl;
+}
+</pre>
+
+
 <h2>Diagram of while() loop (and for() loop)</h2>
 
 <p class="image"><img src="loops-diagram.png" alt=""></p>

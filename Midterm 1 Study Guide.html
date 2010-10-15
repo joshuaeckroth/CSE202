@@ -80,6 +80,60 @@ posted Saturday on the Lab 3 page</li>
 <li>know how to solve every quiz question</li>
 </ul>
 
+<h2>Examples</h2>
+
+<p class="first">What values of <code>z</code> cause the message <code>Frankfurt</code>, and only <code>Frankfurt</code> (no
+other message), to be printed?</p>
+
+<pre class="src">
+<span style="color: #a020f0;">if</span>(z != 0 &amp;&amp; z != 3)
+{
+    <span style="color: #a020f0;">if</span>(z &lt; 5)
+    {
+        <span style="color: #a020f0;">if</span>(z &gt; 1 || z &lt; 3)
+        {
+            cout &lt;&lt; <span style="color: #bc8f8f;">"Frankfurt"</span>;
+        }
+        <span style="color: #a020f0;">else</span> <span style="color: #a020f0;">if</span>(z == 2)
+        {
+            cout &lt;&lt; <span style="color: #bc8f8f;">"Banana slug"</span>;
+        }
+        <span style="color: #a020f0;">if</span>(z == 2)
+        {
+            cout &lt;&lt; <span style="color: #bc8f8f;">"Kangaroo"</span>;
+        }
+    }
+    <span style="color: #a020f0;">else</span>
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">"Frankfurt"</span>;
+    }
+}
+</pre>
+
+<p>What does the following code print? And, how many times is the loop
+conditional checked? And, what are the values of the variables <code>w</code> and <code>z</code>
+at the end of the loop?</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">w</span> = 4, <span style="color: #b8860b;">z</span> = 3;
+    <span style="color: #a020f0;">while</span>(w &gt; z)
+    {
+        cout &lt;&lt; z &lt;&lt; <span style="color: #bc8f8f;">" "</span>;
+        z = (w + 6) % 3;
+        w = z / 3;
+        cout &lt;&lt; z &lt;&lt; <span style="color: #bc8f8f;">" "</span>;
+        z -= w;
+    }
+}
+</pre>
+
+
+
 <!-- Page published by Emacs Muse ends here -->
   </body>
 </html>
