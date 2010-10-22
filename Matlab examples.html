@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>Matlab examples</title>
+    <meta name="generator" content="muse.el">
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=iso-8859-1">
+    <style type="text/css">
+body {
+  background: white; color: black;
+  margin-left: 3%; margin-right: 7%;
+  line-height: 1.5;
+  font-family: Nimbus Sans L, sans;
+}
+
+p { margin-top: 1% }
+p.verse { margin-left: 3% }
+
+.example { margin-left: 3% }
+
+li { margin: 0.5em 0; }
+
+h2 {
+  margin-top: 25px;
+  margin-bottom: 0px;
+}
+h3 { margin-bottom: 0px; }
+
+pre {
+  border: 1px solid #ccc;
+  margin: 5px;
+  padding: 5px;
+}
+
+td {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+code { color: #bc8f8f; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <h1>Matlab examples</h1>
+    <!-- Page published by Emacs Muse begins here -->
+<h2>While loops</h2>
+
+<h3>Newton's method for finding roots</h3>
+
+<p class="first">In the file <code>newton.m</code>:</p>
+
+<pre class="src">
+<span style="color: #a020f0;">function</span> <span style="color: #b8860b;">[y]</span> = <span style="color: #0000ff;">newton</span>(<span style="color: #b8860b;">x</span>)
+y = <span style="color: #228b22;">-</span>2 <span style="color: #228b22;">*</span> sin(cos(sqrt(x)));
+</pre>
+
+<p>In the file <code>dnewton.m</code>:</p>
+
+<pre class="src">
+<span style="color: #a020f0;">function</span> <span style="color: #b8860b;">[d]</span> = <span style="color: #0000ff;">dnewton</span>(<span style="color: #b8860b;">x</span>, <span style="color: #b8860b;">eps</span>)
+eps2 = <span style="color: #5f9ea0;">eps</span> <span style="color: #228b22;">/</span> 1000;
+xs = (x <span style="color: #228b22;">-</span> <span style="color: #5f9ea0;">eps</span>)<span style="color: #228b22;">:</span>eps2<span style="color: #228b22;">:</span>(x <span style="color: #228b22;">+</span> <span style="color: #5f9ea0;">eps</span>);
+y = newton(xs);
+dx = diff(xs);
+dy = diff(y);
+z = dx<span style="color: #228b22;">./</span>dy;
+d = z(500<span style="color: #228b22;">:</span>500);
+</pre>
+
+<p>Now, in Matlab:</p>
+
+<pre class="src">
+<span style="color: #5f9ea0;">eps</span> = 0.0000001;
+xold = 2;
+xnew = xold <span style="color: #228b22;">-</span> newton(xold)<span style="color: #228b22;">/</span>dnewton(xold, <span style="color: #5f9ea0;">eps</span>);
+<span style="color: #a020f0;">while</span> abs(xold <span style="color: #228b22;">-</span> xnew) <span style="color: #228b22;">&gt;</span> <span style="color: #5f9ea0;">eps</span>
+    xold = xnew;
+    xnew = xold <span style="color: #228b22;">-</span> newton(xold)<span style="color: #228b22;">/</span>dnewton(xold, <span style="color: #5f9ea0;">eps</span>);
+<span style="color: #a020f0;">end</span>
+</pre>
+
+
+
+<h2>For loops</h2>
+
+<h3>Bottles of beer</h3>
+
+<pre class="src">
+<span style="color: #a020f0;">for</span> <span style="color: #b8860b;">n</span> = <span style="color: #5f9ea0;">99:-1:3</span>
+    fprintf(<span style="color: #bc8f8f;">'%d bottles of beer... pass it around, %d bottles of beer...\n'</span>, n, n<span style="color: #228b22;">-</span>1);
+<span style="color: #a020f0;">end</span>
+</pre>
+
+
+<h3>Double sum</h3>
+
+<pre class="src">
+m = 100;
+n = 100;
+sum = 0;
+<span style="color: #a020f0;">for</span> <span style="color: #b8860b;">i</span> = <span style="color: #5f9ea0;">1:m</span>
+    <span style="color: #a020f0;">for</span> <span style="color: #b8860b;">j</span> = <span style="color: #5f9ea0;">1:n</span>
+        sum = sum <span style="color: #228b22;">+</span> (<span style="color: #5f9ea0;">i</span><span style="color: #228b22;">+</span><span style="color: #5f9ea0;">j</span>)<span style="color: #228b22;">^</span>2;
+    <span style="color: #a020f0;">end</span>
+<span style="color: #a020f0;">end</span>
+disp(sum)
+</pre>
+
+
+<h3>Stars</h3>
+
+<pre class="src">
+width = 30;
+<span style="color: #a020f0;">for</span> <span style="color: #b8860b;">i</span> = <span style="color: #5f9ea0;">1:2:width</span>
+    <span style="color: #a020f0;">for</span> <span style="color: #b8860b;">j</span> = <span style="color: #5f9ea0;">0:((width - i) / 2 - 1)</span>
+        fprintf(<span style="color: #bc8f8f;">' '</span>);
+    <span style="color: #a020f0;">end</span>
+    <span style="color: #a020f0;">for</span> <span style="color: #b8860b;">j</span> = <span style="color: #5f9ea0;">0:(i-1)</span>
+        fprintf(<span style="color: #bc8f8f;">'*'</span>);
+    <span style="color: #a020f0;">end</span>
+    <span style="color: #a020f0;">if</span> <span style="color: #5f9ea0;">i</span> <span style="color: #228b22;">~=</span> width
+        fprintf(<span style="color: #bc8f8f;">'\n'</span>);
+    <span style="color: #a020f0;">end</span>
+<span style="color: #a020f0;">end</span>
+</pre>
+
+
+
+
+<!-- Page published by Emacs Muse ends here -->
+  </body>
+</html>
