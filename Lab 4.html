@@ -78,6 +78,34 @@ Enter a positive integer: 79
 Prime.
 </pre>
 
+
+<h2>My solution</h2>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+       <span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span>, <span style="color: #b8860b;">x</span>;
+       cout &lt;&lt; <span style="color: #bc8f8f;">"Enter a postive integer: "</span>;
+       cin &gt;&gt; x;
+       <span style="color: #a020f0;">for</span>(i = 2; i &lt; x; i++)
+       {
+               <span style="color: #a020f0;">if</span>(x%i == 0)
+               {
+                       cout &lt;&lt; <span style="color: #bc8f8f;">"Not a prime."</span> &lt;&lt; endl;
+                       <span style="color: #a020f0;">break</span>;
+               }
+       }
+       <span style="color: #a020f0;">if</span>(i == x)
+       {
+               cout &lt;&lt; <span style="color: #bc8f8f;">"Prime."</span> &lt;&lt; endl;
+       }
+       <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+
 <h2>Academic misconduct policy</h2>
 
 <p class="first">All writing (prose) and coding for every one of the programming
