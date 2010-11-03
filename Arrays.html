@@ -324,6 +324,116 @@ two arrays), in a function:</p>
 </pre>
 
 
+<h2>Frequency of English letters example</h2>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;cctype&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">maxCount</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">counts</span>[])
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">mc</span> = 0;
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; 26; i++)
+    {
+        <span style="color: #a020f0;">if</span>(mc &lt; counts[i])
+        {
+            mc = counts[i];
+        }
+    }
+    <span style="color: #a020f0;">return</span> mc;
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">sum</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">counts</span>[])
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">s</span> = 0;
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; 26; i++)
+    {
+        s += counts[i];
+    }
+    <span style="color: #a020f0;">return</span> s;
+}
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">printHistogram</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">counts</span>[])
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">mc</span> = maxCount(counts);
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">s</span> = sum(counts);
+    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">factor</span> = 30.0 / mc;
+
+    cout.precision(2);
+    cout.setf(<span style="color: #5f9ea0;">ios</span>::fixed, <span style="color: #5f9ea0;">ios</span>::floatfield);
+
+    <span style="color: #228b22;">char</span> <span style="color: #b8860b;">c</span>;
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; 26; i++)
+    {
+        c = 97 + i;
+        cout &lt;&lt; c &lt;&lt; <span style="color: #bc8f8f;">": "</span>;
+        <span style="color: #228b22;">int</span> <span style="color: #b8860b;">times</span> = (<span style="color: #228b22;">int</span>)(factor * counts[i]);
+        <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; times; j++)
+        {
+            cout &lt;&lt; <span style="color: #bc8f8f;">"*"</span>;
+        }
+        cout &lt;&lt; <span style="color: #bc8f8f;">" "</span> &lt;&lt; 100 * (<span style="color: #228b22;">double</span>)counts[i] / (<span style="color: #228b22;">double</span>)s &lt;&lt; <span style="color: #bc8f8f;">"%"</span> &lt;&lt; endl;
+    }
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">counts</span>[26] = {0};
+
+    <span style="color: #228b22;">char</span> <span style="color: #b8860b;">c</span>;
+    <span style="color: #a020f0;">while</span>(cin &gt;&gt; c)
+    {
+        <span style="color: #a020f0;">if</span>(isalpha(c))
+        {
+            c = tolower(c);
+            counts[c - 97]++;
+        }
+    }
+
+    printHistogram(counts);
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+
+<p>After compiling, use the program like so:</p>
+
+<pre class="example">
+a.out &lt; text1.txt
+</pre>
+
+<p>Example output (The Adventures of Sherlock Holmes):</p>
+
+<pre class="example">
+a: ******************* 8.12%
+b: *** 1.49%
+c: ***** 2.45%
+d: ********** 4.29%
+e: ***************************** 12.30%
+f: ***** 2.08%
+g: **** 1.83%
+h: **************** 6.65%
+i: ***************** 6.98%
+j:  0.11%
+k: ** 0.82%
+l: ********* 3.96%
+m: ****** 2.72%
+n: **************** 6.65%
+o: ******************* 7.81%
+p: *** 1.60%
+q:  0.10%
+r: ************* 5.71%
+s: *************** 6.28%
+t: ********************** 9.04%
+u: ******* 3.05%
+v: ** 1.03%
+w: ****** 2.58%
+x:  0.13%
+y: ***** 2.19%
+z:  0.03%
+</pre>
+
+
 <h2>Readings (not required)</h2>
 
 <ul>
