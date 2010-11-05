@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>Structures examples</title>
+    <meta name="generator" content="muse.el">
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=iso-8859-1">
+    <style type="text/css">
+body {
+  background: white; color: black;
+  margin-left: 3%; margin-right: 7%;
+  line-height: 1.5;
+  font-family: Nimbus Sans L, sans;
+}
+
+p { margin-top: 1% }
+p.verse { margin-left: 3% }
+
+.example { margin-left: 3% }
+
+li { margin: 0.5em 0; }
+
+h2 {
+  margin-top: 25px;
+  margin-bottom: 0px;
+}
+h3 { margin-bottom: 0px; }
+
+pre {
+  border: 1px solid #ccc;
+  margin: 5px;
+  padding: 5px;
+}
+
+td {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+code { color: #bc8f8f; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <h1>Structures examples</h1>
+    <!-- Page published by Emacs Muse begins here -->
+<h2>A struct and functions for 3D vectors</h2>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;cmath&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #a020f0;">struct</span> <span style="color: #228b22;">vec</span>
+{
+    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">x</span>;
+    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">y</span>;
+    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">z</span>;
+};
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">printVec</span>(<span style="color: #228b22;">vec</span> <span style="color: #b8860b;">v</span>)
+{
+    cout &lt;&lt; <span style="color: #bc8f8f;">"&lt;"</span> &lt;&lt; v.x &lt;&lt; <span style="color: #bc8f8f;">", "</span> &lt;&lt; v.y &lt;&lt; <span style="color: #bc8f8f;">", "</span> &lt;&lt; v.z &lt;&lt; <span style="color: #bc8f8f;">"&gt;"</span> &lt;&lt; endl;
+}
+
+<span style="color: #228b22;">vec</span> <span style="color: #0000ff;">cross</span>(<span style="color: #228b22;">vec</span> <span style="color: #b8860b;">a</span>, <span style="color: #228b22;">vec</span> <span style="color: #b8860b;">b</span>)
+{
+    <span style="color: #228b22;">vec</span> <span style="color: #b8860b;">c</span>;
+    c.x = a.y*b.z - a.z*b.y;
+    c.y = -(a.x*b.z - a.z*b.x);
+    c.z = a.x*b.y - a.y*b.x;
+    <span style="color: #a020f0;">return</span> c;
+}
+
+<span style="color: #228b22;">double</span> <span style="color: #0000ff;">dot</span>(<span style="color: #228b22;">vec</span> <span style="color: #b8860b;">a</span>, <span style="color: #228b22;">vec</span> <span style="color: #b8860b;">b</span>)
+{
+    <span style="color: #a020f0;">return</span> a.x*b.x + a.y*b.y + a.z*b.z;
+}
+
+<span style="color: #228b22;">vec</span> <span style="color: #0000ff;">add</span>(<span style="color: #228b22;">vec</span> <span style="color: #b8860b;">a</span>, <span style="color: #228b22;">vec</span> <span style="color: #b8860b;">b</span>)
+{
+    <span style="color: #228b22;">vec</span> <span style="color: #b8860b;">c</span>;
+    c.x = a.x + b.x;
+    c.y = a.y + b.y;
+    c.z = a.z + b.z;
+    <span style="color: #a020f0;">return</span> c;
+}
+
+<span style="color: #228b22;">vec</span> <span style="color: #0000ff;">sub</span>(<span style="color: #228b22;">vec</span> <span style="color: #b8860b;">a</span>, <span style="color: #228b22;">vec</span> <span style="color: #b8860b;">b</span>)
+{
+    <span style="color: #228b22;">vec</span> <span style="color: #b8860b;">c</span>;
+    c.x = a.x - b.x;
+    c.y = a.y - b.y;
+    c.z = a.z - b.z;
+    <span style="color: #a020f0;">return</span> c;
+}
+
+<span style="color: #228b22;">double</span> <span style="color: #0000ff;">length</span>(<span style="color: #228b22;">vec</span> <span style="color: #b8860b;">v</span>)
+{
+    <span style="color: #a020f0;">return</span> sqrt(v.x*v.x + v.y*v.y + v.z*v.z);
+}
+
+<span style="color: #228b22;">vec</span> <span style="color: #0000ff;">normalize</span>(<span style="color: #228b22;">vec</span> <span style="color: #b8860b;">v</span>)
+{
+    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">len</span> = length(v);
+    v.x /= len;
+    v.y /= len;
+    v.z /= len;
+    <span style="color: #a020f0;">return</span> v;
+}
+
+<span style="color: #228b22;">double</span> <span style="color: #0000ff;">angleBetween</span>(<span style="color: #228b22;">vec</span> <span style="color: #b8860b;">a</span>, <span style="color: #228b22;">vec</span> <span style="color: #b8860b;">b</span>)
+{
+    <span style="color: #a020f0;">return</span> acos(dot(a, b) / (length(a) * length(b)));
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    cout.precision(3);
+    cout.setf(<span style="color: #5f9ea0;">ios</span>::fixed, <span style="color: #5f9ea0;">ios</span>::floatfield);
+
+    <span style="color: #228b22;">vec</span> <span style="color: #b8860b;">a</span>, <span style="color: #b8860b;">b</span>;
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter vector A's x y z values: "</span>;
+    cin &gt;&gt; a.x &gt;&gt; a.y &gt;&gt; a.z;
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter vector B's x y z values: "</span>;
+    cin &gt;&gt; b.x &gt;&gt; b.y &gt;&gt; b.z;
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Dot product of A and B: "</span> &lt;&lt; dot(a, b) &lt;&lt; endl;
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Cross product of A and B: "</span>;
+    printVec(cross(a, b));
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"A+B: "</span>;
+    printVec(add(a, b));
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"A-B: "</span>;
+    printVec(sub(a, b));
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Length of A: "</span> &lt;&lt; length(a) &lt;&lt; endl;
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Length of B: "</span> &lt;&lt; length(b) &lt;&lt; endl;
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Normalize A: "</span>;
+    printVec(normalize(a));
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Normalize B: "</span>;
+    printVec(normalize(b));
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Angle between A and B (radians): "</span> &lt;&lt; angleBetween(a, b) &lt;&lt; endl;
+
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+
+
+
+<!-- Page published by Emacs Muse ends here -->
+  </body>
+</html>
