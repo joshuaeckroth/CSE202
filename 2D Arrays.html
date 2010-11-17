@@ -289,6 +289,176 @@ just like before:</p>
 </pre>
 
 
+<h2>Matrix multiplication example</h2>
+
+<p class="first">This example uses &quot;fake&quot; 2D arrays; really 1D arrays are used, but
+they are treated like 2D arrays.</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">pos</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">row</span>, <span style="color: #228b22;">int</span> <span style="color: #b8860b;">col</span>, <span style="color: #228b22;">int</span> <span style="color: #b8860b;">cols</span>)
+{
+    <span style="color: #a020f0;">return</span> (row * cols + col);
+}
+
+<span style="color: #a020f0;">template</span>&lt;<span style="color: #a020f0;">typename</span> <span style="color: #228b22;">T</span>&gt;
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">matrixmult</span>(<span style="color: #228b22;">T</span> <span style="color: #b8860b;">A</span>[], <span style="color: #228b22;">T</span> <span style="color: #b8860b;">B</span>[], <span style="color: #228b22;">T</span> <span style="color: #b8860b;">C</span>[], <span style="color: #228b22;">int</span> <span style="color: #b8860b;">rows</span>, <span style="color: #228b22;">int</span> <span style="color: #b8860b;">colsInner</span>, <span style="color: #228b22;">int</span> <span style="color: #b8860b;">colsOuter</span>)
+{
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; rows; i++)
+    {
+        <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; colsOuter; j++)
+        {
+            C[pos(i,j,colsOuter)] = 0;
+            <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">k</span> = 0; k &lt; colsInner; k++)
+            {
+                C[pos(i,j,colsOuter)] += A[pos(i,k,colsInner)] * B[pos(k,j,colsOuter)];
+            }
+        }
+    }
+}
+
+<span style="color: #a020f0;">template</span>&lt;<span style="color: #a020f0;">typename</span> <span style="color: #228b22;">T</span>&gt;
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">printMatrix</span>(<span style="color: #228b22;">T</span> <span style="color: #b8860b;">m</span>[], <span style="color: #228b22;">int</span> <span style="color: #b8860b;">rows</span>, <span style="color: #228b22;">int</span> <span style="color: #b8860b;">cols</span>)
+{
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; rows; i++)
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">"[\t"</span>;
+        <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; cols; j++)
+        {
+            cout &lt;&lt; m[pos(i,j,cols)] &lt;&lt; <span style="color: #bc8f8f;">"\t"</span>;
+        }
+        cout &lt;&lt; <span style="color: #bc8f8f;">"]"</span> &lt;&lt; endl;
+    }
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">rows</span>, <span style="color: #b8860b;">colsInner</span>, <span style="color: #b8860b;">colsOuter</span>, <span style="color: #b8860b;">temp</span>;
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter matrix A rows/cols (separated by space): "</span>;
+    cin &gt;&gt; rows &gt;&gt; colsInner;
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter matrix B rows/cols (separated by space): "</span>;
+    cin &gt;&gt; temp &gt;&gt; colsOuter;
+    <span style="color: #a020f0;">if</span>(temp != colsInner)
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">"Error, A ("</span> &lt;&lt; rows &lt;&lt; <span style="color: #bc8f8f;">"x"</span> &lt;&lt; colsInner &lt;&lt; <span style="color: #bc8f8f;">") cannot mulitply B ("</span>
+             &lt;&lt; temp &lt;&lt; <span style="color: #bc8f8f;">"x"</span> &lt;&lt; colsOuter &lt;&lt; <span style="color: #bc8f8f;">") because "</span> &lt;&lt; temp &lt;&lt; <span style="color: #bc8f8f;">" != "</span> &lt;&lt; colsInner
+             &lt;&lt; <span style="color: #bc8f8f;">"."</span> &lt;&lt; endl;
+        <span style="color: #a020f0;">return</span> 0;
+    }
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">make these arrays of doubles if you like;
+</span>    <span style="color: #b22222;">// </span><span style="color: #b22222;">the matrixmult function can handle int arrays or double arrays
+</span>    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">A</span>[rows*colsInner];
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">B</span>[colsInner*colsOuter];
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">C</span>[rows*colsOuter];
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Now enter the matrix values."</span> &lt;&lt; endl;
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; rows; i++)
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">"A's row "</span> &lt;&lt; (i+1) &lt;&lt; <span style="color: #bc8f8f;">" ("</span> &lt;&lt; colsInner &lt;&lt; <span style="color: #bc8f8f;">" values with spaces): "</span>;
+        <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; colsInner; j++)
+        {
+            cin &gt;&gt; A[pos(i,j,colsInner)];
+        }
+    }
+    cout &lt;&lt; endl;
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; colsInner; i++)
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">"B's row "</span> &lt;&lt; (i+1) &lt;&lt; <span style="color: #bc8f8f;">" ("</span> &lt;&lt; colsOuter &lt;&lt; <span style="color: #bc8f8f;">" values with spaces): "</span>;
+        <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; colsOuter; j++)
+        {
+            cin &gt;&gt; B[pos(i,j,colsOuter)];
+        }
+    }
+    cout &lt;&lt; endl;
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Got matrix A:"</span> &lt;&lt; endl;
+    printMatrix(A, rows, colsInner);
+    cout &lt;&lt; endl;
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Got matrix B:"</span> &lt;&lt; endl;
+    printMatrix(B, colsInner, colsOuter);
+    cout &lt;&lt; endl;
+
+    matrixmult(A, B, C, rows, colsInner, colsOuter);
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"A * B:"</span> &lt;&lt; endl;
+    printMatrix(C, rows, colsOuter);
+
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+
+
+<h2>Matrix multiplication with the MTL package</h2>
+
+<p class="first">MTL is available here: <a href="http://www.simunova.com/en/node/24">http://www.simunova.com/en/node/24</a></p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;boost/numeric/mtl/mtl.hpp&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">mtl</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">rows</span>, <span style="color: #b8860b;">colsInner</span>, <span style="color: #b8860b;">colsOuter</span>, <span style="color: #b8860b;">temp</span>;
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter matrix A rows/cols (separated by space): "</span>;
+    cin &gt;&gt; rows &gt;&gt; colsInner;
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter matrix B rows/cols (separated by space): "</span>;
+    cin &gt;&gt; temp &gt;&gt; colsOuter;
+    <span style="color: #a020f0;">if</span>(temp != colsInner)
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">"Error, A ("</span> &lt;&lt; rows &lt;&lt; <span style="color: #bc8f8f;">"x"</span> &lt;&lt; colsInner &lt;&lt; <span style="color: #bc8f8f;">") cannot mulitply B ("</span>
+             &lt;&lt; temp &lt;&lt; <span style="color: #bc8f8f;">"x"</span> &lt;&lt; colsOuter &lt;&lt; <span style="color: #bc8f8f;">") because "</span> &lt;&lt; temp &lt;&lt; <span style="color: #bc8f8f;">" != "</span> &lt;&lt; colsInner
+             &lt;&lt; <span style="color: #bc8f8f;">"."</span> &lt;&lt; endl;
+        <span style="color: #a020f0;">return</span> 0;
+    }
+
+    <span style="color: #228b22;">dense2D</span>&lt;<span style="color: #228b22;">double</span>&gt; <span style="color: #b8860b;">A</span>(rows, colsInner);
+    <span style="color: #228b22;">dense2D</span>&lt;<span style="color: #228b22;">double</span>&gt; <span style="color: #b8860b;">B</span>(colsInner, colsOuter);
+    <span style="color: #228b22;">dense2D</span>&lt;<span style="color: #228b22;">double</span>&gt; <span style="color: #b8860b;">C</span>(rows, colsOuter);
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Now enter the matrix values."</span> &lt;&lt; endl;
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; rows; i++)
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">"A's row "</span> &lt;&lt; (i+1) &lt;&lt; <span style="color: #bc8f8f;">" ("</span> &lt;&lt; colsInner &lt;&lt; <span style="color: #bc8f8f;">" values with spaces): "</span>;
+        <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; colsInner; j++)
+        {
+            cin &gt;&gt; A[i][j];
+        }
+    }
+    cout &lt;&lt; endl;
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; colsInner; i++)
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">"B's row "</span> &lt;&lt; (i+1) &lt;&lt; <span style="color: #bc8f8f;">" ("</span> &lt;&lt; colsOuter &lt;&lt; <span style="color: #bc8f8f;">" values with spaces): "</span>;
+        <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; colsOuter; j++)
+        {
+            cin &gt;&gt; B[i][j];
+        }
+    }
+    cout &lt;&lt; endl;
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Got matrix A:"</span> &lt;&lt; endl;
+    cout &lt;&lt; A &lt;&lt; endl;
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Got matrix B:"</span> &lt;&lt; endl;
+    cout &lt;&lt; B &lt;&lt; endl;
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"A * B:"</span> &lt;&lt; endl;
+    C = A * B;
+    cout &lt;&lt; C &lt;&lt; endl;
+
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+
+
+
 <h2>Readings (not required)</h2>
 
 <ul>
