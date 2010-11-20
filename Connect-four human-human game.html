@@ -1,0 +1,315 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>Connect-four human-human game</title>
+    <meta name="generator" content="muse.el">
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=iso-8859-1">
+    <style type="text/css">
+body {
+  background: white; color: black;
+  margin-left: 3%; margin-right: 7%;
+  line-height: 1.5;
+  font-family: Nimbus Sans L, sans;
+}
+
+p { margin-top: 1% }
+p.verse { margin-left: 3% }
+
+.example { margin-left: 3% }
+
+li { margin: 0.5em 0; }
+
+h2 {
+  margin-top: 25px;
+  margin-bottom: 0px;
+}
+h3 { margin-bottom: 0px; }
+
+pre {
+  border: 1px solid #ccc;
+  margin: 5px;
+  padding: 5px;
+}
+
+td {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+code { color: #bc8f8f; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <h1>Connect-four human-human game</h1>
+    <!-- Page published by Emacs Muse begins here -->
+<h2>Task</h2>
+
+<p class="first">Write a program that allows two humans to play Connect-four. The game
+is briefly described below.</p>
+
+
+<h2>Connect-four</h2>
+
+<p class="first">Although I'm sure there are variants on this game, what's described
+here is how we will play it.</p>
+
+<p>The game board is a 6x7 grid (6 rows, 7 columns). There are two
+players. The players' turns alternate, and during each turn, a player
+places a token in one of the columns. The token slides to the &quot;bottom&quot;
+of the column, as if the game board was vertical (6 rows vertically, 7
+rows horizontally). So the first move of the game would have the token
+at the bottom of the column in which it is place (the token would be
+at row 6); if the other player then plays in the same column, that
+player's token would be above the other player's token (so the new
+token is at row 5), etc.</p>
+
+<p>A player wins when four tokens, from the same player, are arranged
+either horizontally (all on the same row), vertically (all in the same
+column), or diagonally (each token one column left or right, one row
+up or down, from another token), consecutively (no breaks).</p>
+
+<p>Call one player &quot;A&quot; and the other &quot;B&quot;. Label their respective tokens
+&quot;A&quot; and &quot;B&quot; also. Then an empty game board looks like this (with the
+columns labeled with numbers):</p>
+
+<pre class="example">
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+ 1 2 3 4 5 6 7
+</pre>
+
+<p>If player &quot;A&quot; puts a token in column 4, then the game board looks like
+this:</p>
+
+<pre class="example">
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | |A| | | |
+---------------
+ 1 2 3 4 5 6 7
+</pre>
+
+<p>And so on. Here is what an interactive game looks like:</p>
+
+<pre class="example">
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+ 1 2 3 4 5 6 7
+Player A, choose a column: 4
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | |A| | | |
+---------------
+ 1 2 3 4 5 6 7
+Player B, choose a column: 4
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | |B| | | |
+---------------
+| | | |A| | | |
+---------------
+ 1 2 3 4 5 6 7
+Player A, choose a column: 3
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | |B| | | |
+---------------
+| | |A|A| | | |
+---------------
+ 1 2 3 4 5 6 7
+Player B, choose a column: 2
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | |B| | | |
+---------------
+| |B|A|A| | | |
+---------------
+ 1 2 3 4 5 6 7
+Player A, choose a column:
+</pre>
+
+<p>Here is a winning game:</p>
+
+<pre class="example">
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+|A| |B| | |A| |
+---------------
+|B|A|B| |B|B| |
+---------------
+|A|A|A|B|A|B| |
+---------------
+|B|B|A|A|A|B|A|
+---------------
+ 1 2 3 4 5 6 7
+Player A won!
+</pre>
+
+<p>The winning condition is shown with dollar signs below:</p>
+
+<pre class="example">
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+|$| |B| | |A| |
+---------------
+|B|$|B| |B|B| |
+---------------
+|A|A|$|B|A|B| |
+---------------
+|B|B|A|$|A|B|A|
+---------------
+ 1 2 3 4 5 6 7
+Player A won!
+</pre>
+
+<p>Once a player reaches a winning condition, the game should stop, and
+the program should show the message &quot;Player A won!&quot; (or &quot;Player B
+won!&quot;).</p>
+
+<p>If the player chooses a column that is invalid (less than 1 or greater
+than 7) or full (the column has no more empty rows), then the program
+should ask for a new column choice:</p>
+
+<pre class="example">
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+| | | | | | | |
+---------------
+ 1 2 3 4 5 6 7
+Player A, choose a column: 100
+Invalid column number.
+Player A, choose a column:
+</pre>
+
+<pre class="example">
+---------------
+|B| | | | | | |
+---------------
+|A| | | | | | |
+---------------
+|B| | | | | | |
+---------------
+|A| | | | | | |
+---------------
+|B| | | | | | |
+---------------
+|A| | | | | | |
+---------------
+ 1 2 3 4 5 6 7
+Player A, choose a column: 1
+Column full.
+Player A, choose a column:
+</pre>
+
+
+
+
+
+
+
+<h2>Group work</h2>
+
+<p class="first">You can work in groups of 2 or 3 if you'd like. I need to know who you
+worked with, so write all your names in a comment at the top of your
+code. You only need to submit one copy of the code from one person's
+email address. You will all receive the same grade.</p>
+
+
+<h2>Next steps</h2>
+
+<p class="first">After you complete this program, you'll be asked to make player &quot;A&quot; or
+player &quot;B&quot; a computer player, so you will have one or more extra
+functions in your code that look at the game grid and determine the
+best move (or the worst move, depending). Rather than asking the user
+for a move from player &quot;A&quot; (or &quot;B&quot;), your program will just make the
+move automatically.</p>
+
+<p>Then we will have a quick competition in class, in which I link your
+computer player with others that the class has programmed, and my
+own. We'll see whose player is statistically best (by running
+something like 1000 games for each pairing). The winning group, or
+myself, gets a couple bars of vegan chocolate (sorry if you don't want
+chocolate).</p>
+
+
+
+<!-- Page published by Emacs Muse ends here -->
+  </body>
+</html>
