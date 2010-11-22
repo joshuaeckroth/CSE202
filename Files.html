@@ -68,7 +68,7 @@ than ask the user to enter the data one value at a time.</p>
     <span style="color: #a020f0;">if</span>(!file.is_open())
     {
         cout &lt;&lt; <span style="color: #bc8f8f;">"Error opening file!"</span> &lt;&lt; endl;
-        <span style="color: #a020f0;">return</span> EXIT_FAILURE;
+        <span style="color: #a020f0;">return</span> 0;
     }
 
     file.precision(3);
@@ -124,6 +124,7 @@ finding the sum, mean, standard deviation, etc.).</p>
     <span style="color: #a020f0;">if</span>(!file_access_variable.is_open())
     {
         cout &lt;&lt; <span style="color: #bc8f8f;">"Error opening file."</span> &lt;&lt; endl;
+        <span style="color: #a020f0;">return</span> 0;
     }
 
     <span style="color: #b22222;">// </span><span style="color: #b22222;">save the first value in the file; this value is
@@ -200,6 +201,7 @@ would be quite a bit more complicated.</p>
     <span style="color: #a020f0;">if</span>(!file_access_variable.is_open())
     {
         cout &lt;&lt; <span style="color: #bc8f8f;">"Error opening file."</span> &lt;&lt; endl;
+        <span style="color: #a020f0;">return</span> 0;
     }
 
     <span style="color: #b22222;">// </span><span style="color: #b22222;">save the first value in the file; this value is
