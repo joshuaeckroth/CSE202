@@ -281,6 +281,52 @@ Player A, choose a column:
 
 
 
+<h2>Hints</h2>
+
+<p class="first">My program has the following features:</p>
+
+<ul>
+<li>A &quot;global&quot; grid (defined above all other functions), which is a 2D
+array of <code>char</code> values. The grid is initialized so that every value
+is a space. When a player moves, I change somewhere in the grid to
+either the character <code>'A'</code> or <code>'B'</code>.</li>
+
+<li>A function <code>initializeGrid()</code> (no arguments, no return value) that
+sets all the grid positions to a space.</li>
+
+<li>A function <code>printGrid()</code> (no arguments, no return value) that shows
+the grid with dashes and vertical bars (as shown above).</li>
+
+<li>A function <code>columnFull(int col)</code> (argument is the column to check);
+returns a <code>bool</code> that is true if the column is full, false otherwise.</li>
+
+<li>A function <code>addToColumn(int col, char symbol)</code> that changes the
+grid, at the appropriate row, so that player <code>'A'</code> or <code>'B'</code> has a new
+token in the bottom of that column (<code>symbol</code> is either <code>'A'</code> or <code>'B'</code> to
+indicate which token is being added). This function has no return
+value.</li>
+</ul>
+
+
+
+<ul>
+<li>A function <code>won(char player)</code> that checks whether <code>player</code> won by
+asking the above four functions (hidden for the moment) if any
+winning condition for <code>player</code> can be found. Returns <code>bool</code>.</li>
+
+<li>A function <code>playerMove(char player)</code> that asks the player to make a
+move, and tells the player the move is invalid if that is the
+case. Returns <code>bool</code>, where true means the move was valid and the
+grid has been updated (by the <code>addToColumn</code> function), or <code>false</code> if
+the move was invalid.</li>
+
+<li>The <code>main</code> function, that repeatedly asks the players to move
+(switching between players), and for each player, asks that player
+to move so long as their moves continue to fail (when <code>playerMove</code>
+returns false). This function also checks whether each player won
+after their move is performed, and if a player has won, quits the
+program.</li>
+</ul>
 
 
 
