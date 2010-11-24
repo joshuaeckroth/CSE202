@@ -305,14 +305,81 @@ grid, at the appropriate row, so that player <code>'A'</code> or <code>'B'</code
 token in the bottom of that column (<code>symbol</code> is either <code>'A'</code> or <code>'B'</code> to
 indicate which token is being added). This function has no return
 value.</li>
+
+<li>A function <code>checkHorizontal(int row, char player)</code> that checks if
+the player (<code>'A'</code> or <code>'B'</code>) has four tokens, consecutively, anywhere
+in the row <code>row</code>. This function returns a <code>bool</code>. If this function
+returns true, then the player identified by <code>player</code> has won.
+
+<p>Pseudocode:</p></li>
 </ul>
 
+<pre class="example">
+Start a count at 0.
+For each column (j):
+  If the grid at row=row,col=j is the player, increase the count by 1.
+  Else, reset count back to 0.
+  If the count equals 4, stop the loop (break).
+Return true if the count is equal to 4, false otherwise.
+</pre>
 
+<ul>
+<li>A function <code>checkVertical(int col, char player)</code> that does the same
+as the <code>checkHorizontal</code> function but checks up-and-down a column
+(vertically); also returns <code>bool</code>.
+
+<p>Pseudocode:</p></li>
+</ul>
+
+<pre class="example">
+Start a count at 0.
+For each row (i):
+  If the grid at row=i,col=col is the player, increase count by 1.
+  Else, reset count back to 0.
+  If the count equals 4, stop the loop (break).
+Return true if the count is equal to 4, false otherwise.
+</pre>
+
+<ul>
+<li>A function <code>checkDownLeft(int col, int row, char player)</code> that does
+the same as the previous &quot;check&quot; functions but checks diagonally
+(down, to the left) from some starting <code>col</code> and <code>row</code>. Returns <code>bool</code>.
+
+<p>Pseudocode:</p></li>
+</ul>
+
+<pre class="example">
+Start a count at 0.
+for(int i = row, j = col; i &lt; 6 &amp;&amp; j &gt;= 0; i++, j--)
+  If the grid at row=i,col=j is the player, increase count by 1.
+  Else, reset count back to 0.
+  If the count equals 4, stop the loop (break).
+Return true if the count is equal to 4, false otherwise.
+</pre>
+
+<ul>
+<li>A function <code>checkDownRight(int col, int row, char player)</code> that does
+another diagonal check like the previous function. Returns <code>bool</code>.
+
+<p>Pseudocode:</p></li>
+</ul>
+
+<pre class="example">
+Start a count at 0.
+for(int i = row, j = col; i &lt; 6 &amp;&amp; j &lt; 7; i++, j++)
+  If the grid at row=i,col=j is the player, increase count by 1.
+  Else, reset count back to 0.
+  If the count equals 4, stop the loop (break).
+Return true if the count is equal to 4, false otherwise.
+</pre>
 
 <ul>
 <li>A function <code>won(char player)</code> that checks whether <code>player</code> won by
 asking the above four functions (hidden for the moment) if any
 winning condition for <code>player</code> can be found. Returns <code>bool</code>.</li>
+
+<li>A function <code>tie()</code> that checks if there is a tie. This is an easy
+check: if the grid has any spaces, there is no tie.</li>
 
 <li>A function <code>playerMove(char player)</code> that asks the player to make a
 move, and tells the player the move is invalid if that is the
@@ -324,8 +391,8 @@ the move was invalid.</li>
 (switching between players), and for each player, asks that player
 to move so long as their moves continue to fail (when <code>playerMove</code>
 returns false). This function also checks whether each player won
-after their move is performed, and if a player has won, quits the
-program.</li>
+or if there is a tie, after their move is performed, and if a
+player has won or there is a tie,  quits the program.</li>
 </ul>
 
 
