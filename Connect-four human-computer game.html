@@ -1,0 +1,383 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>Connect-four human-computer game</title>
+    <meta name="generator" content="muse.el">
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=iso-8859-1">
+    <style type="text/css">
+body {
+  background: white; color: black;
+  margin-left: 3%; margin-right: 7%;
+  line-height: 1.5;
+  font-family: Nimbus Sans L, sans;
+}
+
+p { margin-top: 1% }
+p.verse { margin-left: 3% }
+
+.example { margin-left: 3% }
+
+li { margin: 0.5em 0; }
+
+h2 {
+  margin-top: 25px;
+  margin-bottom: 0px;
+}
+h3 { margin-bottom: 0px; }
+
+pre {
+  border: 1px solid #ccc;
+  margin: 5px;
+  padding: 5px;
+}
+
+td {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+code { color: #bc8f8f; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <h1>Connect-four human-computer game</h1>
+    <!-- Page published by Emacs Muse begins here -->
+<h2>Task</h2>
+
+<p class="first">Write an &quot;AI&quot; computer player for the Connect-four game.</p>
+
+
+<h2>Details</h2>
+
+<p class="first">First, you'll need to copy the Connect-four code that I wrote. Do it
+like this (in Putty; don't forget the final &quot;dot&quot;):</p>
+
+<pre class="example">
+cp /home/8/eckroth/connect-four/funcs.{o,h} .
+</pre>
+
+<p>You will need to make a new C++ file that has at least one function:</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">"funcs.h"</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">computerMove</span>(<span style="color: #228b22;">char</span> <span style="color: #b8860b;">g</span>[6][7])
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">column</span>;
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">decide which column...
+</span>
+    <span style="color: #a020f0;">return</span> column; <span style="color: #b22222;">// </span><span style="color: #b22222;">return the choice
+</span>}
+</pre>
+
+<p>That's it. You can have just that one function or many more, depending
+on how complex your AI player is.</p>
+
+<p>Compile the program like this (in Putty):</p>
+
+<pre class="example">
+g++ main.cpp funcs.o
+</pre>
+
+
+<h2>Examples</h2>
+
+<h3>Random</h3>
+
+<p class="first">Completely random column choices:</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;cstdlib&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">"funcs.h"</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">computerMove</span>(<span style="color: #228b22;">char</span> <span style="color: #b8860b;">g</span>[6][7])
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">column</span>;
+    <span style="color: #a020f0;">do</span> {
+        column = rand() % 7;
+    } <span style="color: #a020f0;">while</span>(columnFull(g, column));
+
+    <span style="color: #a020f0;">return</span> column;
+}
+</pre>
+
+<p>Notice it's necessary to continue trying random column choices so long
+as the choice is a full column.</p>
+
+
+<h3>Left-right</h3>
+
+<p class="first">Fill up the left first, then move right.</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;cstdlib&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">"funcs.h"</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">computerMove</span>(<span style="color: #228b22;">char</span> <span style="color: #b8860b;">g</span>[6][7])
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">column</span>;
+    <span style="color: #a020f0;">for</span>(column = 0; column &lt; 7 &amp;&amp; columnFull(g, column); column++);
+
+    <span style="color: #a020f0;">return</span> column;
+}
+</pre>
+
+
+<h3>Vertical runs</h3>
+
+<p class="first">Look for vertical runs of 3 or 2 length; stop them if they are the
+human player's vertical runs, or continue them if they are the AI
+player's vertical runs.</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;cstdlib&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">"funcs.h"</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">bool</span> <span style="color: #0000ff;">verticalRun</span>(<span style="color: #228b22;">char</span> <span style="color: #b8860b;">g</span>[6][7], <span style="color: #228b22;">int</span> <span style="color: #b8860b;">col</span>, <span style="color: #228b22;">int</span> <span style="color: #b8860b;">length</span>, <span style="color: #228b22;">char</span> <span style="color: #b8860b;">player</span>)
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">count</span> = 0;
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; 6; i++)
+    {
+        <span style="color: #a020f0;">if</span>(g[i][col] == player) count++;
+        <span style="color: #a020f0;">else</span> <span style="color: #a020f0;">if</span>(g[i][col] != <span style="color: #bc8f8f;">' '</span>) <span style="color: #a020f0;">break</span>;
+
+        <span style="color: #a020f0;">if</span>(count == length) <span style="color: #a020f0;">break</span>;
+    }
+    <span style="color: #a020f0;">return</span> (count == length);
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">computerMove</span>(<span style="color: #228b22;">char</span> <span style="color: #b8860b;">g</span>[6][7])
+{
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">length</span> = 3; length &gt; 1; length--)
+    {
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">check defensive moves
+</span>        <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; 7; j++)
+        {
+            <span style="color: #a020f0;">if</span>(!columnFull(g, j) &amp;&amp; verticalRun(g, j, length, <span style="color: #bc8f8f;">'H'</span>))
+            {
+                <span style="color: #a020f0;">return</span> j;
+            }
+        }
+
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">then check offensive moves
+</span>        <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; 7; j++)
+        {
+            <span style="color: #a020f0;">if</span>(!columnFull(g, j) &amp;&amp; verticalRun(g, j, length, <span style="color: #bc8f8f;">'C'</span>))
+            {
+                <span style="color: #a020f0;">return</span> j;
+            }
+        }
+    }
+
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">column</span>;
+    <span style="color: #a020f0;">do</span> {
+        column = rand() % 7;
+    } <span style="color: #a020f0;">while</span>(columnFull(g, column));
+    <span style="color: #a020f0;">return</span> column;
+}
+</pre>
+
+
+<h3>Nasty tree search</h3>
+
+<p class="first">This program looks a few moves ahead, trying every move (for both
+computer and human). So this program takes a few moments to decide,
+and looking just one more move ahead would basically make it
+unplayable (because it would take too long to look that far).</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;cstdlib&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">"funcs.h"</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #b8860b;">recursive_calls</span>;
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">copyGrid</span>(<span style="color: #228b22;">char</span> <span style="color: #b8860b;">gridA</span>[6][7], <span style="color: #228b22;">char</span> <span style="color: #b8860b;">gridB</span>[6][7])
+{
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; 6; i++)
+    {
+        <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; 7; j++)
+        {
+            gridB[i][j] = gridA[i][j];
+        }
+    }
+}
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">scoreMoves</span>(<span style="color: #228b22;">char</span> <span style="color: #b8860b;">g</span>[6][7], <span style="color: #228b22;">double</span> <span style="color: #b8860b;">scores</span>[7], <span style="color: #228b22;">bool</span> <span style="color: #b8860b;">full</span>[7], <span style="color: #228b22;">int</span> <span style="color: #b8860b;">depth</span>)
+{
+    <span style="color: #228b22;">char</span> <span style="color: #b8860b;">hgrids</span>[7][7][6][7]; <span style="color: #b22222;">// </span><span style="color: #b22222;">hypothetical grids
+</span>    <span style="color: #228b22;">bool</span> <span style="color: #b8860b;">recurse</span>[7]; <span style="color: #b22222;">// </span><span style="color: #b22222;">which moves are recursable
+</span>    <span style="color: #228b22;">bool</span> <span style="color: #b8860b;">full_human</span>[7][7];
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; 7; i++)
+    {
+        recurse[i] = <span style="color: #5f9ea0;">true</span>;
+        full[i] = <span style="color: #5f9ea0;">false</span>; <span style="color: #b22222;">// </span><span style="color: #b22222;">start with no full columns
+</span>        <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; 7; j++)
+        {
+            full_human[i][j] = <span style="color: #5f9ea0;">false</span>;
+        }
+    }
+
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">ai</span> = 0; ai &lt; 7; ai++)
+    {
+        <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">human</span> = 0; human &lt; 7; human++)
+        {
+            copyGrid(g, hgrids[ai][human]);
+        }
+    }
+
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">ai</span> = 0; ai &lt; 7; ai++)
+    {
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">if ai can't move in this column, skip it;
+</span>        <span style="color: #b22222;">// </span><span style="color: #b22222;">since all hgrids[ai][*] are equivalent, we just check the 0'th one
+</span>        <span style="color: #a020f0;">if</span>(columnFull(hgrids[ai][0], ai))
+        {
+            full[ai] = <span style="color: #5f9ea0;">true</span>;
+            <span style="color: #a020f0;">continue</span>;
+        }
+
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">otherwise, ai can move in this column,
+</span>        <span style="color: #b22222;">// </span><span style="color: #b22222;">so make the move in all hypothetical human-move grids
+</span>        <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">human</span> = 0; human &lt; 7; human++)
+        {
+            addToColumn(hgrids[ai][human], ai, <span style="color: #bc8f8f;">'C'</span>);
+        }
+
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">if we won with this move, record this fact
+</span>        <span style="color: #a020f0;">if</span>(won(hgrids[ai][0], <span style="color: #bc8f8f;">'C'</span>))
+        {
+            scores[ai] -= 1.0;
+            recurse[ai] = <span style="color: #5f9ea0;">false</span>;
+        }
+        <span style="color: #a020f0;">else</span> <span style="color: #a020f0;">if</span>(tie(hgrids[ai][0]))
+        {
+            recurse[ai] = <span style="color: #5f9ea0;">false</span>;
+            scores[ai] += 0.5;
+        }
+        <span style="color: #a020f0;">else</span> <span style="color: #b22222;">// </span><span style="color: #b22222;">else did not win with this move, so consider human moves
+</span>        {
+            <span style="color: #b22222;">// </span><span style="color: #b22222;">slightly penalize the score ('cause we didn't win already)
+</span>            scores[ai] += 0.1;
+
+            <span style="color: #b22222;">// </span><span style="color: #b22222;">make human moves
+</span>            <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">human</span> = 0; human &lt; 7; human++)
+            {
+                <span style="color: #a020f0;">if</span>(columnFull(hgrids[ai][human], human))
+                {
+                    full_human[ai][human] = <span style="color: #5f9ea0;">true</span>;
+                }
+                <span style="color: #a020f0;">else</span>
+                {
+                    addToColumn(hgrids[ai][human], human, <span style="color: #bc8f8f;">'H'</span>);
+
+                    <span style="color: #b22222;">// </span><span style="color: #b22222;">ouch, human won; horrible score
+</span>                    <span style="color: #a020f0;">if</span>(won(hgrids[ai][human], <span style="color: #bc8f8f;">'H'</span>))
+                    {
+                        scores[ai] += 1.0;
+                    }
+                    <span style="color: #a020f0;">else</span> <span style="color: #a020f0;">if</span>(tie(hgrids[ai][human]))
+                    {
+                        scores[ai] += 0.5;
+                    }
+                }
+            }
+        }
+    }
+
+    <span style="color: #a020f0;">if</span>(depth &lt; 1)
+    {
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">make recursive calls for non-winning, non-terrible scores
+</span>        <span style="color: #b22222;">// </span><span style="color: #b22222;">also ignore full columns
+</span>        <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">ai</span> = 0; ai &lt; 7; ai++)
+        {
+            <span style="color: #a020f0;">if</span>(full[ai] || !recurse[ai]) <span style="color: #a020f0;">continue</span>;
+
+            <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">human</span> = 0; human &lt; 7; human++)
+            {
+                <span style="color: #a020f0;">if</span>(full_human[ai][human]) <span style="color: #a020f0;">continue</span>;
+
+                <span style="color: #b22222;">// </span><span style="color: #b22222;">set recursive scores equal to this column's score
+</span>                <span style="color: #228b22;">double</span> <span style="color: #b8860b;">r_scores</span>[7];
+                <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; 7; i++)
+                {
+                    r_scores[i] = scores[ai];
+                }
+
+                <span style="color: #228b22;">bool</span> <span style="color: #b8860b;">r_full</span>[7];
+                recursive_calls++;
+                scoreMoves(hgrids[ai][human], r_scores, r_full, depth+1);
+
+                <span style="color: #b22222;">// </span><span style="color: #b22222;">find best score of recursive call, and add it
+</span>                <span style="color: #228b22;">double</span> <span style="color: #b8860b;">min</span> = 1000;
+                <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; 7; i++)
+                {
+                    <span style="color: #a020f0;">if</span>(r_scores[i] &lt; min)
+                    {
+                        min = r_scores[i];
+                    }
+                }
+                min /= 100.0;
+                scores[ai] += min;
+            }
+        }
+    }
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">computerMove</span>(<span style="color: #228b22;">char</span> <span style="color: #b8860b;">g</span>[6][7])
+{
+    recursive_calls = 1;
+    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">scores</span>[7] = {0.0};
+    <span style="color: #228b22;">bool</span> <span style="color: #b8860b;">full</span>[7];
+    scoreMoves(g, scores, full, 0);
+
+    cout &lt;&lt; <span style="color: #bc8f8f;">"recursive calls: "</span> &lt;&lt; recursive_calls &lt;&lt; endl;
+
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; 7; i++)
+    {
+        <span style="color: #a020f0;">if</span>(!full[i])
+            cout &lt;&lt; <span style="color: #bc8f8f;">"scores["</span> &lt;&lt; i &lt;&lt; <span style="color: #bc8f8f;">"] = "</span> &lt;&lt; scores[i] &lt;&lt; endl;
+    }
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">find minimum non-horrendous
+</span>    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">min</span> = 10000;
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">min_index</span> = -1;
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; 7; i++)
+    {
+        <span style="color: #a020f0;">if</span>(!full[i] &amp;&amp; scores[i] &lt; min)
+        {
+            min = scores[i];
+            min_index = i;
+        }
+    }
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">if no good move, choose a random one
+</span>    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">r</span>;
+    <span style="color: #a020f0;">while</span>(min_index == -1)
+    {
+        r = rand() % 7;
+        <span style="color: #a020f0;">if</span>(!columnFull(g, r))
+        {
+            min_index = r;
+        }
+    }
+    <span style="color: #a020f0;">return</span> min_index;
+}
+</pre>
+
+
+
+
+<!-- Page published by Emacs Muse ends here -->
+  </body>
+</html>
