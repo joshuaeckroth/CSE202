@@ -116,6 +116,50 @@ Enter value 10: 2739
 Standard deviation: 824.406702
 </pre>
 
+
+<h2>My solution</h2>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;cmath&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">n</span>;
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter n: "</span>;
+    cin &gt;&gt; n;
+
+    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">vals</span>[n];
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; n; i++)
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">"Enter value "</span> &lt;&lt; (i+1) &lt;&lt; <span style="color: #bc8f8f;">": "</span>;
+        cin &gt;&gt; vals[i];
+    }
+
+    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">sum</span> = 0.0;
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; n; i++)
+    {
+        sum += vals[i];
+    }
+    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">mean</span> = sum / n;
+
+    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">innersum</span> = 0.0;
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; n; i++)
+    {
+        innersum += ((vals[i] - mean) * (vals[i] - mean));
+    }
+
+    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">stddev</span> = sqrt((1.0/n) * innersum);
+
+    cout.precision(6);
+    cout.setf(<span style="color: #5f9ea0;">ios</span>::fixed, <span style="color: #5f9ea0;">ios</span>::floatfield);
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Standard deviation: "</span> &lt;&lt; stddev &lt;&lt; endl;
+
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+
 <h2>Academic misconduct policy</h2>
 
 <p class="first">All writing (prose) and coding for every one of the programming

@@ -173,6 +173,58 @@ Enter m and n: 25 10
 
 <p class="image"><img src="a-7-outfigure.png" alt=""></p>
 
+
+<h2>My solution</h2>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;fstream&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;cmath&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">double</span> <span style="color: #0000ff;">f</span>(<span style="color: #228b22;">double</span> <span style="color: #b8860b;">x</span>, <span style="color: #228b22;">double</span> <span style="color: #b8860b;">y</span>)
+{
+    <span style="color: #a020f0;">return</span> (cos(x) * sin(y) * log(x+y+1));
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">m</span>, <span style="color: #b8860b;">n</span>;
+    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter m and n: "</span>;
+    cin &gt;&gt; m &gt;&gt; n;
+
+    <span style="color: #228b22;">ofstream</span> <span style="color: #b8860b;">of</span>;
+    of.open(<span style="color: #bc8f8f;">"a-7-outfile.txt"</span>);
+    <span style="color: #a020f0;">if</span>(!of.is_open())
+    {
+        cout &lt;&lt; <span style="color: #bc8f8f;">"Error opening file."</span> &lt;&lt; endl;
+        <span style="color: #a020f0;">return</span> -1;
+    }
+
+    of.precision(3);
+    of.setf(<span style="color: #5f9ea0;">ios</span>::fixed, <span style="color: #5f9ea0;">ios</span>::floatfield);
+
+    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">val</span>;
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; m; i++)
+    {
+        <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; n; j++)
+        {
+            val = f(i/5.0, j/5.0);
+            <span style="color: #a020f0;">if</span>(val &gt;= 0.0)
+            {
+                of &lt;&lt; <span style="color: #bc8f8f;">" "</span>;
+            }
+            of &lt;&lt; val &lt;&lt; <span style="color: #bc8f8f;">"\t"</span>;
+        }
+        of &lt;&lt; endl;
+    }
+
+    of.close();
+
+    <span style="color: #a020f0;">return</span> 0;
+}
+</pre>
+
 <h2>Academic misconduct policy</h2>
 
 <p class="first">All writing (prose) and coding for every one of the programming
