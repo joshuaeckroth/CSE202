@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>Midterm 3 Study Guide</title>
+    <meta name="generator" content="muse.el">
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=iso-8859-1">
+    <style type="text/css">
+body {
+  background: white; color: black;
+  margin-left: 3%; margin-right: 7%;
+  line-height: 1.5;
+  font-family: Nimbus Sans L, sans;
+}
+
+p { margin-top: 1% }
+p.verse { margin-left: 3% }
+
+.example { margin-left: 3% }
+
+li { margin: 0.5em 0; }
+
+h2 {
+  margin-top: 25px;
+  margin-bottom: 0px;
+}
+h3 { margin-bottom: 0px; }
+
+pre {
+  border: 1px solid #ccc;
+  margin: 5px;
+  padding: 5px;
+}
+
+td {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+code { color: #bc8f8f; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <h1>Midterm 3 Study Guide</h1>
+    <!-- Page published by Emacs Muse begins here -->
+<p>The following problems <strong>will</strong> appear on the test:</p>
+
+<ul>
+<li>Define <em>abstraction</em>. (1-2 sentences)</li>
+
+<li>Why is abstraction good? (1-2 sentences)</li>
+
+<li>Write a complete program that asks the user for a file name, opens
+that file and reads &quot;double&quot; values from the file into an array
+(the first line of the file is an integer representing how many
+&quot;double&quot; values are in the file), closes the file, then finds the
+min, max, and average of the numbers.</li>
+
+<li>Write a function called <code>fibn</code> that has one argument: an integer <code>n</code>,
+and returns the integer that is the &quot;<code>n</code>'th&quot; Fibonacci
+number. Fibonacci numbers start as follows: 0, 1, 1, 2, 3, 5, 8,
+... The pattern is: each successive number is the sum of the two
+previous numbers. So, the ninth (<code>n=9</code>) Fibonacci
+number is 21.</li>
+
+<li>Rewrite the following code, changing it so that is uses at least
+two functions besides the <code>main</code> function (this is the Newton
+example from lecture; it finds the x-value where a function hits
+zero, by using iterative approximation):</li>
+</ul>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;cmath&gt;</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
+{
+        <span style="color: #228b22;">double</span> <span style="color: #b8860b;">x1</span>, <span style="color: #b8860b;">x2</span>;
+
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">initial guess
+</span>        x1 = 2.0;
+        x2 = x1 - (-2*sin(cos(sqrt(x1))))
+                   / ((cos(cos(sqrt(x1)))*sin(sqrt(x1)))
+                  / sqrt(x1));
+        <span style="color: #a020f0;">while</span>(fabs(x2-x1) &gt; 0.00001)
+        {
+                x1 = x2;
+                x2 = x1 - (-2*sin(cos(sqrt(x1))))
+                           / ((cos(cos(sqrt(x1)))*sin(sqrt(x1)))
+                          / sqrt(x1));
+        }
+        cout &lt;&lt; x2 &lt;&lt; endl;
+}
+</pre>
+
+<p>More hints:</p>
+
+<ul>
+<li>Be able to convert set of nested <code>if/else if/else</code> conditionals to a
+non-nested equivalent version.</li>
+
+<li>Be able to say what a piece of code &quot;prints&quot;, especially when that
+code involves loops, arrays, and/or functions.</li>
+
+<li>Know how to write a double sum or triple sum with <code>for</code> loops (e.g.,
+write <!-- $\sum_i^m \sum_j^n \sum_k^p (i+j+k)^3$--><img src="./latex/latex2png-Midterm 3 Study Guide__171440408.png" alt="latex2png equation" class="latex-inline"> as nested
+<code>for</code> loops).</li>
+
+<li>Know how to convert a <code>for</code> loop to a <code>while</code> loop.</li>
+</ul>
+
+<!-- Page published by Emacs Muse ends here -->
+  </body>
+</html>
