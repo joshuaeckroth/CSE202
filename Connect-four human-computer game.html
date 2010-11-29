@@ -91,6 +91,13 @@ g++ main.cpp funcs.o
 </pre>
 
 
+<h2>Hints</h2>
+
+<p class="first">If you want to improve on the methods below, first think about how to
+combine them. So put the &quot;random&quot; example as a last resort, and try to
+find perhaps a &quot;vertical run&quot; or &quot;win or block&quot; move first.</p>
+
+
 <h2>Examples</h2>
 
 <h3>Random</h3>
@@ -134,6 +141,80 @@ as the choice is a full column.</p>
     <span style="color: #a020f0;">for</span>(column = 0; column &lt; 7 &amp;&amp; columnFull(g, column); column++);
 
     <span style="color: #a020f0;">return</span> column;
+}
+</pre>
+
+
+<h3>Win or block</h3>
+
+<p class="first">Find a winning computer move first, or if that fails, find a move that
+blocks the human; if that fails, too, then just choose a random move.</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;cstdlib&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">"funcs.h"</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">copyGrid</span>(<span style="color: #228b22;">char</span> <span style="color: #b8860b;">gridA</span>[6][7], <span style="color: #228b22;">char</span> <span style="color: #b8860b;">gridB</span>[6][7])
+{
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; 6; i++)
+    {
+        <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; 7; j++)
+        {
+            gridB[i][j] = gridA[i][j];
+        }
+    }
+}
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">this function returns a column if the computer
+</span><span style="color: #b22222;">// </span><span style="color: #b22222;">can win or can block a human win, otherwise
+</span><span style="color: #b22222;">// </span><span style="color: #b22222;">returns -1
+</span>
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">checkMove</span>(<span style="color: #228b22;">char</span> <span style="color: #b8860b;">g</span>[6][7])
+{
+    <span style="color: #228b22;">char</span> <span style="color: #b8860b;">tmp</span>[6][7];
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">can computer win with one move?
+</span>    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; 7; j++)
+    {
+        <span style="color: #a020f0;">if</span>(columnFull(g, j)) <span style="color: #a020f0;">continue</span>;
+
+        copyGrid(g, tmp);
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">make move
+</span>        addToColumn(tmp, j, <span style="color: #bc8f8f;">'C'</span>);
+        <span style="color: #a020f0;">if</span>(won(tmp, <span style="color: #bc8f8f;">'C'</span>))
+            <span style="color: #a020f0;">return</span> j;
+    }
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">can human win with one move? block it
+</span>    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; 7; j++)
+    {
+        <span style="color: #a020f0;">if</span>(columnFull(g, j)) <span style="color: #a020f0;">continue</span>;
+
+        copyGrid(g, tmp);
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">make move
+</span>        addToColumn(tmp, j, <span style="color: #bc8f8f;">'H'</span>);
+        <span style="color: #a020f0;">if</span>(won(tmp, <span style="color: #bc8f8f;">'H'</span>))
+            <span style="color: #a020f0;">return</span> j;
+    }
+
+    <span style="color: #a020f0;">return</span> -1;
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">computerMove</span>(<span style="color: #228b22;">char</span> <span style="color: #b8860b;">g</span>[6][7])
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">col</span>;
+
+    col = checkMove(g);
+    <span style="color: #a020f0;">if</span>(col != -1) <span style="color: #a020f0;">return</span> col;
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">no good move; return a random one
+</span>    <span style="color: #a020f0;">do</span> {
+        col = rand() % 7;
+    } <span style="color: #a020f0;">while</span>(columnFull(g, col));
+
+    <span style="color: #a020f0;">return</span> col;
 }
 </pre>
 
@@ -191,6 +272,126 @@ player's vertical runs.</p>
         column = rand() % 7;
     } <span style="color: #a020f0;">while</span>(columnFull(g, column));
     <span style="color: #a020f0;">return</span> column;
+}
+</pre>
+
+
+<h3>Look two moves ahead</h3>
+
+<p class="first">This example uses the &quot;win or block&quot; check first; if that doesn't give
+a good move, then the grid is copied 49 times so that every possible
+computer move followed by possible every human move is made in a copy
+of the grid, and then these copies are checked for &quot;win or block&quot;. If
+&quot;win or block&quot; gives a good result in these hypothetical situations
+(two moves ahead), then the pretend computer move that preceded the
+pretend human move that preceded a good &quot;win or block&quot; move is chosen
+as the move.</p>
+
+<pre class="src">
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;cstdlib&gt;</span>
+<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">"funcs.h"</span>
+<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">copyGrid</span>(<span style="color: #228b22;">char</span> <span style="color: #b8860b;">gridA</span>[6][7], <span style="color: #228b22;">char</span> <span style="color: #b8860b;">gridB</span>[6][7])
+{
+    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; 6; i++)
+    {
+        <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; 7; j++)
+        {
+            gridB[i][j] = gridA[i][j];
+        }
+    }
+}
+
+
+<span style="color: #b22222;">// </span><span style="color: #b22222;">this function returns a column if the computer
+</span><span style="color: #b22222;">// </span><span style="color: #b22222;">can win or can block a human win, otherwise
+</span><span style="color: #b22222;">// </span><span style="color: #b22222;">returns -1
+</span>
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">checkMove</span>(<span style="color: #228b22;">char</span> <span style="color: #b8860b;">g</span>[6][7])
+{
+    <span style="color: #228b22;">char</span> <span style="color: #b8860b;">tmp</span>[6][7];
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">can computer win with one move?
+</span>    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; 7; j++)
+    {
+        <span style="color: #a020f0;">if</span>(columnFull(g, j)) <span style="color: #a020f0;">continue</span>;
+
+        copyGrid(g, tmp);
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">make move
+</span>        addToColumn(tmp, j, <span style="color: #bc8f8f;">'C'</span>);
+        <span style="color: #a020f0;">if</span>(won(tmp, <span style="color: #bc8f8f;">'C'</span>))
+            <span style="color: #a020f0;">return</span> j;
+    }
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">can human win with one move? block it
+</span>    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">j</span> = 0; j &lt; 7; j++)
+    {
+        <span style="color: #a020f0;">if</span>(columnFull(g, j)) <span style="color: #a020f0;">continue</span>;
+
+        copyGrid(g, tmp);
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">make move
+</span>        addToColumn(tmp, j, <span style="color: #bc8f8f;">'H'</span>);
+        <span style="color: #a020f0;">if</span>(won(tmp, <span style="color: #bc8f8f;">'H'</span>))
+            <span style="color: #a020f0;">return</span> j;
+    }
+
+    <span style="color: #a020f0;">return</span> -1;
+}
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">computerMove</span>(<span style="color: #228b22;">char</span> <span style="color: #b8860b;">g</span>[6][7])
+{
+    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">col</span>;
+
+    <span style="color: #228b22;">char</span> <span style="color: #b8860b;">tmp</span>[6][7];
+    <span style="color: #228b22;">char</span> <span style="color: #b8860b;">tmp2</span>[6][7];
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">check first move
+</span>    col = checkMove(g);
+    <span style="color: #a020f0;">if</span>(col != -1) <span style="color: #a020f0;">return</span> col;
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">make all possible computer moves followed by all possible human moves;
+</span>    <span style="color: #b22222;">// </span><span style="color: #b22222;">at this point, if the above code did not find a good move,
+</span>    <span style="color: #b22222;">// </span><span style="color: #b22222;">then we know that neither one move for the computer
+</span>    <span style="color: #b22222;">// </span><span style="color: #b22222;">nor one move for the human can result in a win
+</span>    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">c</span> = 0; c &lt; 7; c++)
+    {
+        <span style="color: #b22222;">// </span><span style="color: #b22222;">if computer can make this move...
+</span>        <span style="color: #a020f0;">if</span>(!columnFull(g, c))
+        {
+            <span style="color: #b22222;">// </span><span style="color: #b22222;">make a copy of the grid, and make the move
+</span>            copyGrid(g, tmp);
+            addToColumn(tmp, c, <span style="color: #bc8f8f;">'C'</span>);
+
+            <span style="color: #b22222;">// </span><span style="color: #b22222;">consider all possible next human moves
+</span>            <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">h</span> = 0; h &lt; 7; h++)
+            {
+                <span style="color: #b22222;">// </span><span style="color: #b22222;">if human can make this move
+</span>                <span style="color: #a020f0;">if</span>(!columnFull(tmp, h))
+                {
+                    <span style="color: #b22222;">// </span><span style="color: #b22222;">make a copy of the grid, and make the move
+</span>                    copyGrid(tmp, tmp2);
+                    addToColumn(tmp2, h, <span style="color: #bc8f8f;">'H'</span>);
+
+                    <span style="color: #b22222;">// </span><span style="color: #b22222;">determine if there is a good move after these
+</span>                    <span style="color: #b22222;">// </span><span style="color: #b22222;">two pretend moves were made; if so, use
+</span>                    <span style="color: #b22222;">// </span><span style="color: #b22222;">the computer's pretend move as the current
+</span>                    <span style="color: #b22222;">// </span><span style="color: #b22222;">move
+</span>                    col = checkMove(tmp2);
+                    <span style="color: #a020f0;">if</span>(col != -1) <span style="color: #a020f0;">return</span> c; <span style="color: #b22222;">// </span><span style="color: #b22222;">not col!
+</span>                }
+            }
+        }
+    }
+
+
+    <span style="color: #b22222;">// </span><span style="color: #b22222;">no good move; return a random one
+</span>    <span style="color: #a020f0;">do</span> {
+        col = rand() % 7;
+    } <span style="color: #a020f0;">while</span>(columnFull(g, col));
+
+    <span style="color: #a020f0;">return</span> col;
 }
 </pre>
 
