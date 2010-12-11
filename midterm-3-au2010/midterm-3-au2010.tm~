@@ -1,0 +1,450 @@
+<TeXmacs|1.0.7.4>
+
+<style|exam>
+
+<\body>
+  <\title>
+    CSE 202 Au2010 Final Exam
+  </title>
+
+  <\problem>
+    Define <em|abstraction>. (1-2 sentences) (5 pts)
+  </problem>
+
+  \;
+
+  \;
+
+  <\problem>
+    <\with|par-left|0cm>
+      Why is abstraction good? (1-2 sentences) (5 pts)
+    </with>
+  </problem>
+
+  \;
+
+  \;
+
+  <\problem>
+    Write a complete program that asks the user for a file name, opens that
+    file and reads many ``double'' (decimal) values from the file into an
+    array (the first line of the file is an integer representing how many
+    ``double'' values are in the file), closes the file, then finds the min,
+    max, and average (mean) of the values in the array, and prints this
+    min/max/mean to the screen. (10 pts)
+  </problem>
+
+  <new-page>
+
+  <\problem>
+    Which of the following is the best example of abstraction (in C++)?
+    Circle one. (5 pts)
+
+    <\itemize>
+      <item>conditionals (<code*|if> and <code*|else>)
+
+      <item>functions
+
+      <item>loops
+
+      <item>print statements (<code*|cout>)
+    </itemize>
+  </problem>
+
+  <\problem>
+    Rewrite the following <code*|for> loop into an equivalent <code*|while>
+    loop. (5 pts)
+
+    \;
+
+    <\verbatim>
+      int i, j = 5;
+
+      for(i = 0; i \<less\> 100; i = i + 3)
+
+      {
+
+      \ \ \ \ j--;
+
+      \ \ \ \ cout \<less\>\<less\> j \<less\>\<less\> endl;
+
+      \ \ \ \ i++;
+
+      }
+    </verbatim>
+  </problem>
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  <\problem>
+    (10 pts) Write a function called <code*|fibn> that has one argument: an
+    integer <code*|n> (which is greater than or equal to 0), and returns the
+    integer that is the ``<code*|n>'th'' Fibonacci number. Fibonacci numbers
+    start as follows: 0, 1, 2, 3, 5, 8, ... The pattern is: each successive
+    number is the sum of the two previous numbers. So, the ninth
+    (<code*|n==9>) Fibonacci number is 21. (10 pts)
+  </problem>
+
+  <new-page>
+
+  <\problem>
+    Rewrite the following code, changing it so that it uses at least two
+    functions besides the <code*|main> function. This is the Newton example
+    from lecture; it finds the <math|x>-value where a function hits zero
+    (cross the <math|x> axis), by using iterative approximation. The
+    iterative approximation is <math|x<rsub|2>=x<rsub|1>-f(x<rsub|1>)/f<rprime|'>(x<rsub|1>)>
+    where <math|f<rprime|'>> is the derivative of <math|f>, and in this code,
+    <math|f(x)=-2 sin(cos(<sqrt|x>))> and
+    <math|f<rprime|'>(x)=cos(cos(<sqrt|x>))sin(<sqrt|x>)/<sqrt|x>>. (10 pts)
+  </problem>
+
+  <\verbatim>
+    #include \<less\>iostream\<gtr\>
+
+    #include \<less\>cmath\<gtr\>
+
+    using namespace std;
+
+    \;
+
+    int main()
+
+    {
+
+    \ \ \ \ double x1, x2;
+
+    \ \ \ \ // initial guess
+
+    \ \ \ \ x1 = 2.0;
+
+    \ \ \ \ x2 = x1 - (-2*sin(cos(sqrt(x1)))) /
+
+    \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((cos(cos(sqrt(x1)))*sin(sqrt(x1)))/sqrt(x1));
+
+    \ \ \ \ 
+
+    \ \ \ \ while(fabs(x2-x1) \<gtr\> 0.00001)
+
+    \ \ \ \ {
+
+    \ \ \ \ \ \ \ \ x1 = x2;
+
+    \ \ \ \ \ \ \ \ x2 = x1 - (-2*sin(cos(sqrt(x1)))) /\ 
+
+    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ((cos(cos(sqrt(x1)))*sin(sqrt(x1)))/sqrt(x1);
+
+    \ \ \ \ }
+
+    \ \ \ \ cout \<less\>\<less\> x2 \<less\>\<less\> endl;
+
+    \ \ \ \ return 0;
+
+    }
+  </verbatim>
+
+  <new-page>
+
+  <\problem>
+    Rewrite the following nested <code*|if/else> complex conditional as an
+    equivalent conditional but with no nesting. (10 pts)
+
+    \;
+
+    <\verbatim>
+      if(x \<less\> 0)
+
+      {
+
+      \ \ \ \ if(x \<less\> -3 && x \<gtr\>= -8)
+
+      \ \ \ \ {
+
+      \ \ \ \ \ \ \ \ if(x == -8 \|\| x == -4)
+
+      \ \ \ \ \ \ \ \ {
+
+      \ \ \ \ \ \ \ \ \ \ \ \ cout \<less\>\<less\> ``A'' \<less\>\<less\>
+      endl;
+
+      \ \ \ \ \ \ \ \ }
+
+      \ \ \ \ }
+
+      \ \ \ \ else if(x \<less\> -8)
+
+      \ \ \ \ {
+
+      \ \ \ \ \ \ \ \ if(true)
+
+      \ \ \ \ \ \ \ \ {
+
+      \ \ \ \ \ \ \ \ \ \ \ \ cout \<less\>\<less\> ``B'' \<less\>\<less\>
+      endl;
+
+      \ \ \ \ \ \ \ \ }
+
+      \ \ \ \ }
+
+      \ \ \ \ else
+
+      \ \ \ \ {
+
+      \ \ \ \ \ \ \ \ cout \<less\>\<less\> ``C'' \<less\>\<less\> endl;
+
+      \ \ \ \ }
+
+      }
+
+      else if(x \<gtr\> 0)
+
+      {
+
+      \ \ \ \ cout \<less\>\<less\> ``D'' \<less\>\<less\> endl;
+
+      }
+
+      else
+
+      {
+
+      \ \ \ \ cout \<less\>\<less\> ``E'' \<less\>\<less\> endl;
+
+      }
+    </verbatim>
+  </problem>
+
+  <new-page>
+
+  <\problem>
+    Write nested <code*|for> loops that compute the following complex sum.
+    (Make the sum a ``double'' value; you can assume <code*|cmath> has been
+    ``included.'') (10 pts)
+
+    <\equation*>
+      <big|sum><rsup|100><rsub|i=-10><big|sum><rsup|2000><rsub|j=55><big|sum><rsup|15><rsub|k=0>(i+j+k)<rsup|4>
+    </equation*>
+  </problem>
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  <\problem>
+    Write nested <code*|for> loops that compute the following complex sum
+    (make the sum a ``double'' value; note that the second sum goes up to
+    <math|i> not a fixed number; you can assume <code*|cmath> has been
+    ``included''). (5 pts)
+
+    <\equation*>
+      <big|sum><rsup|100><rsub|i=-10><big|sum><rsup|i><rsub|j=-20><sqrt|i-j-2>
+    </equation*>
+  </problem>
+
+  \;
+
+  \;
+
+  <new-page>
+
+  <\problem>
+    What does the following code print? (15 pts)
+
+    <\verbatim>
+      \;
+
+      int xs[5] = {6, 7, 8, 9, 10};
+
+      int ys[5] = {2, 2, 2, 2, 2};
+
+      for(int i = 0; i \<less\> 3; i++)
+
+      {
+
+      \ \ \ \ ys[4-i] = xs[i];
+
+      \ \ \ \ for(int j = 0; j \<less\> 2; j++)
+
+      \ \ \ \ {
+
+      \ \ \ \ \ \ \ \ xs[j] = ys[j] + xs[i];
+
+      \ \ \ \ }
+
+      \ \ \ \ cout \<less\>\<less\> ys[i] \<less\>\<less\> ``,''
+      \<less\>\<less\> xs[i] \<less\>\<less\> endl;
+
+      }
+    </verbatim>
+  </problem>
+
+  \;
+
+  <new-page>
+
+  <\problem>
+    What does the following code print? (15 pts)
+
+    \;
+
+    <\verbatim>
+      #include \<less\>iostream\<gtr\>
+
+      using namespace std;
+
+      \;
+
+      void bar(int xs[], int size)
+
+      {
+
+      \ \ \ \ for(int i = 0; i \<less\> size; i++)
+
+      \ \ \ \ {
+
+      \ \ \ \ \ \ \ \ xs[i] = xs[size-i-1];
+
+      \ \ \ \ }
+
+      }
+
+      \;
+
+      int main()
+
+      {
+
+      \ \ \ \ int vals[5] = {-10, 34, 27, 7, 2};
+
+      \ \ \ \ for(int i = 0; i \<less\> 5; i++)
+
+      \ \ \ \ {
+
+      \ \ \ \ \ \ \ \ cout \<less\>\<less\> vals[i] \<less\>\<less\> `` '';
+
+      \ \ \ \ }
+
+      \ \ \ \ cout \<less\>\<less\> endl;
+
+      \;
+
+      \ \ \ \ bar(vals, 3); \ // yes, I want 3 rather than 5
+
+      \;
+
+      \ \ \ \ for(int i = 0; i \<less\> 5; i++)
+
+      \ \ \ \ {
+
+      \ \ \ \ \ \ \ \ cout \<less\>\<less\> vals[i] \<less\>\<less\> `` '';
+
+      \ \ \ \ }
+
+      \ \ \ \ cout \<less\>\<less\> endl;
+
+      \;
+
+      \ \ \ \ return 0;
+
+      }
+    </verbatim>
+  </problem>
+
+  <new-page>
+
+  <\problem>
+    (Just for fun; an answer is required, but any answer is correct.) What's
+    one aspect that makes programming ``artificial intelligence'' for a robot
+    or a computer Connect Four player very challenging? (2.5 pts)
+  </problem>
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  <\problem>
+    (Just for fun; an answer is required, but any answer is correct.) What do
+    you find is the most difficult aspect of programming in general or
+    programming in C++? What about programming in general or programming in
+    C++ is the biggest source of frustration for you? (There are <em|lots> of
+    correct answers!) (2.5 pts)
+  </problem>
+</body>
+
+<\initial>
+  <\collection>
+    <associate|language|american>
+    <associate|page-bot|0.75in>
+    <associate|page-even|0.75in>
+    <associate|page-odd|0.75in>
+    <associate|page-right|0.75in>
+    <associate|page-top|0.75in>
+    <associate|page-type|letter>
+    <associate|sfactor|7>
+  </collection>
+</initial>
+
+<\references>
+  <\collection>
+    <associate|auto-1|<tuple|1|?>>
+  </collection>
+</references>
