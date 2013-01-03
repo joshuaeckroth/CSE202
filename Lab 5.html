@@ -78,31 +78,6 @@ Converted to meters: 4.750 meters.
 </pre>
 
 
-<h2>My solution</h2>
-
-<pre class="src">
-<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
-<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
-<span style="color: #228b22;">double</span> <span style="color: #0000ff;">convertMeters</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">feet</span>, <span style="color: #228b22;">int</span> <span style="color: #b8860b;">inches</span>)
-{
-    inches += 12 * feet;
-    <span style="color: #a020f0;">return</span> (inches * 0.0254);
-}
-
-<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
-{
-    cout.precision(3);
-    cout.setf(<span style="color: #5f9ea0;">ios</span>::fixed, <span style="color: #5f9ea0;">ios</span>::floatfield);
-    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">feet</span>, <span style="color: #b8860b;">inches</span>;
-    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter number of feet and inches: "</span>;
-    cin &gt;&gt; feet &gt;&gt; inches;
-    cout &lt;&lt; <span style="color: #bc8f8f;">"Converted to meters: "</span>
-         &lt;&lt; convertMeters(feet, inches)
-         &lt;&lt; <span style="color: #bc8f8f;">" meters."</span> &lt;&lt; endl;
-    <span style="color: #a020f0;">return</span> 0;
-}
-</pre>
-
 <h2>Academic misconduct policy</h2>
 
 <p class="first">All writing (prose) and coding for every one of the programming

@@ -117,48 +117,6 @@ Two imaginary solutions.
 </pre>
 
 
-<h2>My solution</h2>
-
-<pre class="src">
-<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
-<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
-<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
-{
-    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">a</span>, <span style="color: #b8860b;">b</span>, <span style="color: #b8860b;">c</span>, <span style="color: #b8860b;">d</span>;
-    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter values for a, b, and c: "</span>;
-    cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;
-
-    <span style="color: #a020f0;">if</span>(a == 0)
-    {
-        <span style="color: #a020f0;">if</span>(b == 0)
-        {
-            cout &lt;&lt; <span style="color: #bc8f8f;">"No solution."</span> &lt;&lt; endl;
-        }
-        <span style="color: #a020f0;">else</span>
-        {
-            cout &lt;&lt; <span style="color: #bc8f8f;">"One solution."</span> &lt;&lt; endl;
-        }
-    }
-    <span style="color: #a020f0;">else</span>
-    {
-        d = b*b - 4*a*c;
-        <span style="color: #a020f0;">if</span>(d == 0)
-        {
-            cout &lt;&lt; <span style="color: #bc8f8f;">"One solution."</span> &lt;&lt; endl;
-        }
-        <span style="color: #a020f0;">else</span> <span style="color: #a020f0;">if</span>(d &gt; 0)
-        {
-            cout &lt;&lt; <span style="color: #bc8f8f;">"Two solutions."</span> &lt;&lt; endl;
-        }
-        <span style="color: #a020f0;">else</span>
-        {
-            cout &lt;&lt; <span style="color: #bc8f8f;">"Two imaginary solutions."</span>;
-        }
-    }
-
-    <span style="color: #a020f0;">return</span> 0;
-}
-</pre>
 
 <h2>Academic misconduct policy</h2>
 

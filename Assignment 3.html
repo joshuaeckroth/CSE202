@@ -83,39 +83,6 @@ Largest input: 5. Number of 5's: 4.
 </pre>
 
 
-<h2>My solution</h2>
-
-<pre class="src">
-<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
-<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
-<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
-{
-    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">n</span>, <span style="color: #b8860b;">max</span> = 0, <span style="color: #b8860b;">maxcount</span> = 0;
-    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter a positive integer (0 to quit): "</span>;
-    cin &gt;&gt; n;
-
-    <span style="color: #a020f0;">while</span>(n != 0)
-    {
-        <span style="color: #a020f0;">if</span>(n &gt; max)
-        {
-            max = n;
-            maxcount = 1;
-        }
-        <span style="color: #a020f0;">else</span> <span style="color: #a020f0;">if</span>(n == max)
-        {
-            maxcount++;
-        }
-
-        cout &lt;&lt; <span style="color: #bc8f8f;">"Enter a positive integer (0 to quit): "</span>;
-        cin &gt;&gt; n;
-    }
-
-    cout &lt;&lt; <span style="color: #bc8f8f;">"Done. Largest input: "</span> &lt;&lt; max &lt;&lt; <span style="color: #bc8f8f;">". Number of "</span>
-         &lt;&lt; max &lt;&lt; <span style="color: #bc8f8f;">"'s: "</span> &lt;&lt; maxcount &lt;&lt; <span style="color: #bc8f8f;">"."</span> &lt;&lt; endl;
-
-}
-</pre>
-
 <h2>Academic misconduct policy</h2>
 
 <p class="first">All writing (prose) and coding for every one of the programming

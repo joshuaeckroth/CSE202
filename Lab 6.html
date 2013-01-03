@@ -106,68 +106,6 @@ Enter value 7: 32754.345
 Min = -3282.524, max = 82345.230, mean = 16335.234
 </pre>
 
-<pre class="src">
-<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
-<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
-
-<span style="color: #228b22;">double</span> <span style="color: #0000ff;">min</span>(<span style="color: #228b22;">double</span> <span style="color: #b8860b;">arr</span>[], <span style="color: #228b22;">int</span> <span style="color: #b8860b;">n</span>)
-{
-    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">m</span> = arr[0];
-    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; n; i++)
-    {
-        <span style="color: #a020f0;">if</span>(m &gt; arr[i])
-        {
-            m = arr[i];
-        }
-    }
-    <span style="color: #a020f0;">return</span> m;
-}
-
-<span style="color: #228b22;">double</span> <span style="color: #0000ff;">max</span>(<span style="color: #228b22;">double</span> <span style="color: #b8860b;">arr</span>[], <span style="color: #228b22;">int</span> <span style="color: #b8860b;">n</span>)
-{
-    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">m</span> = arr[0];
-    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; n; i++)
-    {
-        <span style="color: #a020f0;">if</span>(m &lt; arr[i])
-        {
-            m = arr[i];
-        }
-    }
-    <span style="color: #a020f0;">return</span> m;
-}
-
-<span style="color: #228b22;">double</span> <span style="color: #0000ff;">mean</span>(<span style="color: #228b22;">double</span> <span style="color: #b8860b;">arr</span>[], <span style="color: #228b22;">int</span> <span style="color: #b8860b;">n</span>)
-{
-    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">sum</span> = 0.0;
-    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; n; i++)
-    {
-        sum += arr[i];
-    }
-    <span style="color: #a020f0;">return</span> sum/n;
-}
-
-<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
-{
-    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">n</span>;
-    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter n: "</span>;
-    cin &gt;&gt; n;
-
-    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">vals</span>[n];
-    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; n; i++)
-    {
-        cout &lt;&lt; <span style="color: #bc8f8f;">"Enter value "</span> &lt;&lt; (i+1) &lt;&lt; <span style="color: #bc8f8f;">": "</span>;
-        cin &gt;&gt; vals[i];
-    }
-
-    cout.precision(3);
-    cout.setf(<span style="color: #5f9ea0;">ios</span>::fixed, <span style="color: #5f9ea0;">ios</span>::floatfield);
-    cout &lt;&lt; <span style="color: #bc8f8f;">"Min = "</span> &lt;&lt; min(vals, n) &lt;&lt; <span style="color: #bc8f8f;">", "</span>
-         &lt;&lt; <span style="color: #bc8f8f;">"max = "</span> &lt;&lt; max(vals, n) &lt;&lt; <span style="color: #bc8f8f;">", "</span>
-         &lt;&lt; <span style="color: #bc8f8f;">"mean = "</span> &lt;&lt; mean(vals, n) &lt;&lt; endl;
-
-    <span style="color: #a020f0;">return</span> 0;
-}
-</pre>
 
 <h2>Academic misconduct policy</h2>
 

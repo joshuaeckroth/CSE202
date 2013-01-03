@@ -97,37 +97,6 @@ Enter m and n: 372 43329
 Result: 1.76105e+11
 </pre>
 
-
-<h2>My solution</h2>
-
-<pre class="src">
-<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
-<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
-
-<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
-{
-    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">m</span>, <span style="color: #b8860b;">n</span>, <span style="color: #b8860b;">i</span>, <span style="color: #b8860b;">j</span>;
-    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">sum</span> = 0;
-    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter m and n: "</span>;
-    cin &gt;&gt; m &gt;&gt; n;
-
-    i = 1;
-    <span style="color: #a020f0;">while</span>(i &lt;= m)
-    {
-        j = 1;
-        <span style="color: #a020f0;">while</span>(j &lt;= n)
-        {
-            sum += (i+j)/2.0;
-            j++;
-        }
-        i++;
-    }
-
-    cout &lt;&lt; <span style="color: #bc8f8f;">"Result: "</span> &lt;&lt; sum &lt;&lt; endl;
-    <span style="color: #a020f0;">return</span> 0;
-}
-</pre>
-
 <h2>Academic misconduct policy</h2>
 
 <p class="first">All writing (prose) and coding for every one of the programming

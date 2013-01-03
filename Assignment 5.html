@@ -154,45 +154,6 @@ Area under the curve: 0.387822070006
 click Adaptive Quadrature. Your answer should be close.</p>
 
 
-<h2>My solution</h2>
-
-<pre class="src">
-<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;iostream&gt;</span>
-<span style="color: #da70d6;">#include</span> <span style="color: #bc8f8f;">&lt;cmath&gt;</span>
-<span style="color: #a020f0;">using</span> <span style="color: #a020f0;">namespace</span> <span style="color: #5f9ea0;">std</span>;
-
-<span style="color: #228b22;">double</span> <span style="color: #0000ff;">phi</span>(<span style="color: #228b22;">double</span> <span style="color: #b8860b;">t</span>)
-{
-    <span style="color: #a020f0;">return</span> (1.0 / sqrt(2.0*3.1415926) * exp(-(t*t)/2.0));
-}
-
-<span style="color: #228b22;">double</span> <span style="color: #0000ff;">area</span>(<span style="color: #228b22;">double</span> <span style="color: #b8860b;">a</span>, <span style="color: #228b22;">double</span> <span style="color: #b8860b;">b</span>)
-{
-    <span style="color: #a020f0;">return</span> (phi((a+b)/2.0) * (b - a));
-}
-
-<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span>()
-{
-    <span style="color: #228b22;">int</span> <span style="color: #b8860b;">n</span>;
-    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">x</span>;
-
-    cout &lt;&lt; <span style="color: #bc8f8f;">"Enter n and x: "</span>;
-    cin &gt;&gt; n &gt;&gt; x;
-
-    <span style="color: #228b22;">double</span> <span style="color: #b8860b;">sum</span> = 0.5;
-    <span style="color: #a020f0;">for</span>(<span style="color: #228b22;">int</span> <span style="color: #b8860b;">i</span> = 0; i &lt; n; i++)
-    {
-        sum += area(i * x / n, (i+1) * x / n);
-    }
-
-    cout.precision(12);
-    cout.setf(<span style="color: #5f9ea0;">ios</span>::fixed, <span style="color: #5f9ea0;">ios</span>::floatfield);
-    cout &lt;&lt; <span style="color: #bc8f8f;">"Area under the curve: "</span> &lt;&lt; sum &lt;&lt; endl;
-
-    <span style="color: #a020f0;">return</span> 0;
-}
-</pre>
-
 <h2>Academic misconduct policy</h2>
 
 <p class="first">All writing (prose) and coding for every one of the programming
